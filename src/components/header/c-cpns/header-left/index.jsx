@@ -1,10 +1,13 @@
 import React, { memo } from 'react'
 
+import IconLogo from '@/assets/svg/icon_logo'
 import { LeftWrapper } from './styled'
 
 const HeaderLeft = memo(() => {
   return (
-    <LeftWrapper>HeaderLeft</LeftWrapper>
+    <LeftWrapper>
+      <IconLogo />
+    </LeftWrapper>
   )
 })
 
