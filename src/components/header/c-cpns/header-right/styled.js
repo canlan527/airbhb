@@ -32,11 +32,8 @@ export const RightWrapper = styled.div`
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 21px;
+    ${prop => prop.theme.mixin.boxShadow}
 
-    &:hover {
-      box-shadow: 1px 2px 5px  rgba(0,0,0,0.18);
-      transition: box-shadow .2s ease;
-    }
     .menu-right-item {
       border-radius: 22px;
       color: #666;
