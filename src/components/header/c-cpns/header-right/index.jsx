@@ -9,9 +9,14 @@ const HeaderRight = memo(() => {
   const [showPanel, setShowPanel] = useState(false)
 
   useEffect(() => {
-    window.addEventListener('click', () => {
+    const handleClick = () => {
       setShowPanel(false)
-    }) 
+    }
+    window.addEventListener('click', handleClick) 
+
+    return () => {
+      window.removeEventListener('click',handleClick)
+    }
   }, [])
 
   function handleShowPanel(e) {
