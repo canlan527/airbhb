@@ -12,6 +12,7 @@ const theme = {
     boxShadow: `&:hover {
       box-shadow: 1px 2px 5px  rgba(0,0,0,0.18);
       transition: box-shadow .2s ease;
+      
     }`,
   },
 };
