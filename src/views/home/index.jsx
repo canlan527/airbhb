@@ -3,6 +3,8 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { fetchHomeDataAction } from "@/store/modules/home";
 import Banner from "./c-cpns/banner";
+import SectionHeader from "@/components/setion-header";
+import RoomItem from "@/components/room-item";
 import { HomeWrapper } from "./style";
 
 const Home = memo(() => {
@@ -24,13 +26,14 @@ const Home = memo(() => {
     <HomeWrapper>
       <Banner />
       <div className="content">
-        <h2>{goodPriceInfo.title}</h2>
-        <ul> 
-          {
-            goodPriceInfo?.list?.map((item) => (
-              <li key={item.id}>{item.name}</li>
+        <div className="good-price">
+          <SectionHeader title={goodPriceInfo.title} />
+          <div className="room-list">
+            {goodPriceInfo.list?.slice(0,8).map((item) => (
+              <RoomItem key={item.id} item={item}></RoomItem>
             ))}
-        </ul>
+          </div>
+        </div>
       </div>
     </HomeWrapper>
   );
