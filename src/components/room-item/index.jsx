@@ -30,8 +30,8 @@ const RoomItem = memo((props) => {
         </div>
         <div className="item-extra">
           <Rate className="item-rate" disabled defaultValue={item.star_rating ?? 5} />
-          <span className="item-reviews">{item.reviews_count} ·</span>
-          <span>{item.bottom_info?.content || ''}</span>
+          <span className="item-reviews">{item.reviews_count}</span>
+          <span>{(item.bottom_info?.content) ? '· ' + item.bottom_info?.content : ''}</span>
         </div>
       </div>
     </ItemWrapper>
