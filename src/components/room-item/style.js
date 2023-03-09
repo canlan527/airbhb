@@ -32,7 +32,7 @@ export const ItemWrapper = styled.div`
         justify-content: center;
         align-items: center;
         padding: 2px 5px;
-        background: #dfdfdf;
+        background: #e9e9e9;
         border-radius: 3px;
         font-size: 12px;
         color: ${prop => prop.verifyColor};
@@ -64,6 +64,22 @@ export const ItemWrapper = styled.div`
       }
       
       padding: 7px 0;
+    }
+    .item-extra {
+      font-size: 12px;
+      color: ${props => props.theme.text.lightColor};
+      .item-rate {
+        font-size: 10px;
+        color:${props => props.starColor};
+        margin-right: 6px;
+        li.ant-rate-star {
+          margin-right: -1px;
+        }
+         
+      }
+      .item-reviews{
+        margin-right: 6px;
+      }
     }
   }
 `;

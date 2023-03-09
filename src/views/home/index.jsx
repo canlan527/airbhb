@@ -29,7 +29,7 @@ const Home = memo(() => {
         <div className="good-price">
           <SectionHeader title={goodPriceInfo.title} />
           <div className="room-list">
-            {goodPriceInfo.list?.slice(0,8).map((item) => (
+            {goodPriceInfo.list?.slice(0, 8).map((item) => (
               <RoomItem key={item.id} item={item}></RoomItem>
             ))}
           </div>
