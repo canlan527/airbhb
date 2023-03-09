@@ -7,7 +7,11 @@ import IconStar from "@/assets/svg/icon_star";
 const RoomItem = memo((props) => {
   const { item } = props;
   return (
-    <ItemWrapper verifyColor={item?.verify_info?.text_color || '#333'} starColor={item?.star_rating_color ?? '#008489'}>
+    <ItemWrapper
+      verifyColor={item?.verify_info?.text_color || "#333"}
+      starColor={item?.star_rating_color ?? "#008489"}
+      tagColor={item?.bottom_info?.content_color ?? ""}
+    >
       <div className="item-inner">
         <div className="item-cover">
           <img src={item.picture_url} alt="" />
@@ -29,9 +33,15 @@ const RoomItem = memo((props) => {
           /晚
         </div>
         <div className="item-extra">
-          <Rate className="item-rate" disabled defaultValue={item.star_rating ?? 5} />
+          <Rate
+            className="item-rate"
+            disabled
+            defaultValue={item.star_rating ?? 5}
+          />
           <span className="item-reviews">{item.reviews_count}</span>
-          <span>{(item.bottom_info?.content) ? '· ' + item.bottom_info?.content : ''}</span>
+          <span className="item-extar-tag">
+            {item.bottom_info?.content ? "· " + item.bottom_info?.content : ""}
+          </span>
         </div>
       </div>
     </ItemWrapper>

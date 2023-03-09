@@ -80,6 +80,9 @@ export const ItemWrapper = styled.div`
       .item-reviews{
         margin-right: 6px;
       }
+      .item-extar-tag {
+        color: ${props => props.tagColor}
+      }
     }
   }
 `;
