@@ -35,6 +35,7 @@ export const ItemWrapper = styled.div`
         background: #dfdfdf;
         border-radius: 3px;
         font-size: 12px;
+        color: ${prop => prop.verifyColor};
       }
       .item-star {
         display: flex;

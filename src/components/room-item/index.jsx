@@ -6,7 +6,7 @@ import IconStar from "@/assets/svg/icon_star";
 const RoomItem = memo((props) => {
   const { item } = props;
   return (
-    <ItemWrapper>
+    <ItemWrapper verifyColor={item?.verify_info?.text_color || '#333'}>
       <div className="item-inner">
         <div className="item-cover">
           <img src={item.picture_url} alt="" />
