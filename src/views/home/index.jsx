@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { fetchHomeDataAction } from "@/store/modules/home";
 import Banner from "./c-cpns/banner";
 import SectionHeader from "@/components/setion-header";
-import RoomItem from "@/components/room-item";
+import SectionRoom from "@/components/section-room";
 import { HomeWrapper } from "./style";
 
 const Home = memo(() => {
@@ -28,11 +28,7 @@ const Home = memo(() => {
       <div className="content">
         <div className="good-price">
           <SectionHeader title={goodPriceInfo.title} />
-          <div className="room-list">
-            {goodPriceInfo.list?.slice(0, 8).map((item) => (
-              <RoomItem key={item.id} item={item}></RoomItem>
-            ))}
-          </div>
+          <SectionRoom roomlist={goodPriceInfo.list} />
         </div>
       </div>
     </HomeWrapper>
