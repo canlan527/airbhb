@@ -12,11 +12,12 @@ import SectionRoom from "@/components/section-room";
 import SectionTabs from "@/components/section-tabs";
 const Home = memo(() => {
   // 从redux里拿数据
-  const { goodPriceInfo, highScoreInfo, discountInfo } = useSelector(
+  const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo } = useSelector(
     (state) => ({
       goodPriceInfo: state.home.goodPriceInfo,
       highScoreInfo: state.home.highScoreInfo,
       discountInfo: state.home.discountInfo,
+      recommendInfo: state.home.recommendInfo
     }),
     shallowEqual
   );
@@ -34,9 +35,9 @@ const Home = memo(() => {
       <Banner />
       <div className="content">
         {isEmpty(discountInfo) && <HomeSectionV2 info={discountInfo} />}
-
         {isEmpty(goodPriceInfo) && <HomeSectionV1 info={goodPriceInfo} />}
         {isEmpty(highScoreInfo) && <HomeSectionV1 info={highScoreInfo} />}
+        {isEmpty(recommendInfo) && <HomeSectionV2 info={recommendInfo}/>}
       </div>
     </HomeWrapper>
   );
