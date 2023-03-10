@@ -35,8 +35,8 @@ const Home = memo(() => {
       <div className="content">
         {isEmpty(discountInfo) && <HomeSectionV2 info={discountInfo} />}
 
-        <HomeSectionV1 info={goodPriceInfo} />
-        <HomeSectionV1 info={highScoreInfo} />
+        {isEmpty(goodPriceInfo) && <HomeSectionV1 info={goodPriceInfo} />}
+        {isEmpty(highScoreInfo) && <HomeSectionV1 info={highScoreInfo} />}
       </div>
     </HomeWrapper>
   );
