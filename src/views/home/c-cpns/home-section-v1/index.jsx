@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { memo } from "react";
 
 import { SectionV1Wrapper } from "./style";
-import SectionHeader from "@/components/setion-header";
+import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 
 const SectionV1 = memo((props) => {
@@ -11,7 +11,7 @@ const SectionV1 = memo((props) => {
   return (
     <SectionV1Wrapper>
       <SectionHeader title={info.title} subTitle={info.subtitle} />
-      <SectionRoom roomlist={info.list} />
+      <SectionRoom roomlist={info.list} itemWidth='25%' />
     </SectionV1Wrapper>
   );
 });

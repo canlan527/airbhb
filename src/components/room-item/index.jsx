@@ -5,12 +5,13 @@ import { ItemWrapper } from "./style";
 import IconStar from "@/assets/svg/icon_star";
 
 const RoomItem = memo((props) => {
-  const { item } = props;
+  const { item, itemWidth = '25%' } = props;
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
       starColor={item?.star_rating_color ?? "#008489"}
       tagColor={item?.bottom_info?.content_color ?? ""}
+      itemWidth={itemWidth}
     >
       <div className="item-inner">
         <div className="item-cover">
