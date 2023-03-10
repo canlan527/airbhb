@@ -5,6 +5,7 @@ import { SectionV2Wrapper } from "./style";
 import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 import SectionTabs from "@/components/section-tabs";
+import SectionBottom from "@/components/section-bottom";
 
 const HomeSectionV2 = memo((props) => {
   // 从 props 获取数据局
@@ -24,6 +25,7 @@ const HomeSectionV2 = memo((props) => {
       <SectionHeader title={info.title} subTitle={info.subtitle} />
       <SectionTabs tabs={tabs} tabClick={handleTabClick} />
       <SectionRoom roomlist={info.dest_list?.[tab]} itemWidth="33.33%" />
+      <SectionBottom text={tab} />
     </SectionV2Wrapper>
   );
 });
