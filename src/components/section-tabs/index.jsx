@@ -4,11 +4,12 @@ import React, { memo, useState } from "react";
 
 import { TabsWrapper } from "./style";
 const SectionTabs = memo((props) => {
-  const { tabs } = props;
+  const { tabs, tabClick } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
-  function handleClick(index) {
+  function handleClick(index,name) {
     setTabIndex(index);
+    tabClick(index, name);
   }
 
   return (
@@ -17,7 +18,7 @@ const SectionTabs = memo((props) => {
         <div
           key={index}
           className={classNames("tabs-item", { active: tabIndex === index })}
-          onClick={() => handleClick(index)}
+          onClick={() => handleClick(index,item)}
         >
           {item}
         </div>
