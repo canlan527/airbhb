@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect, useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { isEmpty } from "@/utils";
 
 import { fetchHomeDataAction } from "@/store/modules/home";
 import { HomeWrapper } from "./style";
@@ -32,7 +33,7 @@ const Home = memo(() => {
     <HomeWrapper>
       <Banner />
       <div className="content">
-        <HomeSectionV2 info={discountInfo} />
+        {isEmpty(discountInfo) && <HomeSectionV2 info={discountInfo} />}
 
         <HomeSectionV1 info={goodPriceInfo} />
         <HomeSectionV1 info={highScoreInfo} />
