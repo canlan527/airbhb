@@ -6,7 +6,5 @@ export const HomeWrapper = styled.div`
     width: 1175px;
     margin: 0 auto;
   }
-  .content-item {
-    margin-top: 30px;
-  }
+
 `;
