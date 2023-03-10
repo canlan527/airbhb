@@ -9,9 +9,10 @@ import { HomeWrapper } from "./style";
 
 const Home = memo(() => {
   // 从redux里拿数据
-  const { goodPriceInfo } = useSelector(
+  const { goodPriceInfo, highScoreInfo,  } = useSelector(
     (state) => ({
       goodPriceInfo: state.home.goodPriceInfo,
+      highScoreInfo: state.home.highScoreInfo,
     }),
     shallowEqual
   );
@@ -26,9 +27,13 @@ const Home = memo(() => {
     <HomeWrapper>
       <Banner />
       <div className="content">
-        <div className="good-price">
+        <div className="content-item">
           <SectionHeader title={goodPriceInfo.title} />
           <SectionRoom roomlist={goodPriceInfo.list} />
+        </div>
+        <div className="content-item">
+          <SectionHeader title={highScoreInfo.title} subTitle={highScoreInfo.subtitle} />
+          <SectionRoom roomlist={highScoreInfo.list} />
         </div>
       </div>
     </HomeWrapper>
