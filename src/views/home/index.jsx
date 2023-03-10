@@ -5,6 +5,7 @@ import { fetchHomeDataAction } from "@/store/modules/home";
 import { HomeWrapper } from "./style";
 import Banner from "./c-cpns/banner";
 import HomeSectionV1 from "./c-cpns/home-section-v1";
+import HomeSectionV2 from './c-cpns/home-section-v2'
 import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 import SectionTabs from "@/components/section-tabs";
@@ -25,28 +26,13 @@ const Home = memo(() => {
     dispatch(fetchHomeDataAction());
   }, [dispatch]);
 
-  // 处理数据tabs
-  const [tab, setTab] = useState("佛山");
-  const tabs = discountInfo.dest_address?.map((item) => item.name);
-  const handleTabClick = useCallback((index, name) => {
-    setTab(name)
-  }, []);
+
 
   return (
     <HomeWrapper>
       <Banner />
       <div className="content">
-        <div className="content-discount">
-          <SectionHeader
-            title={discountInfo.title}
-            subTitle={discountInfo.subtitle}
-          />
-          <SectionTabs tabs={tabs} tabClick={handleTabClick} />
-          <SectionRoom
-            roomlist={discountInfo.dest_list?.[tab]}
-            itemWidth="33.33%"
-          />
-        </div>
+        <HomeSectionV2 info={discountInfo} />
 
         <HomeSectionV1 info={goodPriceInfo} />
         <HomeSectionV1 info={highScoreInfo} />
