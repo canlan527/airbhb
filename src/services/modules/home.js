@@ -24,3 +24,9 @@ export function getHomeRecommendData() {
     url: '/home/hotrecommenddest'
   })
 }
+
+export function getHomeLongForData() {
+  return request.get({
+    url: '/home/longfor'
+  })
+}

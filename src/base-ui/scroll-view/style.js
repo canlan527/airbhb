@@ -9,6 +9,7 @@ export const ViewWrapper = styled.div`
   }
   .btn {
     position: absolute;
+    top: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,9 +24,11 @@ export const ViewWrapper = styled.div`
     z-index: 100;
     &.left-btn {
       left: -25px;
+      transform: translateY(-50%);
     }
     &.right-btn {
       right: -25px;
+      transform: translateY(-50%);
     }
   }
 `;

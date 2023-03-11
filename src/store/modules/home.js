@@ -3,6 +3,7 @@ import {
   getHomeHighScoreData,
   getHomeDiscountData,
   getHomeRecommendData,
+  getHomeLongForData,
 } from "@/services";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -21,6 +22,9 @@ export const fetchHomeDataAction = createAsyncThunk(
     getHomeRecommendData().then((res) => {
       dispatch(changeRecommendAction(res));
     });
+    getHomeLongForData().then((res) => {
+      dispatch(changeLongForAction(res));
+    });
   }
 );
 
@@ -31,6 +35,7 @@ const homeSlice = createSlice({
     highScoreInfo: {}, // 高评分 包含list和title
     discountInfo: {}, // 折扣数据
     recommendInfo: {}, // 热门推荐
+    longforInfo: {}, // 向往城市数据
   },
   reducers: {
     changeGoodPriceInfoAction(state, { payload }) {
@@ -45,6 +50,9 @@ const homeSlice = createSlice({
     changeRecommendAction(state, { payload }) {
       state.recommendInfo = payload;
     },
+    changeLongForAction(state, { payload }) {
+      state.longforInfo = payload;
+    },
   },
 });
 
@@ -53,6 +61,7 @@ export const {
   changeHighScoreInfo,
   changeDiscountAction,
   changeRecommendAction,
+  changeLongForAction,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

@@ -54,7 +54,7 @@ const ScrollView = memo((props) => {
 });
 
 ScrollView.propTypes = {
-  children: PropTypes.element
+  // children: PropTypes.element
 };
 
 export default ScrollView;
