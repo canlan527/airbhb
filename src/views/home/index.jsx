@@ -7,19 +7,21 @@ import { HomeWrapper } from "./style";
 import Banner from "./c-cpns/banner";
 import HomeSectionV1 from "./c-cpns/home-section-v1";
 import HomeSectionV2 from './c-cpns/home-section-v2'
+import HomeSectionV3 from './c-cpns/home-section-v3'
 import HomeLongfor from './c-cpns/home-longfor'
 import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 import SectionTabs from "@/components/section-tabs";
 const Home = memo(() => {
   // 从redux里拿数据
-  const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo, longforInfo } = useSelector(
+  const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo, longforInfo, plusInfo } = useSelector(
     (state) => ({
       goodPriceInfo: state.home.goodPriceInfo,
       highScoreInfo: state.home.highScoreInfo,
       discountInfo: state.home.discountInfo,
       recommendInfo: state.home.recommendInfo,
       longforInfo: state.home.longforInfo,
+      plusInfo: state.home.plusInfo,
     }),
     shallowEqual
   );
@@ -41,6 +43,7 @@ const Home = memo(() => {
         {isEmpty(longforInfo) && <HomeLongfor info={longforInfo}/>}
         {isEmpty(highScoreInfo) && <HomeSectionV1 info={highScoreInfo} />}
         {isEmpty(recommendInfo) && <HomeSectionV2 info={recommendInfo}/>}
+        {isEmpty(plusInfo) && <HomeSectionV3 info={plusInfo}/>}
       </div>
     </HomeWrapper>
   );

@@ -4,6 +4,7 @@ import {
   getHomeDiscountData,
   getHomeRecommendData,
   getHomeLongForData,
+  getHomePlusData,
 } from "@/services";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -25,6 +26,9 @@ export const fetchHomeDataAction = createAsyncThunk(
     getHomeLongForData().then((res) => {
       dispatch(changeLongForAction(res));
     });
+    getHomePlusData().then((res) => {
+      dispatch(changePlusAction(res));
+    });
   }
 );
 
@@ -36,6 +40,7 @@ const homeSlice = createSlice({
     discountInfo: {}, // 折扣数据
     recommendInfo: {}, // 热门推荐
     longforInfo: {}, // 向往城市数据
+    plusInfo: {}, // plus数据
   },
   reducers: {
     changeGoodPriceInfoAction(state, { payload }) {
@@ -53,6 +58,9 @@ const homeSlice = createSlice({
     changeLongForAction(state, { payload }) {
       state.longforInfo = payload;
     },
+    changePlusAction(state, { payload }) {
+      state.plusInfo = payload;
+    },
   },
 });
 
@@ -62,6 +70,7 @@ export const {
   changeDiscountAction,
   changeRecommendAction,
   changeLongForAction,
+  changePlusAction,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;
