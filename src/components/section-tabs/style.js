@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const TabsWrapper = styled.div`
   display: flex;
   margin-top: 20px;
+  transition: all 200ms ease;
   .tabs-item {
+    flex-basis: 150px;
+    flex-shrink: 0;
     background: #fff;
     padding: 8px 12px;
     margin-right: 16px;
