@@ -4,7 +4,7 @@ import { fetchEntireRoomlistAction } from '@/store/modules/entire/actionCreators
 
 import EntireTabs from './c-cpns/entire-tabs'
 import EntireRoomlist from './c-cpns/entire-roomlist'
-import Pagination from './c-cpns/pagination'
+import EntirePagination from './c-cpns/entire-pagination'
 import { EntireWrapper } from './style'
 
 const Entire = memo(() => {
@@ -20,7 +20,7 @@ const Entire = memo(() => {
     <EntireWrapper>
       <EntireTabs></EntireTabs>
       <EntireRoomlist></EntireRoomlist>
-      <Pagination></Pagination>
+      <EntirePagination></EntirePagination>
     </EntireWrapper>
   )
 })
