@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
+import {EntireRoomListWrapper} from './style'
 const EntireRoomList = memo((props) => {
   return (
-    <div>EntireRoomList</div>
+    <EntireRoomListWrapper>
+      
+    </EntireRoomListWrapper>
   )
 })
 
