@@ -13,6 +13,7 @@ export const ItemWrapper = styled.div`
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 12px;
+      cursor: pointer;
       img {
         position: absolute;
         top: 0;
@@ -56,6 +57,7 @@ export const ItemWrapper = styled.div`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .item-price {
