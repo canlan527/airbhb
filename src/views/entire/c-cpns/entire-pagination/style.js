@@ -6,6 +6,12 @@ export const PaginationWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  .entire-pagination-desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+  }
 
   // 修改antdesign pagination 样式
   .ant-pagination-item.ant-pagination-item-active {
