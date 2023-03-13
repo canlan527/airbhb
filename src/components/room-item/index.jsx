@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-import { Rate } from "antd";
+import { Rate, Carousel } from "antd";
 import { ItemWrapper } from "./style";
 import IconStar from "@/assets/svg/icon_star";
-
+import IconArrowBack from '@/assets/svg/icon-arrow-back'
+import IconArrowFront from '@/assets/svg/icon-arrow-front'
 const RoomItem = memo((props) => {
-  const { item, itemWidth = '25%' } = props;
+  const { item, itemWidth = "25%" } = props;
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
@@ -14,9 +15,27 @@ const RoomItem = memo((props) => {
       itemWidth={itemWidth}
     >
       <div className="item-inner">
-        <div className="item-cover">
+        {/* <div className="item-cover">
           <img src={item.picture_url} alt="" />
+        </div> */}
+        <div className="item-swiper">
+          <div className="item-swiper-control">
+            <div className="btn left">
+              <IconArrowBack size="26"></IconArrowBack>
+            </div>
+            <div className="btn right">
+              <IconArrowFront size="26"></IconArrowFront>
+            </div>
+          </div>
+          <Carousel dots={false}>
+            {item?.picture_urls?.map((url) => (
+              <div key={url} className="item-cover">
+                <img src={url} alt="" />
+              </div>
+            ))}
+          </Carousel>
         </div>
+
         <div className="item-desc">
           <span className="item-tag">
             {item.verify_info.messages.join(" · ")}
