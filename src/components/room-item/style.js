@@ -51,12 +51,12 @@ export const ItemWrapper = styled.div`
           transform: translateY(-50%);
           color: rgba(255, 255, 255, 0.6);
           cursor: pointer;
-          z-index: 200;
+          z-index: 250;
           &.left {
-            left: 0;
+            left: 16px;
           }
           &.right {
-            right: 0;
+            right: 16px;
           }
         }
       }

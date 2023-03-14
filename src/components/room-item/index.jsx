@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { memo } from "react";
+import React, { memo, useRef, } from "react";
 import { Rate, Carousel } from "antd";
 import { ItemWrapper } from "./style";
 import IconStar from "@/assets/svg/icon_star";
@@ -7,6 +7,20 @@ import IconArrowBack from '@/assets/svg/icon-arrow-back'
 import IconArrowFront from '@/assets/svg/icon-arrow-front'
 const RoomItem = memo((props) => {
   const { item, itemWidth = "25%" } = props;
+
+  const CarouselRef = useRef(null)
+ 
+  // 处理轮播图箭头点击
+  function handleArrowClick(direction) {
+    if(direction === 'prev') {
+      console.log('prev');
+      CarouselRef.current.prev()
+    } else if(direction === 'next') {
+      console.log('next');
+      CarouselRef.current.next()
+    }
+  }
+
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
@@ -20,14 +34,14 @@ const RoomItem = memo((props) => {
         </div> */}
         <div className="item-swiper">
           <div className="item-swiper-control">
-            <div className="btn left">
-              <IconArrowBack size="26"></IconArrowBack>
+            <div className="btn left" onClick={() => handleArrowClick('prev')}>
+              <IconArrowBack size="26" />
             </div>
-            <div className="btn right">
-              <IconArrowFront size="26"></IconArrowFront>
+            <div className="btn right" onClick={() => handleArrowClick('next')}>
+              <IconArrowFront size="26" />
             </div>
           </div>
-          <Carousel dots={false}>
+          <Carousel dots={false} ref={CarouselRef}>
             {item?.picture_urls?.map((url) => (
               <div key={url} className="item-cover">
                 <img src={url} alt="" />
