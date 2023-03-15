@@ -1,24 +1,34 @@
 import PropTypes from "prop-types";
-import React, { memo, useRef, } from "react";
+import React, { memo, useState, useRef } from "react";
 import { Rate, Carousel } from "antd";
 import { ItemWrapper } from "./style";
+import Indicator from "@/base-ui/indicator";
 import IconStar from "@/assets/svg/icon_star";
-import IconArrowBack from '@/assets/svg/icon-arrow-back'
-import IconArrowFront from '@/assets/svg/icon-arrow-front'
+import IconArrowBack from "@/assets/svg/icon-arrow-back";
+import IconArrowFront from "@/assets/svg/icon-arrow-front";
+import classNames from "classnames";
 const RoomItem = memo((props) => {
   const { item, itemWidth = "25%" } = props;
+  const [curIndex, setCurIndex] = useState(0);
 
-  const CarouselRef = useRef(null)
- 
+  const CarouselRef = useRef(null);
+
   // 处理轮播图箭头点击
   function handleArrowClick(direction) {
-    if(direction === 'prev') {
-      console.log('prev');
-      CarouselRef.current.prev()
-    } else if(direction === 'next') {
-      console.log('next');
-      CarouselRef.current.next()
+    const list = item?.picture_urls;
+    let newIndex = 0; //轮播点
+    if (direction === "prev") {
+      console.log("prev");
+      newIndex = curIndex - 1;
+      CarouselRef.current.prev();
+    } else if (direction === "next") {
+      console.log("next");
+      newIndex = curIndex + 1;
+      CarouselRef.current.next();
     }
+    if (newIndex < 0) newIndex = list.length - 1;
+    if (newIndex > list.length - 1) newIndex = 0;
+    setCurIndex(newIndex);
   }
 
   return (
@@ -34,12 +44,26 @@ const RoomItem = memo((props) => {
         </div> */}
         <div className="item-swiper">
           <div className="item-swiper-control">
-            <div className="btn left" onClick={() => handleArrowClick('prev')}>
+            <div className="btn left" onClick={() => handleArrowClick("prev")}>
               <IconArrowBack size="26" />
             </div>
-            <div className="btn right" onClick={() => handleArrowClick('next')}>
+            <div className="btn right" onClick={() => handleArrowClick("next")}>
               <IconArrowFront size="26" />
             </div>
+          </div>
+          <div className="indicator-list">
+            <Indicator curIndex={curIndex}>
+              {item?.picture_urls?.map((item, index) => (
+                <div key={index} className="indicator-item">
+                  <span
+                    className={classNames("dot", {
+                      active: curIndex === index,
+                      activeAside: curIndex === index - 1 || curIndex === index + 1,
+                    })}
+                  ></span>
+                </div>
+              ))}
+            </Indicator>
           </div>
           <Carousel dots={false} ref={CarouselRef}>
             {item?.picture_urls?.map((url) => (

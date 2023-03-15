@@ -25,6 +25,40 @@ export const ItemWrapper = styled.div`
 
     .item-swiper {
       position: relative;
+      .indicator-list {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        overflow: hidden;
+        width: 30%;
+        z-index: 330;
+
+        .indicator-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 14.29%;
+          .dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            &.active {
+              width: 10px;
+              height: 10px;
+              background: #fff;
+            }
+            &.activeAside {
+              width: 8px;
+              height: 8px;
+              background: rgba(255, 255, 255, 0.7);
+            }
+          }
+        }
+      }
       .item-swiper-control {
         position: absolute;
         top: 0;
