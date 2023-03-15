@@ -8,6 +8,10 @@ const SectionTabs = memo((props) => {
   const { tabs, tabClick } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
+  tabs.push('测试1')
+  tabs.push('测试2')
+  tabs.push('测试3')
+
   function handleClick(index, name) {
     setTabIndex(index);
     tabClick(index, name);
