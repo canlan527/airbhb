@@ -31,6 +31,46 @@ const RoomItem = memo((props) => {
     setCurIndex(newIndex);
   }
 
+  const SingleEl = (
+    <div className="item-cover">
+      <img src={item.picture_url} alt="" />
+    </div>
+  );
+
+  const swiperEl = (
+    <div className="item-swiper">
+      <div className="item-swiper-control">
+        <div className="btn left" onClick={() => handleArrowClick("prev")}>
+          <IconArrowBack size="26" />
+        </div>
+        <div className="btn right" onClick={() => handleArrowClick("next")}>
+          <IconArrowFront size="26" />
+        </div>
+      </div>
+      <div className="indicator-list">
+        <Indicator curIndex={curIndex}>
+          {item?.picture_urls?.map((item, index) => (
+            <div key={index} className="indicator-item">
+              <span
+                className={classNames("dot", {
+                  active: curIndex === index,
+                  activeAside: curIndex === index - 1 || curIndex === index + 1,
+                })}
+              ></span>
+            </div>
+          ))}
+        </Indicator>
+      </div>
+      <Carousel dots={false} ref={CarouselRef}>
+        {item?.picture_urls?.map((url) => (
+          <div key={url} className="item-cover">
+            <img src={url} alt="" />
+          </div>
+        ))}
+      </Carousel>
+    </div>
+  );
+
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
@@ -39,40 +79,7 @@ const RoomItem = memo((props) => {
       itemWidth={itemWidth}
     >
       <div className="item-inner">
-        {/* <div className="item-cover">
-          <img src={item.picture_url} alt="" />
-        </div> */}
-        <div className="item-swiper">
-          <div className="item-swiper-control">
-            <div className="btn left" onClick={() => handleArrowClick("prev")}>
-              <IconArrowBack size="26" />
-            </div>
-            <div className="btn right" onClick={() => handleArrowClick("next")}>
-              <IconArrowFront size="26" />
-            </div>
-          </div>
-          <div className="indicator-list">
-            <Indicator curIndex={curIndex}>
-              {item?.picture_urls?.map((item, index) => (
-                <div key={index} className="indicator-item">
-                  <span
-                    className={classNames("dot", {
-                      active: curIndex === index,
-                      activeAside: curIndex === index - 1 || curIndex === index + 1,
-                    })}
-                  ></span>
-                </div>
-              ))}
-            </Indicator>
-          </div>
-          <Carousel dots={false} ref={CarouselRef}>
-            {item?.picture_urls?.map((url) => (
-              <div key={url} className="item-cover">
-                <img src={url} alt="" />
-              </div>
-            ))}
-          </Carousel>
-        </div>
+        {item?.picture_urls ? swiperEl : SingleEl}
 
         <div className="item-desc">
           <span className="item-tag">

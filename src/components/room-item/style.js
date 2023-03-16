@@ -25,6 +25,10 @@ export const ItemWrapper = styled.div`
 
     .item-swiper {
       position: relative;
+      .ant-carousel .slick-slider .slick-list {
+        border-radius: 22px !important;
+      }
+
       .indicator-list {
         position: absolute;
         bottom: 20px;
