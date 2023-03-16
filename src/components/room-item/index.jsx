@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React, { memo, useState, useRef } from "react";
-import { Rate, Carousel } from "antd";
+import React, { memo, useState, useEffect, useRef } from "react";
+import { Rate, Carousel, Skeleton } from "antd";
 import { ItemWrapper } from "./style";
 import Indicator from "@/base-ui/indicator";
 import IconStar from "@/assets/svg/icon_star";
@@ -8,11 +8,17 @@ import IconArrowBack from "@/assets/svg/icon-arrow-back";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
 import classNames from "classnames";
 const RoomItem = memo((props) => {
-  const { item, itemWidth = "25%" } = props;
+  const { item, isResponsive, itemWidth = "25%" } = props;
   const [curIndex, setCurIndex] = useState(0);
+  const [loading, setLoading] = useState(true)
 
   const CarouselRef = useRef(null);
 
+  useEffect(() => {
+    if(item) {
+      setLoading(false)
+    }
+  },[item]) 
   // 处理轮播图箭头点击
   function handleArrowClick(direction) {
     const list = item?.picture_urls;
@@ -71,6 +77,8 @@ const RoomItem = memo((props) => {
     </div>
   );
 
+
+
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
@@ -108,6 +116,7 @@ const RoomItem = memo((props) => {
             {item.bottom_info?.content ? "· " + item.bottom_info?.content : ""}
           </span>
         </div>
+        <Skeleton loading={loading} />
       </div>
     </ItemWrapper>
   );
