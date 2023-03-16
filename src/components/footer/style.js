@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const FooterWrapper = styled.div`
 border-top: 1px solid #eee;
   .content {
+    @media screen and (min-width: 350px) and (max-width: 1024px){
+      /* display: flex;
+      flex-direction: column; */
+      width: 80%;
+    } 
     width:1080px;
     padding: 35px 22px;
     box-sizing: border-box;
@@ -26,6 +31,11 @@ border-top: 1px solid #eee;
     }
   }
   .bottom {
+    @media screen and (min-width: 350px) and (max-width: 1024px){
+      /* display: flex;
+      flex-direction: column; */
+      width: 80%;
+    } 
     width:1080px;
     padding: 24px 0;
     margin: 0 auto;

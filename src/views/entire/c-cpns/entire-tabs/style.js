@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const EntireTabsWrapper = styled.div`
   .filter-tab-list {
+    @media screen and (min-width: 350px) and (max-width: 1024px){
+      display:none;
+    } 
     display: flex;
 
     .filter-tab-item {

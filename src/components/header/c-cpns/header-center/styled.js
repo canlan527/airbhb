@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const CenterWrapper = styled.div`
-
+  @media screen and (min-width: 350px) and (max-width: 1024px){
+      display:none;
+    } 
   .search-bar {
     display: flex;
     align-items: center;
