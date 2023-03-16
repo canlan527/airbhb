@@ -8,7 +8,7 @@ import IconArrowBack from "@/assets/svg/icon-arrow-back";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
 import classNames from "classnames";
 const RoomItem = memo((props) => {
-  const { item, isResponsive, itemWidth = "25%" } = props;
+  const { item, itemClick, itemWidth = "25%" } = props;
   const [curIndex, setCurIndex] = useState(0);
   const [loading, setLoading] = useState(true)
 
@@ -24,11 +24,9 @@ const RoomItem = memo((props) => {
     const list = item?.picture_urls;
     let newIndex = 0; //轮播点
     if (direction === "prev") {
-      console.log("prev");
       newIndex = curIndex - 1;
       CarouselRef.current.prev();
     } else if (direction === "next") {
-      console.log("next");
       newIndex = curIndex + 1;
       CarouselRef.current.next();
     }
@@ -37,12 +35,17 @@ const RoomItem = memo((props) => {
     setCurIndex(newIndex);
   }
 
+  function handleItemClick(item) {
+    itemClick && itemClick(item)
+  }
+
+  // 单图元素
   const SingleEl = (
     <div className="item-cover">
       <img src={item.picture_url} alt="" />
     </div>
   );
-
+  // 轮播图元素
   const swiperEl = (
     <div className="item-swiper">
       <div className="item-swiper-control">
@@ -77,14 +80,13 @@ const RoomItem = memo((props) => {
     </div>
   );
 
-
-
   return (
     <ItemWrapper
       verifyColor={item?.verify_info?.text_color || "#333"}
       starColor={item?.star_rating_color ?? "#008489"}
       tagColor={item?.bottom_info?.content_color ?? ""}
       itemWidth={itemWidth}
+      onClick={() => handleItemClick(item)}
     >
       <div className="item-inner">
         {item?.picture_urls ? swiperEl : SingleEl}
