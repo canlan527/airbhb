@@ -1,7 +1,22 @@
 import styled from "styled-components";
 
 export const ItemWrapper = styled.div`
-  width: ${(props) => props.itemWidth};
+  /* width: ${(props) => props.itemWidth}; */
+  @media screen and (min-width: 1440px) and (max-width: 2440px) {
+    width: 20%;
+  }
+  @media screen and (min-width: 1224px) and (max-width: 1440px){
+    width: 25%;
+  } 
+  @media screen and (min-width: 1024px) and (max-width: 1224px){
+    width: 33%;
+  } 
+  @media screen and (min-width: 750px) and (max-width: 1024px){
+    width: 50%;
+  } 
+  @media screen and (min-width: 350px) and (max-width: 750px){
+    width: 100%;
+  } 
   padding: 8px;
   margin: 8px 0;
   box-sizing: border-box;
