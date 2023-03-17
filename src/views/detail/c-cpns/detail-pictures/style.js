@@ -7,6 +7,17 @@ export const DetailPictureWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:hover {
+    .detail-pic-cover {
+      opacity: 1;
+    }
+    .div-pic-item:hover {
+      .detail-pic-cover {
+        opacity: 0;
+      }
+    }
+  }
   .picture-left {
     /* width: 50%; */
     height: 742px;
@@ -21,6 +32,7 @@ export const DetailPictureWrapper = styled.div`
     flex-wrap: wrap;
   }
   .div-pic-item {
+    position: relative;
     width: 100%;
     height: 100%;
     border: 1px solid #222;
@@ -29,6 +41,7 @@ export const DetailPictureWrapper = styled.div`
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
       &:hover {
         transition: all 250ms ease;
         transform: scale(1.1);
@@ -38,11 +51,17 @@ export const DetailPictureWrapper = styled.div`
       width: 50%;
       height: 50%;
     }
-    
   }
 
   .detail-pic-cover {
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    transition: opacity 250ms ease;
   }
 
   .operation-btn {
