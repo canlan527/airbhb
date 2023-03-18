@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
-import React, { memo } from "react";
+import React, { memo,useState } from "react";
 import { useSelector } from "react-redux";
-
+import PicturePreview from "@/base-ui/picture-preview";
 import { DetailPictureWrapper } from "./style";
 const DetailPicture = memo((props) => {
+  const [showPreview, setShowPreview] = useState(false)
   const { info } = useSelector((state) => ({
     info: state.detail.detailInfo,
   }));
+
+  function handlePreview() {
+    setShowPreview(!showPreview)
+  }
 
   return (
     <DetailPictureWrapper>
@@ -24,9 +29,10 @@ const DetailPicture = memo((props) => {
           </div>
         ))}
       </div>
-      <div className="operation-btn">
+      <div className="operation-btn" onClick={handlePreview}>
         查看照片
       </div>
+      {showPreview && <PicturePreview showPreview={handlePreview} />}
     </DetailPictureWrapper>
   );
 });
