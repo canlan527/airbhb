@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PreviewWrapper = styled.div`
   position: fixed;
@@ -6,13 +6,63 @@ export const PreviewWrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background:#333;
+  display: flex;
+  flex-direction: column;
+  background: #333;
   transition: all 250ms ease;
   z-index: 99;
-  .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
+  .preview-top {
+    height: 100px;
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+
+  .preview-main {
+    flex: 1;
+    position: relative;
+    min-height: 300px;
+    .arrow-control {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      .arrow-btn {
+        color: #fff;
+        cursor: pointer;
+        &.left {
+        }
+        &.right {
+        }
+      }
+    }
+    .preview-picture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 105vh;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: content;
+      }
+    }
+  }
+  .preview-indicator {
+    width: 100%;
+    height: 200px;
+    background: tan;
+    margin: 20px 0 40px;
   }
 `;
