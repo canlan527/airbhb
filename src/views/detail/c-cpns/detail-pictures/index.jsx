@@ -5,12 +5,14 @@ import PicturePreview from "@/base-ui/picture-preview";
 import { DetailPictureWrapper } from "./style";
 const DetailPicture = memo((props) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [showIndex, setShowIndex] = useState(0);
   const { info } = useSelector((state) => ({
     info: state.detail.detailInfo,
   }));
 
-  function handlePreview() {
+  function handlePreview(pic, index) {
     setShowPreview(!showPreview);
+    pic === "midPic" ? setShowIndex(index + 1) : setShowIndex(0);
   }
 
   return (
@@ -22,11 +24,11 @@ const DetailPicture = memo((props) => {
         </div>
       </div>
       <div className="picture-right">
-        {info?.picture_urls?.slice(1, 5).map((item) => (
+        {info?.picture_urls?.slice(1, 5).map((item, index) => (
           <div
             className="div-pic-item right"
             key={item}
-            onClick={handlePreview}
+            onClick={() => handlePreview("midPic", index)}
           >
             <img src={item} alt="" />
             <div className="detail-pic-cover"></div>
@@ -41,6 +43,7 @@ const DetailPicture = memo((props) => {
           showPreview={handlePreview}
           pictures={info.picture_urls}
           name={info.name}
+          showIndex={showIndex}
         />
       )}
     </DetailPictureWrapper>

@@ -11,8 +11,8 @@ import { PreviewWrapper } from "./style";
 import classNames from "classnames";
 
 const PicturePreview = memo((props) => {
-  const { showPreview, pictures, name } = props;
-  const [curIndex, setCurIndex] = useState(0);
+  const { showPreview, pictures, name, showIndex } = props;
+  const [curIndex, setCurIndex] = useState(showIndex??0);
   const [direction, setDirection] = useState("next");
   const [showIndicator, setShowIndicator] = useState(true);
   useEffect(() => {
@@ -109,6 +109,7 @@ const PicturePreview = memo((props) => {
 PicturePreview.propTypes = {
   pictures: PropTypes.array,
   name: PropTypes.string,
+  showIndex: PropTypes.number,
 };
 
 export default PicturePreview;
