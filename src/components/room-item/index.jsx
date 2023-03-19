@@ -20,7 +20,8 @@ const RoomItem = memo((props) => {
     }
   },[item]) 
   // 处理轮播图箭头点击
-  function handleArrowClick(direction) {
+  function handleArrowClick(direction, e) {
+    e.stopPropagation();
     const list = item?.picture_urls;
     let newIndex = 0; //轮播点
     if (direction === "prev") {
@@ -49,10 +50,10 @@ const RoomItem = memo((props) => {
   const swiperEl = (
     <div className="item-swiper">
       <div className="item-swiper-control">
-        <div className="btn left" onClick={() => handleArrowClick("prev")}>
+        <div className="btn left" onClick={(e) => handleArrowClick("prev", e)}>
           <IconArrowBack size="26" />
         </div>
-        <div className="btn right" onClick={() => handleArrowClick("next")}>
+        <div className="btn right" onClick={(e) => handleArrowClick("next", e)}>
           <IconArrowFront size="26" />
         </div>
       </div>

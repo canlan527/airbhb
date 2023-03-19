@@ -89,6 +89,7 @@ export const ItemWrapper = styled.div`
         right: 0;
         bottom: 12px;
         border-radius: 22px;
+        cursor: pointer;
         z-index: 220;
         &:hover {
           background: linear-gradient(
