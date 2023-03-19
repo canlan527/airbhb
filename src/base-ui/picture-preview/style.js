@@ -52,6 +52,8 @@ export const PreviewWrapper = styled.div`
       overflow: hidden;
       cursor: pointer;
       user-select: none;
+      /* transition: all 1500ms ease; */
+
       img {
         width: 100%;
         height: 100%;
@@ -64,5 +66,25 @@ export const PreviewWrapper = styled.div`
     height: 200px;
     background: tan;
     margin: 20px 0 40px;
+  }
+
+  .fade-enter {
+    opacity: .7;
+    transform: translateX(
+      ${(props) => (props.direction === "next" ? "50%" : "-50%")}
+    );
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 150ms;
+  }
+  .fade-exit {
+    opacity: 1;
+  }
+  .fade-exit-active {
+    opacity: .7;
+    transition: all 150ms;
+
   }
 `;
