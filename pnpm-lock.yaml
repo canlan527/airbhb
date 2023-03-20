@@ -19,6 +19,7 @@ specifiers:
   react-scripts: 5.0.1
   react-transition-group: ^4.4.5
   styled-components: ^5.3.8
+  underscore: ^1.13.6
   web-vitals: ^2.1.4
 
 dependencies:
@@ -38,6 +39,7 @@ dependencies:
   react-scripts: 5.0.1_ttstqpwd5x4n2qlxnjlizm3yxq
   react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
   styled-components: 5.3.8_7i5myeigehqah43i5u7wbekgba
+  underscore: 1.13.6
   web-vitals: 2.1.4
 
 devDependencies:
@@ -9825,6 +9827,10 @@ packages:
       has-bigints: 1.0.2
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
+
+  /underscore/1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
+    dev: false
 
   /unicode-canonical-property-names-ecmascript/2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}

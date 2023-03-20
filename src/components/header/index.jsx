@@ -1,22 +1,31 @@
-import React, { memo, useState, useEffect } from "react";
+import classNames from "classnames";
+import React, { memo, useState, useRef } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import HeaderLeft from "./c-cpns/header-left";
 import HeaderCenter from "./c-cpns/header-center";
 import HeaderRight from "./c-cpns/header-right";
-
+import useScrollPosition from "@/hooks";
 import { HeaderWrapper, SearchAreaWrapper } from "./style";
-import classNames from "classnames";
 
 const Header = memo(() => {
-  const { homeHeader } = useSelector((state) => ({
-    homeHeader: state.main.homeHeader,
-  }), shallowEqual);
-  const [isSearch, setIsSearch] = useState(false)
+  const { homeHeader } = useSelector(
+    (state) => ({
+      homeHeader: state.main.homeHeader,
+    }),
+    shallowEqual
+  );
+  const [isSearch, setIsSearch] = useState(false);
   const { isFixed } = homeHeader;
 
   function handleIsSearch() {
     setIsSearch(!isSearch);
   }
+  // 监听滚动Y值，如果在isSearch的状态下，向上、向下滚动大于30就让search-detail消失
+  const currentY = useRef(0);
+  const { scrollY } = useScrollPosition();
+  if (!isSearch) currentY.current = scrollY;
+  if (isSearch && Math.abs(scrollY - currentY.current) > 30) setIsSearch(false);
+  console.log(scrollY);
 
   return (
     <HeaderWrapper className={classNames({ fixed: isFixed })}>
