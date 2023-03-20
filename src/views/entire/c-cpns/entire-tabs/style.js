@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
 export const EntireTabsWrapper = styled.div`
+  /* margin-top: 80px; */
+  position: fixed;
+  top:  80px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-left: 34px;
+  background: #fff;
+  z-index: 99;
   .filter-tab-list {
     @media screen and (min-width: 350px) and (max-width: 1024px){
       display:none;

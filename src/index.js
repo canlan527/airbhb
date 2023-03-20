@@ -7,19 +7,19 @@ import { ThemeProvider } from "styled-components";
 import App from "@/App";
 import "normalize.css";
 import "@/assets/css/reset.less";
-import 'antd/dist/reset.css';
+import "antd/dist/reset.css";
 import store from "./store";
-import theme from '@/assets/theme'
+import theme from "@/assets/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Suspense fallback={"loading"}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <Suspense fallback={"loading"}>
       <ThemeProvider theme={theme}>
-      <HashRouter>
-        <App />
-      </HashRouter>
+        <HashRouter>
+          <App />
+        </HashRouter>
       </ThemeProvider>
-    </Provider>
-  </Suspense>
+    </Suspense>
+  </Provider>
 );

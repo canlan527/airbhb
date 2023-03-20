@@ -12,6 +12,7 @@ import HomeLongfor from './c-cpns/home-longfor'
 import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 import SectionTabs from "@/components/section-tabs";
+import { changeHomeHeaderAction } from "@/store/modules/main";
 const Home = memo(() => {
   // 从redux里拿数据
   const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo, longforInfo, plusInfo } = useSelector(
@@ -29,6 +30,7 @@ const Home = memo(() => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(changeHomeHeaderAction({isFixed: true}))
     dispatch(fetchHomeDataAction());
   }, [dispatch]);
 
