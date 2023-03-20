@@ -18,8 +18,8 @@ const EntirePagination = memo((props) => {
 
   const dispatch = useDispatch();
   function handleChange(page) {
-    console.log(page);
-    window.scrollTo(0, 0); // 滚动到顶部
+    // console.log(page);
+    // window.scrollTo(0, 0); // 滚动到顶部
     dispatch(fetchEntireRoomlistAction(page));
   }
 

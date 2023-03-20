@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import HeaderLeft from "./c-cpns/header-left";
 import HeaderCenter from "./c-cpns/header-center";
 import HeaderRight from "./c-cpns/header-right";
-import useScrollPosition from "@/hooks";
+import {useScrollPosition} from "@/hooks";
 import { HeaderWrapper, SearchAreaWrapper } from "./style";
 
 const Header = memo(() => {

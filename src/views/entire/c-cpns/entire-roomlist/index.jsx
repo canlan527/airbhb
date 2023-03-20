@@ -20,7 +20,7 @@ const EntireRoomList = memo((props) => {
   const handleItemClick = useCallback(
     (item) => {
       dispatch(changeDetailInfoAction(item));
-      console.log(item);
+      // console.log(item);
       navigate(`/detail/${item.id}`);
     },
     [navigate]
