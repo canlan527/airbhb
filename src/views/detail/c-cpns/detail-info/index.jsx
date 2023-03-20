@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { Rate } from "antd";
 import { DetailInfoWrapper } from "./style";
 const DetailInfo = memo((props) => {
@@ -14,7 +14,8 @@ const DetailInfo = memo((props) => {
   ];
   const { info } = useSelector((state) => ({
     info: state.detail.detailInfo,
-  }));
+  }), shallowEqual);
+  
   return (
     <DetailInfoWrapper>
       <div className="detail-info-left">
@@ -33,7 +34,7 @@ const DetailInfo = memo((props) => {
             <span>共{info.reviews_count}条评价</span>
           </div>
           <div className="detail-info-rating-section">
-            {rateTitles?.map((item) => (
+            {rateTitles.map((item) => (
               <div key={item} className="detail-info-rating-item">
                 <span>{item}</span>
                 <Rate
@@ -46,7 +47,7 @@ const DetailInfo = memo((props) => {
           </div>
         </div>
         <div className="detail-info-comment">
-          {info?.reviews.map((item) => (
+          {info?.reviews?.map((item) => (
             <div className="detail-info-comment-item" key={item.review_id}>
               <div className="comment-top">
                 <div className="detail-info-comment-avatar">

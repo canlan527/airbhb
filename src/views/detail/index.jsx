@@ -6,6 +6,7 @@ import DetailInfo from "./c-cpns/detail-info";
 import { DetailWrapper } from "./style";
 import { useScrollTop } from "@/hooks";
 const Detail = memo(() => {
+
   const dispatch = useDispatch();
   useScrollTop();
   useEffect(() => {
