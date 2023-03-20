@@ -37,3 +37,8 @@ export const HeaderWrapper = styled.div`
     z-index: 99;
   }
 `;
+
+export const SearchAreaWrapper = styled.div`
+  transition: all 200ms ease;
+  height: ${props => props.isSearch ? '100px' : '0'};
+`;
