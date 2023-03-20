@@ -4,13 +4,13 @@ import { DemoIndicatorWrapper } from "./style";
 
 const DemoIndicator = memo(() => {
   const list = [
-    "金贤重",
-    "吴世勋",
-    "吴亦凡",
-    "金在中",
-    "郑允浩",
-    "朴灿烈",
-    "沈昌珉",
+    "测试111",
+    "测试2222",
+    "测试333",
+    "测试4444",
+    "测试5555",
+    "测试6666",
+    "测试777",
   ];
   const [curIndex, setCurIndex] = useState(0)
   function handleClick(direction) {

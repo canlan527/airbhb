@@ -21,7 +21,7 @@ export const ViewWrapper = styled.div`
     font-size: 16px;
     cursor: pointer;
     ${(props) => props.theme.mixin.boxShadow}
-    z-index: 100;
+    z-index: 9;
     &.left-btn {
       left: -25px;
       transform: translateY(-50%);

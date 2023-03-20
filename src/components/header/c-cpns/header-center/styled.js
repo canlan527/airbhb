@@ -35,4 +35,21 @@ export const CenterWrapper = styled.div`
       border-radius: 50%;
     }
   }
+
+  .search-detail {
+    position: relative;
+    transform-origin: 50% 0;
+    will-change: transform, opacity;
+
+    .search-detail-info {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      /* width: 100%; */
+      /* display: flex;
+      align-items:center;
+      justify-content: center; */
+    }
+  }
 `;
