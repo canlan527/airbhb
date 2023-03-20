@@ -27,18 +27,18 @@ export const SearchTabsWrapper = styled.div`
     &.active {
       &:after {
         width: 100%;
-        background: #424242;
+        background: ${props => props.theme.isAlpha ? '#fff': '#424242'};
       }
     }
 
     &:hover {
-      color: #888;
+      color: ${props => props.theme.isAlpha ? '#222': '#b2b2b2'};
       transition: all 200ms ease;
     }
     &:hover:after {
       height: 2px;
       animation: ad_width .3s linear forwards;
-      background: #b2b2b2;
+      background: ${props => props.theme.isAlpha ? '#222': '#b2b2b2'};
     }
     
     @keyframes ad_width {

@@ -36,10 +36,10 @@ const Header = memo(() => {
         <div className="top">
           <div className="content">
             <HeaderLeft />
-            <HeaderCenter isSearch={isSearch} handleIsSearch={handleIsSearch} />
+            <HeaderCenter isSearch={isSearch || isAlpha} handleIsSearch={handleIsSearch} />
             <HeaderRight />
           </div>
-          <SearchAreaWrapper isSearch={isSearch} />
+          <SearchAreaWrapper isSearch={isSearch || isAlpha} />
         </div>
         {isSearch && <div className="modal" onClick={handleIsSearch}></div>}
       </HeaderWrapper>

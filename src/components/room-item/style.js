@@ -56,7 +56,7 @@ export const ItemWrapper = styled.div`
         margin: 0 auto;
         overflow: hidden;
         width: 30%;
-        z-index: 330;
+        z-index: 19;
 
         .indicator-item {
           display: flex;
@@ -90,7 +90,7 @@ export const ItemWrapper = styled.div`
         bottom: 12px;
         border-radius: 22px;
         cursor: pointer;
-        z-index: 220;
+        z-index: 20;
         &:hover {
           background: linear-gradient(
             to left,
@@ -109,7 +109,7 @@ export const ItemWrapper = styled.div`
           transform: translateY(-50%);
           color: rgba(255, 255, 255, 0.6);
           cursor: pointer;
-          z-index: 250;
+          z-index: 150;
           &.left {
             left: 16px;
           }
