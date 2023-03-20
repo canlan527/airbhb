@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  border-bottom: 1px solid #eee;
+  
   /* background: #fff; */
 
   .top {
     position: relative;
-    background: #fff;
+    background: ${props => props.theme.isAlpha ? 'rgba(255, 255, 255, 0)' : 'rgba(255, 255, 255, 1)'};
     z-index: 19;
     .content {
       display: flex;
       align-items: center;
       height: 80px;
+      border-bottom: 1px solid #eee;
+      border-color: ${props => props.theme.isAlpha ? 'rgba(255,255,255, 0)' : '#eee'};
     }
 
     .search-area {

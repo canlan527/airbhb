@@ -6,7 +6,7 @@ export const RightWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   font-size: 14px;
-  color: ${(props) => props.theme.text.primaryColor};
+  color: ${(props) => props.theme.isAlpha ? '#fff' : props.theme.text.primaryColor};
   margin-right: 24px;
   .menu-left {
     display: flex;
@@ -33,11 +33,12 @@ export const RightWrapper = styled.div`
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 21px;
+    color: #ccc;
     ${prop => prop.theme.mixin.boxShadow}
 
     .menu-right-item {
       border-radius: 22px;
-      color: #666;
+      color: ${props => props.theme.isAlpha ? '#fff' : '#424242'};
       &:hover {
         background: #f5f5f5;
       }
@@ -54,6 +55,7 @@ export const RightWrapper = styled.div`
         top: 52px;
         width:240px;
         background: #fff;
+        color: #424242;
         border-radius: 14px;
         box-shadow: 0 0 6px rgba(0,0,0,.1);
         .panel-top, .panel-bottom {

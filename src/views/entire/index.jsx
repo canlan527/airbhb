@@ -13,7 +13,7 @@ const Entire = memo(() => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(changeHomeHeaderAction({isFixed: true}))
+    dispatch(changeHomeHeaderAction({isFixed: true, alpha: false}))
     dispatch(fetchEntireRoomlistAction())
     window.scrollTo(0, 0)
   }, [dispatch])

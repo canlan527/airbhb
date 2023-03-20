@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { memo, useState, useRef } from "react";
 import { shallowEqual, useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
 import HeaderLeft from "./c-cpns/header-left";
 import HeaderCenter from "./c-cpns/header-center";
 import HeaderRight from "./c-cpns/header-right";
@@ -15,7 +16,7 @@ const Header = memo(() => {
     shallowEqual
   );
   const [isSearch, setIsSearch] = useState(false);
-  const { isFixed } = homeHeader;
+  const { isFixed, alpha } = homeHeader;
 
   function handleIsSearch() {
     setIsSearch(!isSearch);
@@ -25,20 +26,24 @@ const Header = memo(() => {
   const { scrollY } = useScrollPosition();
   if (!isSearch) currentY.current = scrollY;
   if (isSearch && Math.abs(scrollY - currentY.current) > 30) setIsSearch(false);
-  console.log(scrollY);
+
+  // alpha
+  const isAlpha = alpha && scrollY === 0;
 
   return (
-    <HeaderWrapper className={classNames({ fixed: isFixed })}>
-      <div className="top">
-        <div className="content">
-          <HeaderLeft />
-          <HeaderCenter isSearch={isSearch} handleIsSearch={handleIsSearch} />
-          <HeaderRight />
+    <ThemeProvider theme={{isAlpha}}>
+      <HeaderWrapper className={classNames({ fixed: isFixed })}>
+        <div className="top">
+          <div className="content">
+            <HeaderLeft />
+            <HeaderCenter isSearch={isSearch} handleIsSearch={handleIsSearch} />
+            <HeaderRight />
+          </div>
+          <SearchAreaWrapper isSearch={isSearch} />
         </div>
-        <SearchAreaWrapper isSearch={isSearch} />
-      </div>
-      {isSearch && <div className="modal" onClick={handleIsSearch}></div>}
-    </HeaderWrapper>
+        {isSearch && <div className="modal" onClick={handleIsSearch}></div>}
+      </HeaderWrapper>
+    </ThemeProvider>
   );
 });
 

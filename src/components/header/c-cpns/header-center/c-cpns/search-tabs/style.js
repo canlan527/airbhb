@@ -8,7 +8,7 @@ export const SearchTabsWrapper = styled.div`
   .search-tabs-item {
     padding: 4px 0;
     margin-right: 30px;
-    color: #424242;
+    color: ${props => props.theme.isAlpha ? '#fff': '#424242'};
     cursor: pointer;
     position: relative;
     
