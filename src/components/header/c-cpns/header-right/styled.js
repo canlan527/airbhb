@@ -20,7 +20,7 @@ export const RightWrapper = styled.div`
 
       &:hover {
         background: #f5f5f5;
-        color: ${(props) => props.theme.isAlpha ? props.theme.text.primaryColor : '#f3f3f3'};
+        color: ${(props) => props.theme.isAlpha ? props.theme.text.primaryColor : '#424242'};
       }
     }
   }
@@ -41,7 +41,7 @@ export const RightWrapper = styled.div`
       border-radius: 22px;
       color: ${props => props.theme.isAlpha ? '#fff' : '#424242'};
       &:hover {
-        color: ${(props) => props.theme.isAlpha ? props.theme.text.primaryColor : '#f3f3f3'};
+        color: ${(props) => props.theme.isAlpha ? props.theme.text.primaryColor : '#424242'};
       }
       &.right {
         margin-left: 12px;
