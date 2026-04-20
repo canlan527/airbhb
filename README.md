@@ -1,6 +1,6 @@
-# AirBHB
+# Airbnb
 
-AirBHB 是一个基于 React 的仿 Airbnb 房源浏览项目，包含首页、房源列表页、房源详情页、图片预览、本地用户状态和简单支付流程。项目当前支持部署到 Vercel，并通过 Vercel Function 代理后端接口，避免线上 HTTPS 页面请求 HTTP 接口时出现 mixed content 问题。
+Airbnb 是一个基于 React 的仿 Airbnb 房源浏览项目，包含首页、房源列表页、房源详情页、图片预览、本地用户状态和简单支付流程。项目当前支持部署到 Vercel，并通过 Vercel Function 代理后端接口，避免线上 HTTPS 页面请求 HTTP 接口时出现 mixed content 问题。
 
 ## 功能
 
