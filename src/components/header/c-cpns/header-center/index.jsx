@@ -5,13 +5,16 @@ import SearchTabs from "./c-cpns/search-tabs";
 import SearchTypes from "./c-cpns/search-types";
 import IconSearch from "@/assets/svg/icon_search";
 import data from "@/assets/data/search_titles.json";
+
 const HeaderCenter = memo((props) => {
   const { isSearch, handleIsSearch } = props;
   const titles = data.map((item) => item.title);
   const [tabIndex, setTabIndex] = useState(0);
+  // tab点击事件，根据点击的tab的索引切换tab：搜索房源和搜索体验
   function handleTabClick(index) {
     setTabIndex(index);
   }
+  // 根据isSearch状态切换动画
   function handleSearch() {
     handleIsSearch && handleIsSearch();
   }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL, TIMEOUT} from './config'
 
+// 封装axios
 class Request {
   constructor(baseURL, timeout) {
     // 创建 axios 实例

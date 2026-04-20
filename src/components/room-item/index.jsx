@@ -22,18 +22,21 @@ const RoomItem = memo((props) => {
   // 处理轮播图箭头点击
   function handleArrowClick(direction, e) {
     e.stopPropagation();
+    // 拿到轮播的list图片
     const list = item?.picture_urls;
     let newIndex = 0; //轮播点
-    if (direction === "prev") {
-      newIndex = curIndex - 1;
+    if (direction === "prev") { // 向前点 
+      newIndex = curIndex - 1; 
       CarouselRef.current.prev();
-    } else if (direction === "next") {
+    } else if (direction === "next") { // 向后点
       newIndex = curIndex + 1;
       CarouselRef.current.next();
     }
+    // 判断index边界
     if (newIndex < 0) newIndex = list.length - 1;
     if (newIndex > list.length - 1) newIndex = 0;
-    setCurIndex(newIndex);
+    console.log(newIndex)
+    setCurIndex(newIndex); // 设置index
   }
 
   function handleItemClick(item) {
@@ -57,6 +60,7 @@ const RoomItem = memo((props) => {
           <IconArrowFront size="26" />
         </div>
       </div>
+      {/* 指示点 */}
       <div className="indicator-list">
         <Indicator curIndex={curIndex}>
           {item?.picture_urls?.map((item, index) => (
@@ -71,6 +75,7 @@ const RoomItem = memo((props) => {
           ))}
         </Indicator>
       </div>
+      {/* 轮播图 */}
       <Carousel dots={false} ref={CarouselRef}>
         {item?.picture_urls?.map((url) => (
           <div key={url} className="item-cover">

@@ -5,7 +5,7 @@ import TextLogo from '@/assets/img/home/logo-text.jpeg'
 import { LeftWrapper } from './styled'
 
 const HeaderLeft = memo(() => {
-
+  // 拿到路由hook，点击logo跳转首页
   const navigate = useNavigate()
   function handleClick() {
     navigate('/')

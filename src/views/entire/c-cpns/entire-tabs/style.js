@@ -9,7 +9,7 @@ export const EntireTabsWrapper = styled.div`
   width: 100%;
   padding-left: 34px;
   background: #fff;
-  z-index: 99;
+  z-index: 9;
   .filter-tab-list {
     @media screen and (min-width: 350px) and (max-width: 1024px){
       display:none;

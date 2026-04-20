@@ -106,9 +106,17 @@ export const DetailInfoWrapper = styled.div`
   }
 
   .detail-info-right {
+    position: relative;
     padding: 20px;
     border: 1px solid #ccc;
     width: 375px;
+    .spin-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-400px);
+      z-index: 99;
+    }
     .detail-info-price {
       h3 {
         font-size: 28px;
@@ -142,9 +150,41 @@ export const DetailInfoWrapper = styled.div`
       padding: 12px;
       font-size: 12px;
     }
+    .detail-info-right-item {
+      margin: 16px 0;
+      color: #333;
+      &.price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: bold;
+      }
+      .detail-info-right-item-text {
+        margin-bottom: 2px;
+      }
+      .ant-picker {
+        width: 100%;
+      }
+      .ant-input-number{
+        display: block;
+        width: 100%;
+      }
+      /* 信用卡表单样式 */
+      .card-form {
+        padding: 12px;
+        .card-form-item {
+          margin: 12px 0;
+        }
+      }
+      form {
+        font-family: Helvetica, sans-serif;
+        margin: 30px auto 0;
+        max-width: 400px;
+      }
+
+    }
   }
   .rate {
-    
     color: ${props => props.theme.color.secondaryColor};
     margin-right: 12px;
   }

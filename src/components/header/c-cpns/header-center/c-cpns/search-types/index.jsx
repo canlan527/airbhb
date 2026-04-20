@@ -1,4 +1,4 @@
-import classNames from ".pnpm/classnames@2.3.2/node_modules/classnames";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import React, { memo, useState } from "react";
 import IconSearch from "@/assets/svg/icon_search";

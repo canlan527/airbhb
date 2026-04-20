@@ -49,7 +49,7 @@ export const CenterWrapper = styled.div`
 
     .search-detail-info {
       position: absolute;
-      top: 100%;
+      top: 140%;
       left: 50%;
       transform: translateX(-50%);
     }

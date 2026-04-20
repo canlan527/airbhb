@@ -8,6 +8,14 @@ export const RightWrapper = styled.div`
   font-size: 14px;
   color: ${(props) => props.theme.isAlpha ? '#fff' : props.theme.text.primaryColor};
   margin-right: 24px;
+  .register-modal {
+    .logo-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+ 
   .menu-left {
     display: flex;
     align-items: center;
@@ -60,7 +68,7 @@ export const RightWrapper = styled.div`
         border-radius: 14px;
         box-shadow: 0 0 6px rgba(0,0,0,.1);
         .panel-top, .panel-bottom {
-          padding:8px 0;
+          padding:12px 0;
           
           .panel-item {
             padding: 12px ;

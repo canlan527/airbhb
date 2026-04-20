@@ -7,6 +7,7 @@ import ScrollView from '@/base-ui/scroll-view';
 import { LongforWrapper } from "./style";
 
 const HomeLongfor = memo((props) => {
+  // 获取 info 数据
   const {info} = props
   return (
     <LongforWrapper>

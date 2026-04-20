@@ -27,12 +27,12 @@ export const fetchEntireRoomlistAction = (page = 0) => {
     const currentPage = getState().entire.currentPage;
     dispatch(changeCurrentPageAction(page))
     dispatch(changeLoadingAction(true)) //  发送网路请求前设置isloading为 true
+    // 获取entire数据
     getEntireRoomList(currentPage * 20).then(res => {
-      // console.log(res);
       const {list, totalCount} = res
       dispatch(changeLoadingAction(false)) // 拿到返回的数据后设置isloading为false
-      dispatch(changeRoomList(list))
-      dispatch(changeTotalCount(totalCount))
+      dispatch(changeRoomList(list)) // 拿到roomlist数据
+      dispatch(changeTotalCount(totalCount)) // 拿到totalCount
     })
   }
 }

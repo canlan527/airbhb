@@ -7,20 +7,24 @@ import { changeDetailInfoAction } from "@/store/modules/detail";
 import { EntireRoomListWrapper } from "./style";
 
 const EntireRoomList = memo((props) => {
+  // 从redux拿取数据
   const { roomlist, totalCount, isloading } = useSelector(
     (state) => ({
-      roomlist: state.entire.roomList,
-      totalCount: state.entire.totalCount,
-      isloading: state.entire.isloading,
+      roomlist: state.entire.roomList, // roomlist数据
+      totalCount: state.entire.totalCount, // totalCount
+      isloading: state.entire.isloading, // 拿取isloading
     }),
     shallowEqual
   );
+  // 获取路由导航
   const navigate = useNavigate();
+  // 获取dispatch
   const dispatch = useDispatch()
+
+  // 点击每个room-item，派发请求详情的action，并跳转路由
   const handleItemClick = useCallback(
     (item) => {
       dispatch(changeDetailInfoAction(item));
-      // console.log(item);
       navigate(`/detail/${item.id}`);
     },
     [navigate]

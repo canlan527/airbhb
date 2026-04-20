@@ -1,15 +1,18 @@
-import PropTypes from "prop-types";
 import React, { memo, useState } from "react";
 import { useSelector } from "react-redux";
 import PicturePreview from "@/base-ui/picture-preview";
 import { DetailPictureWrapper } from "./style";
+
 const DetailPicture = memo((props) => {
-  const [showPreview, setShowPreview] = useState(false);
-  const [showIndex, setShowIndex] = useState(0);
+  const [showPreview, setShowPreview] = useState(false); //显示预览
+  const [showIndex, setShowIndex] = useState(0); // 当前预览的图片的索引
+  
+  // 从redux里获取详情info
   const { info } = useSelector((state) => ({
     info: state.detail.detailInfo,
   }));
 
+  // 图片预览处理事件
   function handlePreview(pic, index) {
     setShowPreview(!showPreview);
     pic === "midPic" ? setShowIndex(index + 1) : setShowIndex(0);

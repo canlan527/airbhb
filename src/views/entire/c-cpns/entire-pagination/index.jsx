@@ -6,20 +6,19 @@ import { fetchEntireRoomlistAction } from "@/store/modules/entire/actionCreators
 import { PaginationWrapper } from "./style";
 
 const EntirePagination = memo((props) => {
+  // 从redux拿取数据
   const { totalCount, currentPage, roomlist } = useSelector((state) => ({
-    totalCount: state.entire.totalCount,
-    currentPage: state.entire.currentPage,
-    roomlist: state.entire.roomList,
+    totalCount: state.entire.totalCount, // 总条数
+    currentPage: state.entire.currentPage, // 当前页
+    roomlist: state.entire.roomList, // entire页面房间数据
   }), shallowEqual);
 
-  const start = currentPage * 20 + 1;
-  const end = (currentPage + 1) * 20;
-  const pageSize = 20;
+  const start = currentPage * 20 + 1; // 每页的起始数
+  const end = (currentPage + 1) * 20; // 每页的结尾数
+  const pageSize = 20; // 每页条数
 
   const dispatch = useDispatch();
   function handleChange(page) {
-    // console.log(page);
-    // window.scrollTo(0, 0); // 滚动到顶部
     dispatch(fetchEntireRoomlistAction(page));
   }
 

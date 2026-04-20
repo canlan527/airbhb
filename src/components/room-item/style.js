@@ -134,6 +134,10 @@ export const ItemWrapper = styled.div`
         border-radius: 3px;
         font-size: 12px;
         color: ${(prop) => prop.verifyColor};
+        max-width: 160px;
+        overflow:hidden; //超出的文本隐藏
+        text-overflow:ellipsis; //溢出用省略号显示
+        white-space:nowrap; //溢出不换行
       }
       .item-star {
         display: flex;

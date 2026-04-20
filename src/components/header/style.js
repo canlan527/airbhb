@@ -9,11 +9,13 @@ export const HeaderWrapper = styled.div`
     background: ${props => props.theme.isAlpha ? 'rgba(255, 255, 255, 0)' : 'rgba(255, 255, 255, 1)'};
     z-index: 19;
     .content {
+      position: relative;
       display: flex;
       align-items: center;
       height: 80px;
       border-bottom: 1px solid #eee;
       border-color: ${props => props.theme.isAlpha ? 'rgba(255,255,255, 0)' : '#eee'};
+      z-index: 100;
     }
 
     .search-area {
