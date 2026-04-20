@@ -9,6 +9,16 @@ const HOP_BY_HOP_HEADERS = new Set([
   'upgrade'
 ])
 
+function getPath(req) {
+  const path = req.query.path
+
+  if (Array.isArray(path)) {
+    return path.join('/')
+  }
+
+  return path || ''
+}
+
 function getTargetUrl(req) {
   const baseUrl = process.env.API_BASE_URL
 
@@ -16,7 +26,6 @@ function getTargetUrl(req) {
     throw new Error('Missing API_BASE_URL environment variable')
   }
 
-  const path = Array.isArray(req.query.path) ? req.query.path.join('/') : ''
   const searchParams = new URLSearchParams()
 
   for (const [key, value] of Object.entries(req.query)) {
@@ -30,6 +39,7 @@ function getTargetUrl(req) {
   }
 
   const normalizedBaseUrl = baseUrl.replace(/\/$/, '')
+  const path = getPath(req).replace(/^\//, '')
   const queryString = searchParams.toString()
 
   return `${normalizedBaseUrl}/${path}${queryString ? `?${queryString}` : ''}`
@@ -48,7 +58,10 @@ function getProxyHeaders(req) {
     ) {
       continue
     }
-    if (value !== undefined) headers[key] = value
+
+    if (value !== undefined) {
+      headers[key] = value
+    }
   }
 
   return headers
@@ -59,7 +72,7 @@ function getRequestBody(req) {
   return typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {})
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   let targetUrl
 
   try {
