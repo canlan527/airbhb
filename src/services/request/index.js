@@ -27,4 +27,6 @@ class Request {
   }
 }
 
-export default new Request(BASE_URL,TIMEOUT)
+const request = new Request(BASE_URL,TIMEOUT)
+
+export default request

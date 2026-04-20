@@ -53,6 +53,4 @@ const DetailPicture = memo((props) => {
   );
 });
 
-DetailPicture.propTypes = {};
-
 export default DetailPicture;

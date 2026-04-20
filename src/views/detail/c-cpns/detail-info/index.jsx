@@ -94,7 +94,7 @@ const DetailInfo = memo((props) => {
       setIsReserve(true) // 设置预定状态
     }
     
-  }, [info, stayDays, personNumber, currentUsername, isReserve]) // 设置依赖项
+  }, [info, stayDays, personNumber, currentUsername, isReserve, completePay]) // 设置依赖项
 
 
   // 时间选择器处理选择不超过七天的范围

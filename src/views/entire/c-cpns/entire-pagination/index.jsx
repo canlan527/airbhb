@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import React, { memo, useState, useEffect, useLayoutEffect } from "react";
+import React, { memo } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Pagination, ConfigProvider } from "antd";
 import { fetchEntireRoomlistAction } from "@/store/modules/entire/actionCreators";
@@ -44,7 +43,5 @@ const EntirePagination = memo((props) => {
     </PaginationWrapper>
   );
 });
-
-EntirePagination.propTypes = {};
 
 export default EntirePagination;

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchEntireRoomlistAction } from '@/store/modules/entire/actionCreators'
 import { changeHomeHeaderAction } from '@/store/modules/main'

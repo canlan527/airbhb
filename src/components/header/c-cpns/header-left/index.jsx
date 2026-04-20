@@ -17,7 +17,7 @@ const HeaderLeft = memo(() => {
         <IconLogo />
       </div>
       <div className="text-logo">
-        <img className="text-logo-img" src={TextLogo} />
+        <img className="text-logo-img" src={TextLogo} alt="AirBHB" />
       </div>
     </LeftWrapper>
   )

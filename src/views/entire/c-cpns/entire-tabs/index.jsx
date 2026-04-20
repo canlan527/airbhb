@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { memo, useState } from "react";
 import classNames from "classnames";
 import filterData from "@/assets/data/filter_data.json";
@@ -39,7 +38,5 @@ const EntireTabs = memo((props) => {
     </EntireTabsWrapper>
   );
 });
-
-EntireTabs.propTypes = {};
 
 export default EntireTabs;

@@ -12,12 +12,10 @@ import LogoText from '@/assets/img/home/logo-text.jpeg'
 const HeaderRight = memo(() => {
   const [messageApi, contextHolder] = message.useMessage() // antd message组件
   const [userinfo, setUserinfo] = useState(storage.get('airbnb-info') || []) // 存储本地用户信息
-  const [currentUsername, setCurrentUsername] = useState(storage.get('airbnb-info-cur') || '') // 当期登录的用户名
   const [showPanel, setShowPanel] = useState(false)
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
-  const [isRegister, setIsRegister] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -65,7 +63,6 @@ const HeaderRight = memo(() => {
     if (userinfo.length) {
       for (const user of userinfo) {
         if (values.username === user.username) {
-          setIsRegister(true) // 如果找到 代表已注册过
           // 关闭register modal
           setIsRegisterModalOpen(false)
           messageApi.info('您已注册，请直接登录！');
@@ -85,8 +82,6 @@ const HeaderRight = memo(() => {
             // 关闭register modal
             setIsRegisterModalOpen(false)
             navigate('/') // 跳转首页
-            // 记录当前用户
-            setCurrentUsername(values.username)
             // 存储当前用户
             storage.set('airbnb-info-cur', values.username)
             // 弹出message
@@ -105,8 +100,6 @@ const HeaderRight = memo(() => {
       setUserinfo(userinfo)
       // 本地化存储用户信息
       storage.set('airbnb-info', userinfo)
-      // 记录当前用户
-      setCurrentUsername(values.username)
       // 存储当前用户
       storage.set('airbnb-info-cur', values.username)
       // 关闭register modal
@@ -146,8 +139,6 @@ const HeaderRight = memo(() => {
         // 判断密码
         if (values.password === user.password) { //如果密码匹配成功
           setIsLoginModalOpen(false);// 关闭login modal
-          // 记录当前用户
-          setCurrentUsername(values.username)
           // 存储当前用户
           storage.set('airbnb-info-cur', values.username)
           setIsLogin(true)
@@ -193,8 +184,6 @@ const HeaderRight = memo(() => {
     setIsLogin(false)
     // 弹出message
     messageApi.info('已登出');
-    // 清除当前用户
-    setCurrentUsername('')
     // 清除存储当前用户记录
     storage.set('airbnb-info-cur', '')
   }

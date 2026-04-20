@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { memo, useState, useEffect, useRef } from "react";
 import { ViewWrapper } from "./style";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
@@ -11,11 +10,6 @@ const ScrollView = memo((props) => {
   const ScrollViewRef = useRef(); // children 的ref
   const moveDistance = useRef(); // innerView已经滚动的距离
   useEffect(() => {
-    handleMove()
-  }, [curIndex]);
-
-  // 处理滚动逻辑的函数
-  function handleMove() {
     const innerView = ScrollViewRef.current.children[0];
     // 移动一个item的宽度
     moveDistance.current = innerView.children[curIndex].offsetLeft;
@@ -26,7 +20,7 @@ const ScrollView = memo((props) => {
     setShowRBtn(moveDistance.current < distance)
     // 显示影藏左侧按钮，左侧按钮显示的条件是已滚动的距离 > 0
     setShowLBtn(moveDistance.current > 0)
-  }
+  }, [curIndex]);
 
   function handleRight() {
     setCurIndex(curIndex + 1);
@@ -52,9 +46,5 @@ const ScrollView = memo((props) => {
     </ViewWrapper>
   );
 });
-
-ScrollView.propTypes = {
-  // children: PropTypes.element
-};
 
 export default ScrollView;
