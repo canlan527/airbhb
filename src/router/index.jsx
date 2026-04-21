@@ -1,4 +1,4 @@
-import React, {lazy} from 'react'
+import React, { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
 const Home = lazy(() => import('@/views/home'))
@@ -14,11 +14,11 @@ const routes = [
   },
   {
     path: '/home',
-    element: <Home/>
+    element: <Home />
   },
   {
     path: '/detail/:id',
-    element: <Detail/>
+    element: <Detail />
   },
   {
     path: '/entire',
@@ -26,14 +26,14 @@ const routes = [
   },
   {
     path: '/demo',
-    element: <Demo/>,
+    element: <Demo />,
     children: [
       {
         path: '/demo/indicator',
-        element: <DemoIndicator/>
+        element: <DemoIndicator />
       }
     ]
   }
 ]
 
-export default routes;
+export default routes
