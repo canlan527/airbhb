@@ -5,6 +5,7 @@ import storage from 'store' // 引入本地存储库
 import dayjs from 'dayjs' // 引入dayjs
 import { Rate, DatePicker, InputNumber, Form, Input, Spin, Button, message } from "antd"; // 按需引入antd组件
 import zhCN from 'antd/es/date-picker/locale/zh_CN'; // 引入antd-date-picker中文包
+import { createOrder, favoriteHouse, payOrder, recordHouseView } from "@/services";
 
 // 引入表单格式化工具函数
 import {
@@ -38,6 +39,7 @@ const DetailInfo = memo((props) => {
   const [confirmPay, setConfirmPay] = useState(false) // 是否确认支付
   const [completePay, setCompletePay] = useState(false) // 是否支付完成
   const [loading, setLoading] = useState(false) // 加载图标
+  const [orderNo, setOrderNo] = useState('')
   const [card, setCard] = useState({  // 信用卡内容
     number: '',
     expiry: '',
@@ -96,6 +98,12 @@ const DetailInfo = memo((props) => {
     
   }, [info, stayDays, personNumber, currentUsername, isReserve, completePay]) // 设置依赖项
 
+  useEffect(() => {
+    if (info?._id && storage.get('airbhb-token')) {
+      recordHouseView(info._id).catch(() => {})
+    }
+  }, [info?._id])
+
 
   // 时间选择器处理选择不超过七天的范围
   const disabledDate = (current) => {
@@ -140,40 +148,64 @@ const DetailInfo = memo((props) => {
   }
   // 处理确定支付按钮事件
   function handleReserve() {
-    let currentUsername = storage.get('airbnb-info-cur')
-    if(currentUsername) {
+    let currentUser = storage.get('airbhb-user')
+    if(currentUser) {
       setConfirmPay(true)
     } else {
       messageApi.info('请先登录');
     }
   }
   // 处理支付
-  function handlePay() {
+  async function handlePay() {
     if (!confirmPay) return
     // 设置加载
     setLoading(true)
     // 弹起input onfocus
     numberInputRef.current?.focus({ cursor: 'end' })
     // 设置定时器1000毫秒
-    setTimeout(() => {
+    setTimeout(async () => {
       // 完成加载
-      setLoading(false)
-      // 处理支付
-      setCompletePay(true)
-      // 本地化存储当前用户已预定信息
-      storage.set('airbnb-info-pay', {
-        username: storage.get('airbnb-info-cur'), // 拿到当前用户名
-        roomId: info.id, // 房间id
-        roomprice: info.price, // 房间定价
-        reserveDate: [dayjs(value[0]), dayjs(value[1])],  // 预定日期
-        // reserveDate: value,  // 预定日期
-        completePay: true, // 完成支付
-        stayDays, // 预定天数
-        personNumber, // 人数
-        totalPrice, // 总价
-      })
+      try {
+        const order = await createOrder({
+          houseId: info._id,
+          checkIn: value[0].toISOString(),
+          checkOut: value[1].toISOString()
+        })
+        const paid = await payOrder(order.orderNo)
+        setOrderNo(paid.orderNo)
+        setCompletePay(true)
+        storage.set('airbnb-info-pay', {
+          username: storage.get('airbnb-info-cur'),
+          roomId: info.id,
+          orderNo: paid.orderNo,
+          roomprice: info.price,
+          reserveDate: [dayjs(value[0]), dayjs(value[1])],
+          completePay: true,
+          stayDays,
+          personNumber,
+          totalPrice: paid.amount || totalPrice,
+        })
+        messageApi.success(`支付成功，订单号：${paid.orderNo}`)
+      } catch (error) {
+        messageApi.error(error?.message || '支付失败，请稍后再试')
+      } finally {
+        setLoading(false)
+      }
     }, 2500)
 
+  }
+
+  async function handleFavorite() {
+    if (!storage.get('airbhb-token')) {
+      messageApi.info('请先登录')
+      return
+    }
+    try {
+      await favoriteHouse(info._id)
+      messageApi.success('已加入我的收藏')
+    } catch (error) {
+      messageApi.error(error?.message || '收藏失败')
+    }
   }
   // 处理信用卡表单项输入
   const handleCardInputChange = (e) => {
@@ -206,6 +238,7 @@ const DetailInfo = memo((props) => {
       {contextHolder}
       <div className="detail-info-left">
         <div className="detail-info-title">{info.name}</div>
+        <Button onClick={handleFavorite} style={{ margin: '12px 0' }}>收藏房源</Button>
         <div className="detail-info-verify">
           {info?.verify_info?.messages.map((item) => (
             <span key={item} className="detail-info-tag">
@@ -303,7 +336,7 @@ const DetailInfo = memo((props) => {
 
             {
               completePay && (
-                isReserve ? <Button type="primary" danger block disabled={completePay} onClick={handleReserve}>已预定</Button>
+                isReserve ? <Button type="primary" danger block disabled={completePay} onClick={handleReserve}>{orderNo ? `已支付 ${orderNo}` : '已预定'}</Button>
                 : <Button type="primary" danger block>查看订阅状态</Button>
               )
             }
