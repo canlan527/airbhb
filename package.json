@@ -30,6 +30,8 @@
     "preview": "vite preview",
     "dev:api": "pnpm --filter @airbhb/api start:dev",
     "build:api": "pnpm --filter @airbhb/api build",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
     "prisma:generate": "pnpm --filter @airbhb/api prisma generate",
     "prisma:migrate": "pnpm --filter @airbhb/api prisma migrate dev",
     "prisma:seed": "pnpm --filter @airbhb/api prisma db seed"

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: airbhb-api
+    runtime: node
+    rootDir: apps/api
+    plan: free
+    buildCommand: cd ../.. && pnpm install --frozen-lockfile && pnpm --filter @airbhb/api prisma generate && pnpm --filter @airbhb/api build
+    startCommand: cd ../.. && pnpm --filter @airbhb/api prisma migrate deploy && pnpm --filter @airbhb/api start:prod
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false

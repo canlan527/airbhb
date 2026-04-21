@@ -25,6 +25,7 @@ admin@example.com / 123456
 ```bash
 cp .env.example .env
 pnpm install
+pnpm db:up
 pnpm --filter @airbhb/api prisma generate
 pnpm --filter @airbhb/api prisma migrate dev
 pnpm --filter @airbhb/api prisma db seed

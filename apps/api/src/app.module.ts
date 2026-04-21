@@ -8,6 +8,7 @@ import { HistoriesModule } from './modules/histories/histories.module';
 import { HousesModule } from './modules/houses/houses.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PrismaModule } from './prisma/prisma.module';
     FavoritesModule,
     HistoriesModule,
     AdminModule
-  ]
+  ],
+  controllers: [HealthController]
 })
 export class AppModule {}

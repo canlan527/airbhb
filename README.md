@@ -49,11 +49,21 @@ pnpm dev
 
 ```bash
 cp apps/api/.env.example apps/api/.env
+pnpm db:up
 pnpm prisma:generate
+pnpm prisma:migrate
+pnpm prisma:seed
 pnpm dev:api
 ```
 
 后端默认使用 `http://localhost:3001/api`。如果要连接 PostgreSQL，请在 `apps/api/.env` 中配置 `DATABASE_URL` 后执行迁移和 seed：
+本地默认 PostgreSQL 连接为：
+
+```env
+DATABASE_URL="postgresql://airbhb:airbhb@localhost:54329/airbhb"
+```
+
+如果使用 Neon / Supabase / Railway PostgreSQL，把 `apps/api/.env` 里的 `DATABASE_URL` 替换为托管数据库连接串即可：
 
 ```bash
 pnpm prisma:migrate
@@ -158,6 +168,32 @@ API_BASE_URL=http://your-api-host/airbnb/api
 
 保存后重新部署，页面数据会通过 `/api/proxy` 加载。
 
+## Render 后端部署
+
+仓库内提供了 `render.yaml`，用于部署 `apps/api`：
+
+```text
+Build Command:
+cd ../.. && pnpm install --frozen-lockfile && pnpm --filter @airbhb/api prisma generate && pnpm --filter @airbhb/api build
+
+Start Command:
+cd ../.. && pnpm --filter @airbhb/api prisma migrate deploy && pnpm --filter @airbhb/api start:prod
+```
+
+Render 环境变量需要配置：
+
+```env
+DATABASE_URL=你的 PostgreSQL 连接串
+JWT_SECRET=任意安全随机字符串
+PORT=3001
+```
+
+部署成功后，将前端 Vercel 的 `VITE_API_BASE_URL` 配置为：
+
+```env
+VITE_API_BASE_URL=https://你的-render-api域名/api
+```
+
 ## 项目结构
 
 ```text
@@ -182,6 +218,7 @@ apps/api
 ```bash
 pnpm start
 pnpm dev:api
+pnpm db:up
 pnpm run build
 pnpm build:api
 ```
