@@ -73,6 +73,8 @@ model House {
   bathrooms     Int
   reviewsCount  Int         @default(0)
   verifyMessage String      @default("整套房源")
+  originSections String[]    @default([])
+  originGroup    String?
   source        HouseSource @default(USER)
   status        HouseStatus @default(PENDING)
 

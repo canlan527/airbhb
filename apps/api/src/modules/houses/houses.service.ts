@@ -84,29 +84,38 @@ export class HousesService {
     return { ok: true };
   }
 
-  async legacySection(title: string, options: { take: number; orderBy?: 'rating'; groupByCity?: boolean }) {
+  async legacySection(
+    title: string,
+    options: { take: number; orderBy?: 'rating'; groupByCity?: boolean; section?: string; subtitle?: string }
+  ) {
+    const where = {
+      status: HouseStatus.PUBLISHED,
+      ...(options.section ? { originSections: { has: options.section } } : {})
+    };
     const list = await this.prisma.house.findMany({
-      where: { status: HouseStatus.PUBLISHED },
-      orderBy: options.orderBy === 'rating' ? { rating: 'desc' } : { createdAt: 'desc' },
+      where,
+      orderBy: options.orderBy === 'rating' ? { rating: 'desc' } : { createdAt: 'asc' },
       take: options.take
     });
-    const legacyList = list.map(toLegacyHouse);
     if (options.groupByCity) {
+      const grouped = list.reduce<Record<string, ReturnType<typeof toLegacyHouse>[]>>((acc, house) => {
+        const groupName = house.originGroup || house.city || '精选';
+        acc[groupName] = acc[groupName] || [];
+        acc[groupName].push(toLegacyHouse(house));
+        return acc;
+      }, {});
+      const groups = Object.keys(grouped);
       return {
         title,
-        subtitle: '精选城市与热门住宿',
-        dest_address: ['广州', '上海', '北京', '杭州', '成都', '深圳'],
-        dest_list: legacyList.reduce<Record<string, ReturnType<typeof toLegacyHouse>[]>>((acc, item) => {
-          const city = item.city || '精选';
-          acc[city] = acc[city] || [];
-          acc[city].push(item);
-          return acc;
-        }, {})
+        subtitle: options.subtitle || '精选城市与热门住宿',
+        dest_address: groups.map((name) => ({ name })),
+        dest_list: grouped
       };
     }
+    const legacyList = list.map(toLegacyHouse);
     return {
       title,
-      subtitle: '真实后端接口返回的演示数据',
+      subtitle: options.subtitle || '真实接口导入到 PostgreSQL 的房源数据',
       list: legacyList
     };
   }

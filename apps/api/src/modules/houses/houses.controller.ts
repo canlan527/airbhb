@@ -50,22 +50,27 @@ export class HousesController {
 
   @Get('home/goodprice')
   legacyGoodPrice() {
-    return this.housesService.legacySection('高性价比房源', { take: 8 });
+    return this.housesService.legacySection('佛山高性价比房源', { take: 10, section: 'goodprice', subtitle: '品质房源，低至 5 折' });
   }
 
   @Get('home/highscore')
   legacyHighScore() {
-    return this.housesService.legacySection('高分好评房源', { take: 8, orderBy: 'rating' });
+    return this.housesService.legacySection('高分好评房源', { take: 10, section: 'highscore', orderBy: 'rating', subtitle: '住客真实评分精选' });
   }
 
   @Get('home/discount')
   legacyDiscount() {
-    return this.housesService.legacySection('热门城市房源', { take: 12, groupByCity: true });
+    return this.housesService.legacySection('热门目的地', { take: 36, section: 'discount', groupByCity: true, subtitle: '品质房源，低至 5 折' });
   }
 
   @Get('home/hotrecommenddest')
   legacyRecommend() {
-    return this.housesService.legacySection('热门目的地', { take: 12, groupByCity: true });
+    return this.housesService.legacySection('探索佛山的精彩之地', {
+      take: 48,
+      section: 'hotrecommenddest',
+      groupByCity: true,
+      subtitle: '精选目的地与热门住宿'
+    });
   }
 
   @Get('home/longfor')
@@ -75,7 +80,7 @@ export class HousesController {
 
   @Get('home/plus')
   legacyPlus() {
-    return this.housesService.legacySection('平台精选 Plus 房源', { take: 8 });
+    return this.housesService.legacySection('佛山的爱彼迎 Plus 房源', { take: 8, section: 'plus', subtitle: '品质和设计经过验证的精选房源' });
   }
 
   @Get('entire/list')
