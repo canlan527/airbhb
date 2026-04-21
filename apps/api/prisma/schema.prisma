@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  HOST
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum HouseSource {
+  USER
+  PLATFORM
+}
+
+enum HouseStatus {
+  DRAFT
+  PENDING
+  PUBLISHED
+  REJECTED
+  OFFLINE
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+  COMPLETED
+  REFUNDED
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  name      String
+  avatar    String?
+  role      UserRole   @default(USER)
+  status    UserStatus @default(ACTIVE)
+
+  houses    House[]         @relation("HostHouses")
+  orders    Order[]
+  favorites Favorite[]
+  histories BrowseHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model House {
+  id            String      @id @default(uuid())
+  legacyId      String?     @unique
+  title         String
+  city          String
+  address       String
+  price         Int
+  rating        Float       @default(5)
+  coverUrl      String
+  imageUrls     String[]
+  tags          String[]
+  description   String
+  bedrooms      Int
+  bathrooms     Int
+  reviewsCount  Int         @default(0)
+  verifyMessage String      @default("整套房源")
+  source        HouseSource @default(USER)
+  status        HouseStatus @default(PENDING)
+
+  hostId        String?
+  host          User?       @relation("HostHouses", fields: [hostId], references: [id])
+
+  orders        Order[]
+  favorites     Favorite[]
+  histories     BrowseHistory[]
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  orderNo   String      @unique
+  userId    String
+  houseId   String
+  checkIn   DateTime
+  checkOut  DateTime
+  nights    Int
+  amount    Int
+  status    OrderStatus @default(PENDING)
+
+  user      User        @relation(fields: [userId], references: [id])
+  house     House       @relation(fields: [houseId], references: [id])
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  houseId   String
+
+  user      User     @relation(fields: [userId], references: [id])
+  house     House    @relation(fields: [houseId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, houseId])
+}
+
+model BrowseHistory {
+  id        String   @id @default(uuid())
+  userId    String
+  houseId   String
+
+  user      User     @relation(fields: [userId], references: [id])
+  house     House    @relation(fields: [houseId], references: [id])
+
+  viewedAt  DateTime @default(now())
+
+  @@unique([userId, houseId])
+}
