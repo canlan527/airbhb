@@ -75,6 +75,8 @@ const PublishHouse = memo(() => {
   const [imageFiles, setImageFiles] = useState(defaultImageFiles)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
   const [previewIndex, setPreviewIndex] = useState(0)
+  const [draggingUid, setDraggingUid] = useState('')
+  const [dragOverUid, setDragOverUid] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
@@ -172,6 +174,56 @@ const PublishHouse = memo(() => {
       if (!imageFiles.length) return 0
       return (currentIndex + step + imageFiles.length) % imageFiles.length
     })
+  }
+
+  function handleSortImages(sourceUid, targetUid) {
+    if (!sourceUid || !targetUid || sourceUid === targetUid) return
+    setImageFiles(prevFiles => {
+      const sourceIndex = prevFiles.findIndex(item => item.uid === sourceUid)
+      const targetIndex = prevFiles.findIndex(item => item.uid === targetUid)
+      if (sourceIndex < 0 || targetIndex < 0) return prevFiles
+
+      const nextFiles = [...prevFiles]
+      const [movedFile] = nextFiles.splice(sourceIndex, 1)
+      nextFiles.splice(targetIndex, 0, movedFile)
+      return nextFiles
+    })
+  }
+
+  function renderUploadItem(originNode, file) {
+    const isDragging = draggingUid === file.uid
+    const isDragOver = dragOverUid === file.uid && draggingUid !== file.uid
+
+    return (
+      <div
+        className={`sortable-upload-item${isDragging ? ' is-dragging' : ''}${isDragOver ? ' is-drag-over' : ''}`}
+        draggable
+        onDragEnd={() => {
+          setDraggingUid('')
+          setDragOverUid('')
+        }}
+        onDragEnter={event => {
+          event.preventDefault()
+          setDragOverUid(file.uid)
+        }}
+        onDragOver={event => event.preventDefault()}
+        onDragStart={event => {
+          setDraggingUid(file.uid)
+          event.dataTransfer.effectAllowed = 'move'
+          event.dataTransfer.setData('text/plain', file.uid)
+        }}
+        onDrop={event => {
+          event.preventDefault()
+          const sourceUid = event.dataTransfer.getData('text/plain') || draggingUid
+          handleSortImages(sourceUid, file.uid)
+          setDraggingUid('')
+          setDragOverUid('')
+        }}
+      >
+        {originNode}
+        <span className="drag-order-tip">拖拽排序</span>
+      </div>
+    )
   }
 
   const currentPreviewImage = imageFiles[previewIndex]?.url || imageFiles[previewIndex]?.thumbUrl || ''
@@ -282,6 +334,7 @@ const PublishHouse = memo(() => {
                 accept="image/*"
                 beforeUpload={handleBeforeUpload}
                 fileList={imageFiles}
+                itemRender={renderUploadItem}
                 listType="picture-card"
                 maxCount={maxUploadImages}
                 multiple

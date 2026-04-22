@@ -170,6 +170,62 @@
     .ant-upload-list-picture-card .ant-upload-list-item-thumbnail img {
       object-fit: cover;
     }
+
+    .sortable-upload-item {
+      position: relative;
+      width: 150px;
+      height: 112px;
+      cursor: grab;
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      .ant-upload-list-item-container {
+        pointer-events: auto;
+      }
+    }
+
+    .sortable-upload-item.is-dragging {
+      opacity: 0.5;
+      transform: scale(0.98);
+    }
+
+    .sortable-upload-item.is-drag-over {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        z-index: 3;
+        border: 2px dashed #ff385c;
+        border-radius: 8px;
+        pointer-events: none;
+      }
+    }
+
+    .drag-order-tip {
+      position: absolute;
+      right: 7px;
+      bottom: 7px;
+      z-index: 4;
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 650;
+      background: rgba(17, 24, 39, 0.68);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .sortable-upload-item:hover .drag-order-tip,
+    .sortable-upload-item.is-dragging .drag-order-tip {
+      opacity: 1;
+    }
   }
 
   .upload-trigger {
@@ -251,6 +307,11 @@
         width: 138px;
         height: 104px;
       }
+
+      .sortable-upload-item {
+        width: 138px;
+        height: 104px;
+      }
     }
   }
 
@@ -291,6 +352,12 @@
 
       .ant-upload-list-picture-card .ant-upload-list-item-container,
       .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+
+      .sortable-upload-item {
         width: 100%;
         height: auto;
         aspect-ratio: 4 / 3;
