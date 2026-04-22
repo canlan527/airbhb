@@ -41,6 +41,14 @@ const PublishHouse = memo(() => {
     dispatch(changeHomeHeaderAction({ isFixed: true, alpha: false }))
   }, [dispatch])
 
+  useEffect(() => {
+    const urls = imageFiles.map(item => item.url || item.thumbUrl).filter(Boolean)
+    form.setFieldsValue({
+      coverUrl: urls[0] || '',
+      imageUrls: urls.join('\n')
+    })
+  }, [form, imageFiles])
+
   async function onFinish(values) {
     if (!user) {
       messageApi.info('请先登录')
@@ -68,14 +76,6 @@ const PublishHouse = memo(() => {
     }
   }
 
-  function syncImageFields(nextFiles) {
-    const urls = nextFiles.map(item => item.url || item.thumbUrl).filter(Boolean)
-    form.setFieldsValue({
-      coverUrl: urls[0] || '',
-      imageUrls: urls.join('\n')
-    })
-  }
-
   async function handleBeforeUpload(file) {
     if (!file.type.startsWith('image/')) {
       messageApi.warning('只能上传图片文件')
@@ -86,24 +86,28 @@ const PublishHouse = memo(() => {
       return Upload.LIST_IGNORE
     }
     const dataUrl = await fileToDataUrl(file)
-    const nextFiles = [
-      ...imageFiles,
-      {
-        uid: file.uid,
-        name: file.name,
-        status: 'done',
-        url: dataUrl
+    setImageFiles(prevFiles => {
+      if (prevFiles.some(item => item.uid === file.uid)) return prevFiles
+      if (prevFiles.length >= 8) {
+        messageApi.warning('最多上传 8 张房源图片')
+        return prevFiles
       }
-    ]
-    setImageFiles(nextFiles)
-    syncImageFields(nextFiles)
+      return [
+        ...prevFiles,
+        {
+          uid: file.uid,
+          name: file.name,
+          status: 'done',
+          url: dataUrl
+        }
+      ]
+    })
     return Upload.LIST_IGNORE
   }
 
   function handleRemove(file) {
     const nextFiles = imageFiles.filter(item => item.uid !== file.uid)
     setImageFiles(nextFiles)
-    syncImageFields(nextFiles)
   }
 
   function handlePreview(file) {
@@ -214,6 +218,7 @@ const PublishHouse = memo(() => {
                 beforeUpload={handleBeforeUpload}
                 fileList={imageFiles}
                 listType="picture-card"
+                maxCount={8}
                 multiple
                 onPreview={handlePreview}
                 onRemove={handleRemove}
