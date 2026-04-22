@@ -60,7 +60,14 @@ export class HousesController {
 
   @Get('home/discount')
   legacyDiscount() {
-    return this.housesService.legacySection('热门目的地', { take: 36, section: 'discount', groupByCity: true, subtitle: '品质房源，低至 5 折' });
+    return this.housesService.legacySection('热门目的地', {
+      take: 48,
+      section: 'discount',
+      groupByCity: true,
+      groupField: 'city',
+      groupOrder: ['佛山', '成都', '广州', '重庆', '长沙', '杭州', '西安', '深圳'],
+      subtitle: '品质房源，低至 5 折'
+    });
   }
 
   @Get('home/hotrecommenddest')
@@ -69,6 +76,7 @@ export class HousesController {
       take: 48,
       section: 'hotrecommenddest',
       groupByCity: true,
+      groupField: 'originGroup',
       subtitle: '精选目的地与热门住宿'
     });
   }

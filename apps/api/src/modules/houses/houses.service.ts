@@ -86,7 +86,15 @@ export class HousesService {
 
   async legacySection(
     title: string,
-    options: { take: number; orderBy?: 'rating'; groupByCity?: boolean; section?: string; subtitle?: string }
+    options: {
+      take: number;
+      orderBy?: 'rating';
+      groupByCity?: boolean;
+      section?: string;
+      subtitle?: string;
+      groupField?: 'city' | 'originGroup';
+      groupOrder?: string[];
+    }
   ) {
     const where = {
       status: HouseStatus.PUBLISHED,
@@ -99,12 +107,12 @@ export class HousesService {
     });
     if (options.groupByCity) {
       const grouped = list.reduce<Record<string, ReturnType<typeof toLegacyHouse>[]>>((acc, house) => {
-        const groupName = house.originGroup || house.city || '精选';
+        const groupName = options.groupField === 'originGroup' ? house.originGroup || house.city || '精选' : house.city || house.originGroup || '精选';
         acc[groupName] = acc[groupName] || [];
         acc[groupName].push(toLegacyHouse(house));
         return acc;
       }, {});
-      const groups = Object.keys(grouped);
+      const groups = options.groupOrder?.filter((name) => grouped[name]?.length) || Object.keys(grouped);
       return {
         title,
         subtitle: options.subtitle || '精选城市与热门住宿',

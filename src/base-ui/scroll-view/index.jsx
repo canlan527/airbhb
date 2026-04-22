@@ -9,25 +9,43 @@ const ScrollView = memo((props) => {
   const [showLBtn, setShowLBtn] = useState(false); // 控制左侧按钮
   const ScrollViewRef = useRef(); // children 的ref
   const moveDistance = useRef(); // innerView已经滚动的距离
+
   useEffect(() => {
+    function updatePosition() {
+      const wrapper = ScrollViewRef.current;
+      const innerView = wrapper?.children?.[0];
+      const target = innerView?.children?.[curIndex];
+      if (!wrapper || !innerView || !target) return;
+
+      const maxDistance = Math.max(innerView.scrollWidth - wrapper.clientWidth, 0);
+      const nextDistance = Math.min(target.offsetLeft, maxDistance);
+
+      moveDistance.current = nextDistance;
+      innerView.style.transform = `translateX(-${nextDistance}px)`;
+      setShowRBtn(nextDistance < maxDistance);
+      setShowLBtn(nextDistance > 0);
+    }
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
+  }, [curIndex, props.children]);
+
+  useEffect(() => {
+    setCurIndex(0);
+  }, [props.children]);
+
+  function getMaxIndex() {
     const innerView = ScrollViewRef.current.children[0];
-    // 移动一个item的宽度
-    moveDistance.current = innerView.children[curIndex].offsetLeft;
-    innerView.style.transform = `translateX(-${moveDistance.current}px)`;
-    // innerView可滚动的距离
-    const distance = innerView.scrollWidth - innerView.clientWidth;
-    // 显示隐藏右侧按钮，右侧按钮显示的条件是已经滚动的距离 < 可滚动的距离
-    setShowRBtn(moveDistance.current < distance)
-    // 显示影藏左侧按钮，左侧按钮显示的条件是已滚动的距离 > 0
-    setShowLBtn(moveDistance.current > 0)
-  }, [curIndex]);
+    return Math.max(innerView.children.length - 1, 0);
+  }
 
   function handleRight() {
-    setCurIndex(curIndex + 1);
+    setCurIndex((index) => Math.min(index + 1, getMaxIndex()));
   }
 
   function handleLeft() {
-    setCurIndex(curIndex - 1)
+    setCurIndex((index) => Math.max(index - 1, 0))
   }
 
   return (
