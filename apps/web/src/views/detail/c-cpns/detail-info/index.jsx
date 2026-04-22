@@ -5,7 +5,7 @@ import storage from 'store' // 引入本地存储库
 import dayjs from 'dayjs' // 引入dayjs
 import { Rate, DatePicker, InputNumber, Form, Input, Spin, Button, message } from "antd"; // 按需引入antd组件
 import zhCN from 'antd/es/date-picker/locale/zh_CN'; // 引入antd-date-picker中文包
-import { createOrder, favoriteHouse, payOrder, recordHouseView } from "@/services";
+import { createOrder, favoriteHouse, getMyFavorites, payOrder, recordHouseView } from "@/services";
 
 // 引入表单格式化工具函数
 import {
@@ -40,6 +40,8 @@ const DetailInfo = memo((props) => {
   const [completePay, setCompletePay] = useState(false) // 是否支付完成
   const [loading, setLoading] = useState(false) // 加载图标
   const [orderNo, setOrderNo] = useState('')
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [favoriteLoading, setFavoriteLoading] = useState(false)
   const [card, setCard] = useState({  // 信用卡内容
     number: '',
     expiry: '',
@@ -102,6 +104,18 @@ const DetailInfo = memo((props) => {
     if (info?._id && storage.get('airbhb-token')) {
       recordHouseView(info._id).catch(() => {})
     }
+  }, [info?._id])
+
+  useEffect(() => {
+    if (!info?._id || !storage.get('airbhb-token')) {
+      setIsFavorite(false)
+      return
+    }
+    getMyFavorites()
+      .then(favorites => {
+        setIsFavorite(favorites.some(item => item.houseId === info._id || item.house?.id === info._id))
+      })
+      .catch(() => {})
   }, [info?._id])
 
 
@@ -200,11 +214,16 @@ const DetailInfo = memo((props) => {
       messageApi.info('请先登录')
       return
     }
+    if (isFavorite) return
     try {
+      setFavoriteLoading(true)
       await favoriteHouse(info._id)
+      setIsFavorite(true)
       messageApi.success('已加入我的收藏')
     } catch (error) {
       messageApi.error(error?.message || '收藏失败')
+    } finally {
+      setFavoriteLoading(false)
     }
   }
   // 处理信用卡表单项输入
@@ -238,7 +257,9 @@ const DetailInfo = memo((props) => {
       {contextHolder}
       <div className="detail-info-left">
         <div className="detail-info-title">{info.name}</div>
-        <Button onClick={handleFavorite} style={{ margin: '12px 0' }}>收藏房源</Button>
+        <Button disabled={isFavorite} loading={favoriteLoading} onClick={handleFavorite} style={{ margin: '12px 0' }}>
+          {isFavorite ? '已添加至收藏' : '收藏房源'}
+        </Button>
         <div className="detail-info-verify">
           {info?.verify_info?.messages.map((item) => (
             <span key={item} className="detail-info-tag">
