@@ -190,14 +190,16 @@ const PublishHouse = memo(() => {
     })
   }
 
-  function renderUploadItem(originNode, file) {
+  function renderImageCard(file, index) {
     const isDragging = draggingUid === file.uid
     const isDragOver = dragOverUid === file.uid && draggingUid !== file.uid
+    const imageSrc = file.url || file.thumbUrl
 
     return (
       <div
-        className={`sortable-upload-item${isDragging ? ' is-dragging' : ''}${isDragOver ? ' is-drag-over' : ''}`}
+        className={`image-upload-card${isDragging ? ' is-dragging' : ''}${isDragOver ? ' is-drag-over' : ''}`}
         draggable
+        key={file.uid}
         onDragEnd={() => {
           setDraggingUid('')
           setDragOverUid('')
@@ -220,7 +222,12 @@ const PublishHouse = memo(() => {
           setDragOverUid('')
         }}
       >
-        {originNode}
+        <img alt={file.name} src={imageSrc} />
+        {index === 0 ? <span className="cover-badge">封面</span> : null}
+        <div className="image-card-mask">
+          <Button type="text" onClick={() => handlePreview(file)}>预览</Button>
+          <Button danger type="text" onClick={() => handleRemove(file)}>删除</Button>
+        </div>
         <span className="drag-order-tip">拖拽排序</span>
       </div>
     )
@@ -330,19 +337,19 @@ const PublishHouse = memo(() => {
               </div>
             </div>
             <Form.Item className="image-upload-item" label="房源图片">
-              <Upload
-                accept="image/*"
-                beforeUpload={handleBeforeUpload}
-                fileList={imageFiles}
-                itemRender={renderUploadItem}
-                listType="picture-card"
-                maxCount={maxUploadImages}
-                multiple
-                onPreview={handlePreview}
-                onRemove={handleRemove}
-              >
-                {imageFiles.length >= maxUploadImages ? null : <div className="upload-trigger"><span>+</span><em>上传图片</em></div>}
-              </Upload>
+              <div className="image-upload-grid">
+                {imageFiles.map(renderImageCard)}
+                {imageFiles.length >= maxUploadImages ? null : (
+                  <Upload
+                    accept="image/*"
+                    beforeUpload={handleBeforeUpload}
+                    multiple
+                    showUploadList={false}
+                  >
+                    <div className="upload-trigger"><span>+</span><em>上传图片</em></div>
+                  </Upload>
+                )}
+              </div>
               <div className="image-upload-tip">支持 JPG / PNG / WebP，最多 {maxUploadImages} 张；上传后会自动压缩，第一张为封面图。</div>
             </Form.Item>
             <Form.Item hidden name="coverUrl" rules={[{ required: true, message: '请上传封面图' }]}>
