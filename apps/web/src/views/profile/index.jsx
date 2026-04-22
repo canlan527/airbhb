@@ -75,15 +75,19 @@ const Profile = memo(() => {
       {contextHolder}
       <Card className="profile-card">
         <div className="profile-head">
-          <div>
-            <h1>{user?.name || '用户'}的个人中心</h1>
-            <p>{user?.email}</p>
-            <Space>
-              <Tag color="cyan">{user?.role || 'USER'}</Tag>
-              {user?.role === 'HOST' && <Tag color="gold">房东</Tag>}
-            </Space>
+          <div className="profile-user">
+            <div className="profile-avatar">{(user?.name || '用').slice(0, 1).toUpperCase()}</div>
+            <div className="profile-meta">
+              <span className="profile-kicker">Personal Center</span>
+              <h1>{user?.name || '用户'}的个人中心</h1>
+              <p>{user?.email}</p>
+              <Space className="profile-tags">
+                <Tag color="cyan">{user?.role || 'USER'}</Tag>
+                {user?.role === 'HOST' && <Tag color="gold">房东</Tag>}
+              </Space>
+            </div>
           </div>
-          <Button type="primary" onClick={() => navigate('/publish-house')}>发布房源</Button>
+          <Button className="profile-action" type="primary" size="large" onClick={() => navigate('/publish-house')}>发布房源</Button>
         </div>
       </Card>
 
@@ -121,7 +125,8 @@ function HouseRelationList({ data, emptyText }) {
   if (!data.length) return <Empty description={emptyText} />
   return (
     <List
-      grid={{ gutter: 16, column: 3 }}
+      className="profile-house-list"
+      grid={{ gutter: 24, xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 3 }}
       dataSource={data}
       renderItem={(item) => {
         const house = item.house

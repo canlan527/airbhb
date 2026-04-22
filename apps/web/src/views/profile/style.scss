@@ -1,27 +1,229 @@
 .profile-page {
-  width: 1120px;
-  max-width: calc(100vw - 48px);
+  width: 1320px;
+  max-width: calc(100vw - 64px);
   min-height: 70vh;
-  margin: 120px auto 48px;
+  margin: 96px auto 56px;
+  color: #1f2937;
 
   .profile-card,
   .content-card {
-    @apply mb-5 rounded-lg;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 14px 38px rgba(15, 23, 42, 0.06);
+  }
+
+  .profile-card {
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(255, 56, 92, 0.08), rgba(0, 132, 137, 0.1)),
+      #ffffff;
+
+    .ant-card-body {
+      padding: 28px 32px;
+    }
+  }
+
+  .content-card {
+    .ant-card-body {
+      padding: 24px 28px 30px;
+    }
   }
 
   .profile-head {
-    @apply flex items-center justify-between gap-6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .profile-user {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 18px;
+  }
+
+  .profile-avatar {
+    display: grid;
+    flex: 0 0 auto;
+    width: 76px;
+    height: 76px;
+    place-items: center;
+    border: 1px solid rgba(255, 56, 92, 0.18);
+    border-radius: 8px;
+    color: #ff385c;
+    font-size: 34px;
+    font-weight: 800;
+    background: #fff7f8;
+    box-shadow: inset 0 0 0 8px rgba(255, 56, 92, 0.04);
+  }
+
+  .profile-meta {
+    min-width: 0;
+  }
+
+  .profile-kicker {
+    display: inline-flex;
+    margin-bottom: 8px;
+    padding: 4px 9px;
+    border: 1px solid rgba(0, 132, 137, 0.24);
+    border-radius: 8px;
+    color: #007a7f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    background: rgba(0, 132, 137, 0.08);
   }
 
   h1 {
-    @apply mb-2 text-[28px] font-semibold leading-tight text-neutral-950;
+    margin-bottom: 8px;
+    color: #111827;
+    font-size: 32px;
+    font-weight: 760;
+    line-height: 1.15;
   }
 
   p {
-    @apply mb-3 text-neutral-500;
+    margin-bottom: 12px;
+    overflow: hidden;
+    color: #6b7280;
+    font-size: 15px;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .profile-tags {
+    flex-wrap: wrap;
+  }
+
+  .profile-action {
+    min-width: 132px;
+    border-radius: 8px;
+    font-weight: 650;
+  }
+
+  .ant-tabs-nav {
+    margin-bottom: 22px;
+  }
+
+  .ant-tabs-tab {
+    padding: 10px 0 14px;
+    font-size: 15px;
+    font-weight: 650;
+  }
+
+  .profile-house-list {
+    .ant-list-item {
+      margin-bottom: 0;
+    }
+
+    .ant-card {
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid #eef0f3;
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .ant-card:hover {
+      border-color: rgba(0, 132, 137, 0.28);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .ant-card-cover {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #f3f4f6;
+    }
+
+    .ant-card-body {
+      padding: 18px 20px 20px;
+    }
+
+    .ant-card-meta-title {
+      margin-bottom: 10px;
+      color: #111827;
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .ant-card-meta-description {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.5;
+    }
   }
 
   img {
-    @apply h-[180px] object-cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    max-width: calc(100vw - 32px);
+    margin-top: 88px;
+
+    .profile-card .ant-card-body,
+    .content-card .ant-card-body {
+      padding: 22px;
+    }
+
+    .profile-head {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .profile-action {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    max-width: calc(100vw - 24px);
+    margin-top: 76px;
+
+    .profile-card .ant-card-body,
+    .content-card .ant-card-body {
+      padding: 18px;
+    }
+
+    .profile-user {
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .profile-avatar {
+      width: 58px;
+      height: 58px;
+      font-size: 26px;
+    }
+
+    h1 {
+      font-size: 23px;
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .ant-tabs-nav {
+      overflow-x: auto;
+    }
+
+    .ant-tabs-nav-list {
+      min-width: max-content;
+    }
   }
 }
