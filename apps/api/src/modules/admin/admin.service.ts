@@ -65,7 +65,16 @@ export class AdminService {
   }
 
   async deleteHouse(id: string) {
-    await this.prisma.house.delete({ where: { id } });
+    const house = await this.prisma.house.findUnique({ where: { id } });
+    if (!house) {
+      throw new NotFoundException('House not found');
+    }
+    await this.prisma.$transaction([
+      this.prisma.favorite.deleteMany({ where: { houseId: id } }),
+      this.prisma.browseHistory.deleteMany({ where: { houseId: id } }),
+      this.prisma.order.deleteMany({ where: { houseId: id } }),
+      this.prisma.house.delete({ where: { id } })
+    ]);
     return { ok: true };
   }
 
