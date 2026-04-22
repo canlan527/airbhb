@@ -1,0 +1,28 @@
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
+@layer components {
+  .tw-page-shell {
+    @apply mx-auto w-full max-w-[1480px] px-6 py-8;
+  }
+
+  .tw-page-title {
+    @apply text-[32px] font-semibold leading-tight text-neutral-950;
+  }
+
+  .tw-page-subtitle {
+    @apply mt-2 text-base leading-7 text-neutral-500;
+  }
+
+  .tw-content-panel {
+    @apply rounded-lg border border-neutral-200 bg-white p-6;
+  }
+
+  .tw-toolbar {
+    @apply mb-5 flex flex-wrap items-center justify-between gap-3;
+  }
+
+  .tw-form-grid {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-3;
+  }
+}
