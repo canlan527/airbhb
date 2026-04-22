@@ -10,25 +10,26 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchHomeDataAction = createAsyncThunk(
   "fetch/homeData",
-  (payload, { dispatch, getState }) => {
-    getHomeGoodPriceData().then((res) => {
-      dispatch(changeGoodPriceInfoAction(res));
-    });
-    getHomeHighScoreData().then((res) => {
-      dispatch(changeHighScoreInfo(res));
-    });
-    getHomeDiscountData().then((res) => {
-      dispatch(changeDiscountAction(res));
-    });
-    getHomeRecommendData().then((res) => {
-      dispatch(changeRecommendAction(res));
-    });
-    getHomeLongForData().then((res) => {
-      dispatch(changeLongForAction(res));
-    });
-    getHomePlusData().then((res) => {
-      dispatch(changePlusAction(res));
-    });
+  async (payload, { dispatch }) => {
+    dispatch(changeHomeLoadingAction(true));
+    try {
+      const [goodPrice, highScore, discount, recommend, longfor, plus] = await Promise.all([
+        getHomeGoodPriceData(),
+        getHomeHighScoreData(),
+        getHomeDiscountData(),
+        getHomeRecommendData(),
+        getHomeLongForData(),
+        getHomePlusData(),
+      ]);
+      dispatch(changeGoodPriceInfoAction(goodPrice));
+      dispatch(changeHighScoreInfo(highScore));
+      dispatch(changeDiscountAction(discount));
+      dispatch(changeRecommendAction(recommend));
+      dispatch(changeLongForAction(longfor));
+      dispatch(changePlusAction(plus));
+    } finally {
+      dispatch(changeHomeLoadingAction(false));
+    }
   }
 );
 
@@ -41,8 +42,12 @@ const homeSlice = createSlice({
     recommendInfo: {}, // 热门推荐
     longforInfo: {}, // 向往城市数据
     plusInfo: {}, // plus数据
+    isLoading: false,
   },
   reducers: {
+    changeHomeLoadingAction(state, { payload }) {
+      state.isLoading = payload;
+    },
     changeGoodPriceInfoAction(state, { payload }) {
       state.goodPriceInfo = payload;
     },
@@ -65,6 +70,7 @@ const homeSlice = createSlice({
 });
 
 export const {
+  changeHomeLoadingAction,
   changeGoodPriceInfoAction,
   changeHighScoreInfo,
   changeDiscountAction,

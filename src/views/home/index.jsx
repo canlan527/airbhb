@@ -9,6 +9,7 @@ import HomeSectionV1 from "./c-cpns/home-section-v1";
 import HomeSectionV2 from "./c-cpns/home-section-v2";
 import HomeSectionV3 from "./c-cpns/home-section-v3";
 import HomeLongfor from "./c-cpns/home-longfor";
+import HomeSkeleton from "./c-cpns/home-skeleton";
 import { changeHomeHeaderAction } from "@/store/modules/main";
 import { useScrollTop } from "@/hooks";
 
@@ -21,6 +22,7 @@ const Home = memo(() => {
     recommendInfo, // 探索佛山的精彩之地数据
     longforInfo, // 你可能想去数据
     plusInfo, // Plus房源
+    isLoading,
   } = useSelector(
     (state) => ({
       goodPriceInfo: state.home.goodPriceInfo,
@@ -29,6 +31,7 @@ const Home = memo(() => {
       recommendInfo: state.home.recommendInfo,
       longforInfo: state.home.longforInfo,
       plusInfo: state.home.plusInfo,
+      isLoading: state.home.isLoading,
     }),
     shallowEqual
   );
@@ -47,18 +50,27 @@ const Home = memo(() => {
       {/* 横幅 */}
       <Banner />
       <div className="content">
-        {/* 热门目的地 */}
-        {isEmpty(discountInfo) && <HomeSectionV2 info={discountInfo} />}
-        {/* 佛山高性价比房源 */}
-        {isEmpty(goodPriceInfo) && <HomeSectionV1 info={goodPriceInfo} />}
-        {/* 你可能想去 */}
-        {isEmpty(longforInfo) && <HomeLongfor info={longforInfo} />}
-        {/* 佛山高分好评房源 */}
-        {isEmpty(highScoreInfo) && <HomeSectionV1 info={highScoreInfo} />}
-        {/* 探索佛山的精彩之地 */}
-        {isEmpty(recommendInfo) && <HomeSectionV2 info={recommendInfo} />}
-        {/* 佛山的爱彼迎Plus房源 */}
-        {isEmpty(plusInfo) && <HomeSectionV3 info={plusInfo} />}
+        {isLoading ? (
+          <>
+            <HomeSkeleton />
+            <HomeSkeleton />
+          </>
+        ) : (
+          <>
+            {/* 热门目的地 */}
+            {isEmpty(discountInfo) && <HomeSectionV2 info={discountInfo} />}
+            {/* 佛山高性价比房源 */}
+            {isEmpty(goodPriceInfo) && <HomeSectionV1 info={goodPriceInfo} />}
+            {/* 你可能想去 */}
+            {isEmpty(longforInfo) && <HomeLongfor info={longforInfo} />}
+            {/* 佛山高分好评房源 */}
+            {isEmpty(highScoreInfo) && <HomeSectionV1 info={highScoreInfo} />}
+            {/* 探索佛山的精彩之地 */}
+            {isEmpty(recommendInfo) && <HomeSectionV2 info={recommendInfo} />}
+            {/* 佛山的爱彼迎Plus房源 */}
+            {isEmpty(plusInfo) && <HomeSectionV3 info={plusInfo} />}
+          </>
+        )}
       </div>
     </HomeWrapper>
   );
