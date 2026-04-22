@@ -82,9 +82,6 @@ const Admin = memo(() => {
       label: '房源管理',
       children: (
         <>
-          <div className="toolbar">
-            <Button type="primary" onClick={() => setIsModalOpen(true)}>新增平台房源</Button>
-          </div>
           <Table
             rowKey="id"
             dataSource={houses}
@@ -158,14 +155,18 @@ const Admin = memo(() => {
     <div className="admin-page">
       {contextHolder}
       <div className="admin-head">
-        <h1>平台管理后台</h1>
-        <p>平台自营房源、用户发布房源、订单和用户状态统一管理。</p>
+        <div>
+          <span className="admin-kicker">Airbhb Console</span>
+          <h1>平台管理后台</h1>
+          <p>平台自营房源、用户发布房源、订单和用户状态统一管理。</p>
+        </div>
+        <Button type="primary" size="large" onClick={() => setIsModalOpen(true)}>新增平台房源</Button>
       </div>
       <div className="stats">
-        <Card><Statistic title="用户数" value={dashboard.totalUsers || 0} /></Card>
-        <Card><Statistic title="房源数" value={dashboard.totalHouses || 0} /></Card>
-        <Card><Statistic title="待审核房源" value={dashboard.pendingHouses || 0} /></Card>
-        <Card><Statistic title="成交金额" value={dashboard.totalAmount || 0} prefix="￥" /></Card>
+        <Card className="stat-card stat-card-users"><Statistic title="用户数" value={dashboard.totalUsers || 0} /></Card>
+        <Card className="stat-card stat-card-houses"><Statistic title="房源数" value={dashboard.totalHouses || 0} /></Card>
+        <Card className="stat-card stat-card-pending"><Statistic title="待审核房源" value={dashboard.pendingHouses || 0} /></Card>
+        <Card className="stat-card stat-card-amount"><Statistic title="成交金额" value={dashboard.totalAmount || 0} prefix="￥" /></Card>
       </div>
       <Card className="admin-card">
         <Tabs items={tabs} />
