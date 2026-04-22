@@ -1,8 +1,10 @@
 import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Button, Card, Empty, List, Space, Tabs, Tag, message } from 'antd'
 import { getMyFavorites, getMyHistories, getMyHouses, getMyOrders } from '@/services'
+import { changeHomeHeaderAction } from '@/store/modules/main'
 import { ProfileWrapper } from './style'
 
 const Profile = memo(() => {
@@ -13,8 +15,10 @@ const Profile = memo(() => {
   const [houses, setHouses] = useState([])
   const user = storage.get('airbhb-user')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(changeHomeHeaderAction({ isFixed: true, alpha: false }))
     if (!user) {
       messageApi.info('请先登录')
       navigate('/home')

@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Button, Card, Form, Input, InputNumber, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
 import {
   createAdminHouse,
@@ -13,6 +14,7 @@ import {
   updateAdminOrderStatus,
   updateAdminUserStatus
 } from '@/services'
+import { changeHomeHeaderAction } from '@/store/modules/main'
 import { AdminWrapper } from './style'
 
 const houseStatuses = ['PENDING', 'PUBLISHED', 'REJECTED', 'OFFLINE']
@@ -28,9 +30,11 @@ const Admin = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [form] = Form.useForm()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
 
   useEffect(() => {
+    dispatch(changeHomeHeaderAction({ isFixed: true, alpha: false }))
     if (user?.role !== 'ADMIN') {
       messageApi.info('请使用管理员账号登录')
       navigate('/home')

@@ -1,14 +1,21 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Button, Card, Form, Input, InputNumber, message } from 'antd'
 import { createMyHouse } from '@/services'
+import { changeHomeHeaderAction } from '@/store/modules/main'
 import { PublishHouseWrapper } from './style'
 
 const PublishHouse = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
+
+  useEffect(() => {
+    dispatch(changeHomeHeaderAction({ isFixed: true, alpha: false }))
+  }, [dispatch])
 
   async function onFinish(values) {
     if (!user) {
