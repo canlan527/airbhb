@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import PicturePreview from "@/base-ui/picture-preview";
 import { DetailPictureWrapper } from "./style";
 
@@ -10,7 +10,7 @@ const DetailPicture = memo((props) => {
   // 从redux里获取详情info
   const { info } = useSelector((state) => ({
     info: state.detail.detailInfo,
-  }));
+  }), shallowEqual);
 
   // 图片预览处理事件
   function handlePreview(pic, index) {

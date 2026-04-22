@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import Indicator from "@/base-ui/indicator";
 import IconClose from "@/assets/svg/icon_close";
@@ -16,6 +16,7 @@ const PicturePreview = memo((props) => {
   const [curIndex, setCurIndex] = useState(showIndex??0); // 当前展示的图片的索引
   const [direction, setDirection] = useState("next"); // 图片方向
   const [showIndicator, setShowIndicator] = useState(true); // 显示图片列表
+  const pictureRef = useRef(null);
   
   // 图片预览设置页面overflow
   useEffect(() => {
@@ -72,8 +73,9 @@ const PicturePreview = memo((props) => {
               key={pictures[curIndex]}
               timeout={150}
               classNames="fade"
+              nodeRef={pictureRef}
             >
-              <img src={pictures[curIndex]} alt="" />
+              <img ref={pictureRef} src={pictures[curIndex]} alt="" />
             </CSSTransition>
           </SwitchTransition>
         </div>
