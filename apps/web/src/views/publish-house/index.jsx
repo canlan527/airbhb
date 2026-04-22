@@ -13,8 +13,10 @@ const defaultImageUrls = [
 ]
 const maxUploadImages = 8
 const maxImageSizeMB = 8
-const imageMaxEdge = 1280
-const imageQuality = 0.78
+const imageMaxEdge = 960
+const imageQuality = 0.68
+const maxCompressedImageSize = 480 * 1024
+const maxPublishPayloadSize = 12 * 1024 * 1024
 const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp']
 
 const defaultImageFiles = defaultImageUrls.map((url, index) => ({
@@ -37,19 +39,31 @@ async function fileToCompressedDataUrl(file) {
   const objectUrl = URL.createObjectURL(file)
   try {
     const image = await loadImage(objectUrl)
-    const scale = Math.min(1, imageMaxEdge / Math.max(image.naturalWidth, image.naturalHeight))
-    const width = Math.max(1, Math.round(image.naturalWidth * scale))
-    const height = Math.max(1, Math.round(image.naturalHeight * scale))
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')
+    const plans = [
+      { edge: imageMaxEdge, quality: imageQuality },
+      { edge: 800, quality: 0.6 },
+      { edge: 640, quality: 0.52 }
+    ]
 
-    canvas.width = width
-    canvas.height = height
-    context.fillStyle = '#ffffff'
-    context.fillRect(0, 0, width, height)
-    context.drawImage(image, 0, 0, width, height)
+    let result = ''
+    for (const plan of plans) {
+      const scale = Math.min(1, plan.edge / Math.max(image.naturalWidth, image.naturalHeight))
+      const width = Math.max(1, Math.round(image.naturalWidth * scale))
+      const height = Math.max(1, Math.round(image.naturalHeight * scale))
 
-    return canvas.toDataURL('image/jpeg', imageQuality)
+      canvas.width = width
+      canvas.height = height
+      context.fillStyle = '#ffffff'
+      context.fillRect(0, 0, width, height)
+      context.drawImage(image, 0, 0, width, height)
+
+      result = canvas.toDataURL('image/jpeg', plan.quality)
+      if (result.length <= maxCompressedImageSize) return result
+    }
+
+    return result
   } finally {
     URL.revokeObjectURL(objectUrl)
   }
@@ -87,13 +101,18 @@ const PublishHouse = memo(() => {
       messageApi.info('请至少上传一张房源图片')
       return
     }
-    try {
-      await createMyHouse({
+    const payload = {
         ...values,
         coverUrl: values.coverUrl || imageUrls[0],
         imageUrls,
         tags: values.tags.split(',').map(item => item.trim()).filter(Boolean)
-      })
+    }
+    if (JSON.stringify(payload).length > maxPublishPayloadSize) {
+      messageApi.warning('图片总体积仍然偏大，请删除几张图片后再提交')
+      return
+    }
+    try {
+      await createMyHouse(payload)
       const nextUser = { ...user, role: 'HOST' }
       storage.set('airbhb-user', nextUser)
       messageApi.success('房源已提交，等待平台审核')
