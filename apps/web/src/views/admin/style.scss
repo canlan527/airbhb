@@ -176,3 +176,70 @@
     }
   }
 }
+
+.house-detail-modal {
+  .ant-modal-body {
+    max-height: 72vh;
+    overflow-y: auto;
+  }
+
+  .house-detail {
+    display: grid;
+    gap: 18px;
+  }
+
+  .house-detail-cover {
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f3f4f6;
+
+    .ant-image {
+      display: block;
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+    }
+  }
+
+  .house-detail-images {
+    h3 {
+      margin-bottom: 12px;
+      color: #111827;
+      font-size: 16px;
+      font-weight: 750;
+    }
+  }
+
+  .house-detail-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+
+    .ant-image {
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      background: #f3f4f6;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ant-modal-body {
+      max-height: 76vh;
+    }
+
+    .house-detail-image-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Card, Form, Input, InputNumber, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
+import { Button, Card, Descriptions, Form, Image, Input, InputNumber, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
 import {
   createAdminHouse,
   deleteAdminHouse,
@@ -28,6 +28,7 @@ const Admin = memo(() => {
   const [orders, setOrders] = useState([])
   const [users, setUsers] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedHouse, setSelectedHouse] = useState(null)
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -96,10 +97,13 @@ const Admin = memo(() => {
               ) },
               { title: '价格', dataIndex: 'price', width: 100, render: value => `￥${value}` },
               { title: '发布者', dataIndex: ['host', 'name'], width: 120, render: value => value || '平台自营' },
-              { title: '操作', width: 100, render: (_, record) => (
-                <Popconfirm title="确认删除房源？" onConfirm={() => deleteAdminHouse(record.id).then(loadData)}>
-                  <Button danger>删除</Button>
-                </Popconfirm>
+              { title: '操作', width: 180, render: (_, record) => (
+                <Space>
+                  <Button onClick={() => setSelectedHouse(record)}>查看</Button>
+                  <Popconfirm title="确认删除房源？" onConfirm={() => deleteAdminHouse(record.id).then(loadData)}>
+                    <Button danger>删除</Button>
+                  </Popconfirm>
+                </Space>
               ) }
             ]}
           />
@@ -196,6 +200,63 @@ const Admin = memo(() => {
           <Form.Item label="描述" name="description" rules={[{ required: true }]}><Input.TextArea rows={4} /></Form.Item>
           <Button type="primary" htmlType="submit">创建</Button>
         </Form>
+      </Modal>
+
+      <Modal
+        className="house-detail-modal"
+        title="房源审核详情"
+        width={920}
+        open={Boolean(selectedHouse)}
+        footer={[
+          <Button key="close" onClick={() => setSelectedHouse(null)}>关闭</Button>,
+          selectedHouse?.status !== 'REJECTED' ? (
+            <Button key="reject" danger onClick={() => updateAdminHouseStatus(selectedHouse.id, 'REJECTED').then(() => {
+              setSelectedHouse(null)
+              loadData()
+            })}>驳回</Button>
+          ) : null,
+          selectedHouse?.status !== 'PUBLISHED' ? (
+            <Button key="publish" type="primary" onClick={() => updateAdminHouseStatus(selectedHouse.id, 'PUBLISHED').then(() => {
+              setSelectedHouse(null)
+              loadData()
+            })}>上架</Button>
+          ) : null
+        ]}
+        onCancel={() => setSelectedHouse(null)}
+      >
+        {selectedHouse ? (
+          <div className="house-detail">
+            <div className="house-detail-cover">
+              <Image src={selectedHouse.coverUrl} alt={selectedHouse.title} />
+            </div>
+            <Descriptions bordered column={2} size="middle">
+              <Descriptions.Item label="房源标题" span={2}>{selectedHouse.title}</Descriptions.Item>
+              <Descriptions.Item label="城市">{selectedHouse.city}</Descriptions.Item>
+              <Descriptions.Item label="价格">￥{selectedHouse.price} / 晚</Descriptions.Item>
+              <Descriptions.Item label="来源"><Tag>{selectedHouse.source}</Tag></Descriptions.Item>
+              <Descriptions.Item label="状态"><Tag color={selectedHouse.status === 'PUBLISHED' ? 'green' : selectedHouse.status === 'PENDING' ? 'gold' : 'default'}>{selectedHouse.status}</Tag></Descriptions.Item>
+              <Descriptions.Item label="发布者">{selectedHouse.host?.name || '平台自营'}</Descriptions.Item>
+              <Descriptions.Item label="邮箱">{selectedHouse.host?.email || '-'}</Descriptions.Item>
+              <Descriptions.Item label="卧室">{selectedHouse.bedrooms}</Descriptions.Item>
+              <Descriptions.Item label="卫生间">{selectedHouse.bathrooms}</Descriptions.Item>
+              <Descriptions.Item label="详细地址" span={2}>{selectedHouse.address || '-'}</Descriptions.Item>
+              <Descriptions.Item label="标签" span={2}>
+                <Space wrap>{selectedHouse.tags?.map(tag => <Tag key={tag}>{tag}</Tag>)}</Space>
+              </Descriptions.Item>
+              <Descriptions.Item label="房源描述" span={2}>{selectedHouse.description || '-'}</Descriptions.Item>
+            </Descriptions>
+            <div className="house-detail-images">
+              <h3>房源图片</h3>
+              <Image.PreviewGroup>
+                <div className="house-detail-image-grid">
+                  {selectedHouse.imageUrls?.map((url, index) => (
+                    <Image key={`${url}-${index}`} src={url} alt={`${selectedHouse.title}-${index + 1}`} />
+                  ))}
+                </div>
+              </Image.PreviewGroup>
+            </div>
+          </div>
+        ) : null}
       </Modal>
     </div>
   )

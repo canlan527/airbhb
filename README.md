@@ -205,6 +205,7 @@ pnpm build:api
 - 使用 Zustand 替换 Redux Toolkit，简化全局状态管理
 - 引入 Tailwind CSS，逐步统一样式组织方式并减少样式文件维护成本
 - 梳理接口代理和环境变量配置，使本地开发、预览环境和生产环境保持一致
+- 图片上传后续升级为 `/api/uploads`：前端上传文件，后端使用 Multer 接收并接入对象存储或本地静态资源，数据库只保存图片 URL；当前 demo 阶段先用压缩后的 base64 dataURL 跑通发布房源流程
 
 ## 说明
 
