@@ -75,6 +75,16 @@ const Admin = memo(() => {
     }
   }
 
+  async function handlePublishHouse(id) {
+    try {
+      await updateAdminHouseStatus(id, 'PUBLISHED')
+      messageApi.success('房源已重新上架')
+      loadData()
+    } catch (error) {
+      messageApi.error(error?.message || '重新上架失败')
+    }
+  }
+
   const tabs = [
     {
       key: 'houses',
@@ -98,9 +108,15 @@ const Admin = memo(() => {
               { title: '操作', width: 180, render: (_, record) => (
                 <Space>
                   <Button onClick={() => setSelectedHouse(record)}>查看</Button>
-                  <Popconfirm title="确认下架房源？" description="下架后前台不可见，历史订单和成交金额会保留。" onConfirm={() => handleOfflineHouse(record.id)}>
-                    <Button danger disabled={record.status === 'OFFLINE'}>{record.status === 'OFFLINE' ? '已下架' : '下架'}</Button>
-                  </Popconfirm>
+                  {record.status === 'OFFLINE' ? (
+                    <Popconfirm title="确认重新上架房源？" onConfirm={() => handlePublishHouse(record.id)}>
+                      <Button type="primary">重新上架</Button>
+                    </Popconfirm>
+                  ) : (
+                    <Popconfirm title="确认下架房源？" description="下架后前台不可见，历史订单和成交金额会保留。" onConfirm={() => handleOfflineHouse(record.id)}>
+                      <Button danger>下架</Button>
+                    </Popconfirm>
+                  )}
                 </Space>
               ) }
             ]}
