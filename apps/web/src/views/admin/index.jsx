@@ -6,7 +6,6 @@ import { Button, Card, Descriptions, Image, Modal, Popconfirm, Select, Space, St
 import HousePublishForm from '@/components/house-publish-form'
 import {
   createAdminHouse,
-  deleteAdminHouse,
   getAdminDashboard,
   getAdminHouses,
   getAdminOrders,
@@ -66,17 +65,13 @@ const Admin = memo(() => {
     loadData()
   }
 
-  async function handleDeleteHouse(id) {
+  async function handleOfflineHouse(id) {
     try {
-      const res = await deleteAdminHouse(id)
-      if (res?.mode === 'offline') {
-        messageApi.info(res.message || '房源已有订单，已下架并保留历史订单')
-      } else {
-        messageApi.success(res?.message || '房源已删除')
-      }
+      await updateAdminHouseStatus(id, 'OFFLINE')
+      messageApi.success('房源已下架，历史订单和成交金额已保留')
       loadData()
     } catch (error) {
-      messageApi.error(error?.message || '删除失败')
+      messageApi.error(error?.message || '下架失败')
     }
   }
 
@@ -103,8 +98,8 @@ const Admin = memo(() => {
               { title: '操作', width: 180, render: (_, record) => (
                 <Space>
                   <Button onClick={() => setSelectedHouse(record)}>查看</Button>
-                  <Popconfirm title="确认删除房源？" onConfirm={() => handleDeleteHouse(record.id)}>
-                    <Button danger>删除</Button>
+                  <Popconfirm title="确认下架房源？" description="下架后前台不可见，历史订单和成交金额会保留。" onConfirm={() => handleOfflineHouse(record.id)}>
+                    <Button danger disabled={record.status === 'OFFLINE'}>{record.status === 'OFFLINE' ? '已下架' : '下架'}</Button>
                   </Popconfirm>
                 </Space>
               ) }
