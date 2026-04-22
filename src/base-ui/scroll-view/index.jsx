@@ -31,10 +31,6 @@ const ScrollView = memo((props) => {
     return () => window.removeEventListener("resize", updatePosition);
   }, [curIndex, props.children]);
 
-  useEffect(() => {
-    setCurIndex(0);
-  }, [props.children]);
-
   function getMaxIndex() {
     const innerView = ScrollViewRef.current.children[0];
     return Math.max(innerView.children.length - 1, 0);
