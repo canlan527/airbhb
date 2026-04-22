@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Card, Form, Input, InputNumber, Upload, message } from 'antd'
+import { Button, Card, Form, Image, Input, InputNumber, Upload, message } from 'antd'
 import { createMyHouse } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
 import './style.scss'
@@ -32,6 +32,7 @@ const PublishHouse = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
   const [form] = Form.useForm()
   const [imageFiles, setImageFiles] = useState(defaultImageFiles)
+  const [previewState, setPreviewState] = useState({ open: false, current: 0 })
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
@@ -105,6 +106,13 @@ const PublishHouse = memo(() => {
     syncImageFields(nextFiles)
   }
 
+  function handlePreview(file) {
+    const index = imageFiles.findIndex(item => item.uid === file.uid)
+    setPreviewState({ open: true, current: Math.max(index, 0) })
+  }
+
+  const previewImages = imageFiles.map(item => item.url || item.thumbUrl).filter(Boolean)
+
   return (
     <div className="publish-house-page">
       {contextHolder}
@@ -122,6 +130,19 @@ const PublishHouse = memo(() => {
       </div>
 
       <Card className="publish-card">
+        <Image.PreviewGroup
+          items={previewImages}
+          preview={{
+            current: previewState.current,
+            open: previewState.open,
+            onChange: current => setPreviewState(state => ({ ...state, current })),
+            onOpenChange: open => setPreviewState(state => ({ ...state, open }))
+          }}
+        >
+          {previewImages.map((src, index) => (
+            <Image key={src || index} src={src} wrapperStyle={{ display: 'none' }} />
+          ))}
+        </Image.PreviewGroup>
         <Form form={form} layout="vertical" onFinish={onFinish} initialValues={{
           city: '广州',
           price: 399,
@@ -188,6 +209,7 @@ const PublishHouse = memo(() => {
                 fileList={imageFiles}
                 listType="picture-card"
                 multiple
+                onPreview={handlePreview}
                 onRemove={handleRemove}
               >
                 {imageFiles.length >= 8 ? null : <div className="upload-trigger"><span>+</span><em>上传图片</em></div>}
