@@ -11,6 +11,11 @@ const defaultImageUrls = [
   'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80'
 ]
+const maxUploadImages = 8
+const maxImageSizeMB = 8
+const imageMaxEdge = 1280
+const imageQuality = 0.78
+const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp']
 
 const defaultImageFiles = defaultImageUrls.map((url, index) => ({
   uid: `default-${index}`,
@@ -19,13 +24,35 @@ const defaultImageFiles = defaultImageUrls.map((url, index) => ({
   url
 }))
 
-function fileToDataUrl(file) {
+function loadImage(src) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = reject
-    reader.readAsDataURL(file)
+    const image = new window.Image()
+    image.onload = () => resolve(image)
+    image.onerror = reject
+    image.src = src
   })
+}
+
+async function fileToCompressedDataUrl(file) {
+  const objectUrl = URL.createObjectURL(file)
+  try {
+    const image = await loadImage(objectUrl)
+    const scale = Math.min(1, imageMaxEdge / Math.max(image.naturalWidth, image.naturalHeight))
+    const width = Math.max(1, Math.round(image.naturalWidth * scale))
+    const height = Math.max(1, Math.round(image.naturalHeight * scale))
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+
+    canvas.width = width
+    canvas.height = height
+    context.fillStyle = '#ffffff'
+    context.fillRect(0, 0, width, height)
+    context.drawImage(image, 0, 0, width, height)
+
+    return canvas.toDataURL('image/jpeg', imageQuality)
+  } finally {
+    URL.revokeObjectURL(objectUrl)
+  }
 }
 
 const PublishHouse = memo(() => {
@@ -77,19 +104,19 @@ const PublishHouse = memo(() => {
   }
 
   async function handleBeforeUpload(file) {
-    if (!file.type.startsWith('image/')) {
-      messageApi.warning('只能上传图片文件')
+    if (!allowedImageTypes.includes(file.type)) {
+      messageApi.warning('仅支持 JPG / PNG / WebP 图片')
       return Upload.LIST_IGNORE
     }
-    if (file.size / 1024 / 1024 > 3) {
-      messageApi.warning('单张图片请控制在 3MB 内')
+    if (file.size / 1024 / 1024 > maxImageSizeMB) {
+      messageApi.warning(`单张图片请控制在 ${maxImageSizeMB}MB 内`)
       return Upload.LIST_IGNORE
     }
-    const dataUrl = await fileToDataUrl(file)
+    const dataUrl = await fileToCompressedDataUrl(file)
     setImageFiles(prevFiles => {
       if (prevFiles.some(item => item.uid === file.uid)) return prevFiles
-      if (prevFiles.length >= 8) {
-        messageApi.warning('最多上传 8 张房源图片')
+      if (prevFiles.length >= maxUploadImages) {
+        messageApi.warning(`最多上传 ${maxUploadImages} 张房源图片`)
         return prevFiles
       }
       return [
@@ -218,14 +245,14 @@ const PublishHouse = memo(() => {
                 beforeUpload={handleBeforeUpload}
                 fileList={imageFiles}
                 listType="picture-card"
-                maxCount={8}
+                maxCount={maxUploadImages}
                 multiple
                 onPreview={handlePreview}
                 onRemove={handleRemove}
               >
-                {imageFiles.length >= 8 ? null : <div className="upload-trigger"><span>+</span><em>上传图片</em></div>}
+                {imageFiles.length >= maxUploadImages ? null : <div className="upload-trigger"><span>+</span><em>上传图片</em></div>}
               </Upload>
-              <div className="image-upload-tip">支持 JPG / PNG / WebP，最多 8 张；第一张为封面图。</div>
+              <div className="image-upload-tip">支持 JPG / PNG / WebP，最多 {maxUploadImages} 张；上传后会自动压缩，第一张为封面图。</div>
             </Form.Item>
             <Form.Item hidden name="coverUrl" rules={[{ required: true, message: '请上传封面图' }]}>
               <Input />
