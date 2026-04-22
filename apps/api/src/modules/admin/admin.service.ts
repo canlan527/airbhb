@@ -69,13 +69,20 @@ export class AdminService {
     if (!house) {
       throw new NotFoundException('House not found');
     }
+    const orderCount = await this.prisma.order.count({ where: { houseId: id } });
+    if (orderCount > 0) {
+      await this.prisma.house.update({
+        where: { id },
+        data: { status: HouseStatus.OFFLINE }
+      });
+      return { ok: true, mode: 'offline', message: '房源已有订单，已下架并保留历史订单' };
+    }
     await this.prisma.$transaction([
       this.prisma.favorite.deleteMany({ where: { houseId: id } }),
       this.prisma.browseHistory.deleteMany({ where: { houseId: id } }),
-      this.prisma.order.deleteMany({ where: { houseId: id } }),
       this.prisma.house.delete({ where: { id } })
     ]);
-    return { ok: true };
+    return { ok: true, mode: 'deleted', message: '房源已删除' };
   }
 
   orders(params: { status?: string; keyword?: string }) {

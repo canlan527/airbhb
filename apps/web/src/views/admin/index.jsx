@@ -68,8 +68,12 @@ const Admin = memo(() => {
 
   async function handleDeleteHouse(id) {
     try {
-      await deleteAdminHouse(id)
-      messageApi.success('房源已删除')
+      const res = await deleteAdminHouse(id)
+      if (res?.mode === 'offline') {
+        messageApi.info(res.message || '房源已有订单，已下架并保留历史订单')
+      } else {
+        messageApi.success(res?.message || '房源已删除')
+      }
       loadData()
     } catch (error) {
       messageApi.error(error?.message || '删除失败')
