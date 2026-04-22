@@ -154,7 +154,8 @@
       display: none;
     }
 
-    .ant-upload-list-picture-card .ant-upload-list-item-container,
+    .ant-upload-list-picture-card > .ant-upload-list-item-container,
+    .ant-upload-list-picture-card > .ant-upload-list-item-container > .sortable-upload-item,
     .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
       width: 150px;
       height: 112px;
@@ -173,8 +174,8 @@
 
     .sortable-upload-item {
       position: relative;
-      width: 150px;
-      height: 112px;
+      width: 100%;
+      height: 100%;
       cursor: grab;
       transition:
         opacity 0.18s ease,
@@ -185,6 +186,8 @@
       }
 
       .ant-upload-list-item-container {
+        width: 100%;
+        height: 100%;
         pointer-events: auto;
       }
     }
@@ -302,13 +305,9 @@
         grid-template-columns: repeat(auto-fill, 138px);
       }
 
-      .ant-upload-list-picture-card .ant-upload-list-item-container,
+      .ant-upload-list-picture-card > .ant-upload-list-item-container,
+      .ant-upload-list-picture-card > .ant-upload-list-item-container > .sortable-upload-item,
       .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
-        width: 138px;
-        height: 104px;
-      }
-
-      .sortable-upload-item {
         width: 138px;
         height: 104px;
       }
@@ -350,14 +349,9 @@
         gap: 10px;
       }
 
-      .ant-upload-list-picture-card .ant-upload-list-item-container,
+      .ant-upload-list-picture-card > .ant-upload-list-item-container,
+      .ant-upload-list-picture-card > .ant-upload-list-item-container > .sortable-upload-item,
       .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4 / 3;
-      }
-
-      .sortable-upload-item {
         width: 100%;
         height: auto;
         aspect-ratio: 4 / 3;
