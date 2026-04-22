@@ -1,5 +1,7 @@
 # Airbnb 当前功能基线
 
+> 历史快照：本文记录的是迁移前后的阶段性基线，部分路径仍保留旧的根目录 `src/*` 写法。当前前端工程已迁移到 `apps/web`，实际入口以 `apps/web/src/main.jsx` 和 `apps/web/src/router/index.jsx` 为准。
+
 ## 目的
 
 本文档用于记录当前项目在重构开始前的可见行为、数据流和关键依赖，作为后续迁移到 `Vite`、接入 `Tailwind CSS`、逐步替换 `styled-components` 时的回归依据。

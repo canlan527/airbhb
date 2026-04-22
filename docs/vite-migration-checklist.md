@@ -1,5 +1,7 @@
 # Airbnb Phase 1：Vite 迁移清单
 
+> 历史快照：本文是从 CRA/CRACO 迁移到 Vite 时的检查清单，里面的 `src/*` 路径指的是迁移阶段上下文。当前前端入口位于 `apps/web/src/main.jsx`，Vite 配置位于 `apps/web/vite.config.mjs`。
+
 ## 目的
 
 本文档用于梳理当前项目从 `Create React App + CRACO` 迁移到 `Vite` 时会涉及的文件、配置和注意事项。

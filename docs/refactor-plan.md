@@ -1,5 +1,7 @@
 # Airbnb 重构计划
 
+> 历史快照：本文是早期重构计划记录，部分描述仍对应迁移前的根目录前端工程和 `/api/proxy` 方案。当前项目已整理为 `apps/web` + `apps/api` 的 pnpm workspace，前端请求 NestJS API。
+
 ## 目标
 
 本次重构的第一轮目标聚焦在以下几件事：

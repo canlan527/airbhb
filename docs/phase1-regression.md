@@ -1,5 +1,7 @@
 # Phase 1 回归检查记录
 
+> 历史快照：本文记录第一阶段迁移时的回归结果，部分命令和路径是当时的项目结构。当前请使用根目录 workspace 脚本，例如 `pnpm build:web`、`pnpm dev:web` 和 `pnpm build:api`。
+
 ## 检查时间
 
 2026-04-21
