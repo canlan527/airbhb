@@ -149,7 +149,7 @@ const HeaderRight = memo(() => {
         }
       </div>
 
-      <Modal className="register-modal" destroyOnClose title="用户注册" centered footer={null} open={isRegisterModalOpen} onCancel={() => setIsRegisterModalOpen(false)}>
+      <Modal className="register-modal" destroyOnHidden title="用户注册" centered footer={null} open={isRegisterModalOpen} onCancel={() => setIsRegisterModalOpen(false)}>
         <LogoHeader />
         <Form name="registerForm" labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} style={{ maxWidth: 600 }} onFinish={onRegisterFinish} preserve={false} autoComplete="off">
           <Form.Item label="昵称" name="name" rules={[{ required: true, message: '请输入昵称' }]}>
@@ -189,7 +189,7 @@ const HeaderRight = memo(() => {
         </Form>
       </Modal>
 
-      <Modal title="用户登录" centered destroyOnClose footer={null} open={isLoginModalOpen} onCancel={() => setIsLoginModalOpen(false)}>
+      <Modal title="用户登录" centered destroyOnHidden footer={null} open={isLoginModalOpen} onCancel={() => setIsLoginModalOpen(false)}>
         <LogoHeader />
         <Form name="loginForm" labelCol={{ span: 5 }} wrapperCol={{ span: 16 }} style={{ maxWidth: 600 }} onFinish={onLoginFinish} preserve={false} autoComplete="off">
           <Form.Item label="邮箱" name="email" rules={[{ required: true, message: '请输入邮箱' }, { type: 'email', message: '请输入有效邮箱' }]}>

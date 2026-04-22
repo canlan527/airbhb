@@ -172,7 +172,7 @@ const Admin = memo(() => {
         <Tabs items={tabs} />
       </Card>
 
-      <Modal title="新增平台自营房源" open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={null} destroyOnClose>
+      <Modal title="新增平台自营房源" open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={null} destroyOnHidden>
         <Form form={form} layout="vertical" onFinish={handleCreateHouse} initialValues={{
           city: '广州',
           price: 499,

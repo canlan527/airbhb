@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Card, Form, Image, Input, InputNumber, Upload, message } from 'antd'
+import { Button, Card, Form, Image, Input, InputNumber, Modal, Upload, message } from 'antd'
 import { createMyHouse } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
 import './style.scss'
@@ -32,7 +32,7 @@ const PublishHouse = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
   const [form] = Form.useForm()
   const [imageFiles, setImageFiles] = useState(defaultImageFiles)
-  const [previewState, setPreviewState] = useState({ open: false, current: 0 })
+  const [previewImage, setPreviewImage] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
@@ -107,15 +107,29 @@ const PublishHouse = memo(() => {
   }
 
   function handlePreview(file) {
-    const index = imageFiles.findIndex(item => item.uid === file.uid)
-    setPreviewState({ open: true, current: Math.max(index, 0) })
+    const currentFile = imageFiles.find(item => item.uid === file.uid)
+    const src = file.url || file.thumbUrl || currentFile?.url || currentFile?.thumbUrl
+    if (!src) {
+      messageApi.warning('暂无可预览图片')
+      return
+    }
+    setPreviewImage(src)
   }
-
-  const previewImages = imageFiles.map(item => item.url || item.thumbUrl).filter(Boolean)
 
   return (
     <div className="publish-house-page">
       {contextHolder}
+      <Modal
+        className="publish-image-preview-modal"
+        title="房源图片预览"
+        centered
+        destroyOnHidden
+        footer={null}
+        open={Boolean(previewImage)}
+        onCancel={() => setPreviewImage('')}
+      >
+        {previewImage ? <Image alt="房源图片预览" preview={false} src={previewImage} /> : null}
+      </Modal>
       <div className="publish-hero">
         <div>
           <span className="publish-kicker">Host Onboarding</span>
@@ -130,19 +144,6 @@ const PublishHouse = memo(() => {
       </div>
 
       <Card className="publish-card">
-        <Image.PreviewGroup
-          items={previewImages}
-          preview={{
-            current: previewState.current,
-            open: previewState.open,
-            onChange: current => setPreviewState(state => ({ ...state, current })),
-            onOpenChange: open => setPreviewState(state => ({ ...state, open }))
-          }}
-        >
-          {previewImages.map((src, index) => (
-            <Image key={src || index} src={src} wrapperStyle={{ display: 'none' }} />
-          ))}
-        </Image.PreviewGroup>
         <Form form={form} layout="vertical" onFinish={onFinish} initialValues={{
           city: '广州',
           price: 399,
@@ -183,7 +184,12 @@ const PublishHouse = memo(() => {
             </div>
             <div className="form-grid">
               <Form.Item label="每晚价格" name="price" rules={[{ required: true, message: '请输入价格' }]}>
-                <InputNumber min={1} addonBefore="￥" style={{ width: '100%' }} />
+                <InputNumber
+                  min={1}
+                  formatter={value => `￥ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  parser={value => value?.replace(/[￥\s,]/g, '')}
+                  style={{ width: '100%' }}
+                />
               </Form.Item>
               <Form.Item label="卧室" name="bedrooms" rules={[{ required: true, message: '请输入卧室数量' }]}>
                 <InputNumber min={1} style={{ width: '100%' }} />
