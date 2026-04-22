@@ -4,6 +4,26 @@
   margin: 96px auto 56px;
   color: #1f2937;
 
+  &.is-embedded {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
+    .publish-hero {
+      align-items: flex-start;
+      padding: 20px 22px;
+      box-shadow: none;
+    }
+
+    .publish-card {
+      box-shadow: none;
+
+      .ant-card-body {
+        padding: 24px;
+      }
+    }
+  }
+
   .publish-hero {
     display: flex;
     align-items: flex-end;

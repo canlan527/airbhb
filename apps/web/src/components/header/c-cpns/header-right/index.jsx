@@ -20,6 +20,10 @@ const HeaderRight = memo(() => {
 
   const isLogin = Boolean(currentUser)
 
+  function getUserEntryPath(user) {
+    return user?.role === 'ADMIN' ? '/admin' : '/profile'
+  }
+
   useEffect(() => {
     const handleClick = () => setShowPanel(false)
     window.addEventListener('click', handleClick)
@@ -44,7 +48,7 @@ const HeaderRight = memo(() => {
       setIsLoginModalOpen(true)
       return
     }
-    navigate('/profile')
+    navigate(getUserEntryPath(currentUser))
   }
 
   function handlePublishHouse(e) {
@@ -54,7 +58,7 @@ const HeaderRight = memo(() => {
       messageApi.info('请先登录后再发布房源')
       return
     }
-    navigate('/publish-house')
+    navigate(currentUser?.role === 'ADMIN' ? '/admin' : '/publish-house')
   }
 
   async function onRegisterFinish(values) {
@@ -82,6 +86,9 @@ const HeaderRight = memo(() => {
       persistSession(res)
       setIsLoginModalOpen(false)
       messageApi.success('欢迎回来！')
+      if (res.user?.role === 'ADMIN') {
+        navigate('/admin')
+      }
     } catch (error) {
       messageApi.error(error?.message || '登录失败，请检查邮箱和密码')
     }

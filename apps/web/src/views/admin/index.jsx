@@ -2,7 +2,8 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Card, Descriptions, Form, Image, Input, InputNumber, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
+import { Button, Card, Descriptions, Image, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
+import HousePublishForm from '@/components/house-publish-form'
 import {
   createAdminHouse,
   deleteAdminHouse,
@@ -29,7 +30,6 @@ const Admin = memo(() => {
   const [users, setUsers] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedHouse, setSelectedHouse] = useState(null)
-  const [form] = Form.useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
@@ -61,19 +61,18 @@ const Admin = memo(() => {
     }
   }
 
-  async function handleCreateHouse(values) {
+  async function handleCreateHouse(payload) {
+    await createAdminHouse(payload)
+    loadData()
+  }
+
+  async function handleDeleteHouse(id) {
     try {
-      await createAdminHouse({
-        ...values,
-        imageUrls: values.imageUrls.split('\n').map(item => item.trim()).filter(Boolean),
-        tags: values.tags.split(',').map(item => item.trim()).filter(Boolean)
-      })
-      setIsModalOpen(false)
-      form.resetFields()
-      messageApi.success('平台房源已创建')
+      await deleteAdminHouse(id)
+      messageApi.success('房源已删除')
       loadData()
     } catch (error) {
-      messageApi.error(error?.message || '创建失败')
+      messageApi.error(error?.message || '删除失败')
     }
   }
 
@@ -100,7 +99,7 @@ const Admin = memo(() => {
               { title: '操作', width: 180, render: (_, record) => (
                 <Space>
                   <Button onClick={() => setSelectedHouse(record)}>查看</Button>
-                  <Popconfirm title="确认删除房源？" onConfirm={() => deleteAdminHouse(record.id).then(loadData)}>
+                  <Popconfirm title="确认删除房源？" onConfirm={() => handleDeleteHouse(record.id)}>
                     <Button danger>删除</Button>
                   </Popconfirm>
                 </Space>
@@ -176,30 +175,38 @@ const Admin = memo(() => {
         <Tabs items={tabs} />
       </Card>
 
-      <Modal title="新增平台自营房源" open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={null} destroyOnHidden>
-        <Form form={form} layout="vertical" onFinish={handleCreateHouse} initialValues={{
-          city: '广州',
-          price: 499,
-          bedrooms: 2,
-          bathrooms: 1,
-          tags: '平台自营,近商圈,可长租',
-          coverUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-          imageUrls: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80\nhttps://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80'
-        }}>
-          <Form.Item label="标题" name="title" rules={[{ required: true }]}><Input /></Form.Item>
-          <Form.Item label="城市" name="city" rules={[{ required: true }]}><Input /></Form.Item>
-          <Form.Item label="地址" name="address" rules={[{ required: true }]}><Input /></Form.Item>
-          <Space>
-            <Form.Item label="价格" name="price" rules={[{ required: true }]}><InputNumber min={1} /></Form.Item>
-            <Form.Item label="卧室" name="bedrooms" rules={[{ required: true }]}><InputNumber min={1} /></Form.Item>
-            <Form.Item label="卫生间" name="bathrooms" rules={[{ required: true }]}><InputNumber min={1} /></Form.Item>
-          </Space>
-          <Form.Item label="封面图" name="coverUrl" rules={[{ required: true }]}><Input /></Form.Item>
-          <Form.Item label="图片，每行一个" name="imageUrls" rules={[{ required: true }]}><Input.TextArea rows={3} /></Form.Item>
-          <Form.Item label="标签，逗号分隔" name="tags" rules={[{ required: true }]}><Input /></Form.Item>
-          <Form.Item label="描述" name="description" rules={[{ required: true }]}><Input.TextArea rows={4} /></Form.Item>
-          <Button type="primary" htmlType="submit">创建</Button>
-        </Form>
+      <Modal
+        className="admin-publish-modal"
+        title={null}
+        width={1120}
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+        destroyOnHidden
+      >
+        <HousePublishForm
+          embedded
+          heroKicker="Admin Publishing"
+          heroTitle="新增平台自营房源"
+          heroDescription="由管理员录入的平台自营房源会直接上架，适合平台合作房源、城市精选房源和运营活动房源。"
+          flowSteps={['填写信息', '直接上架', '运营管理']}
+          initialValues={{
+            city: '广州',
+            price: 499,
+            bedrooms: 2,
+            bathrooms: 1,
+            tags: '平台自营,近商圈,可长租',
+            coverUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+            imageUrls: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80\nhttps://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80'
+          }}
+          cancelText="取消"
+          submitText="创建并上架"
+          successText="平台房源已创建并上架"
+          errorText="创建失败"
+          onCancel={() => setIsModalOpen(false)}
+          onSubmit={handleCreateHouse}
+          onSuccess={() => setTimeout(() => setIsModalOpen(false), 500)}
+        />
       </Modal>
 
       <Modal
