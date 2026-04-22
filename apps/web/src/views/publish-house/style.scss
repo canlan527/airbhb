@@ -135,6 +135,68 @@
     font-weight: 650;
   }
 
+  .image-upload-item {
+    margin-bottom: 0;
+
+    .ant-upload-wrapper {
+      width: 100%;
+    }
+
+    .ant-upload-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ant-upload-list::before,
+    .ant-upload-list::after {
+      display: none;
+    }
+
+    .ant-upload-list-picture-card .ant-upload-list-item-container,
+    .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      margin: 0;
+      border-radius: 8px;
+    }
+
+    .ant-upload-list-picture-card .ant-upload-list-item {
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .ant-upload-list-picture-card .ant-upload-list-item-thumbnail img {
+      object-fit: cover;
+    }
+  }
+
+  .upload-trigger {
+    display: grid;
+    height: 100%;
+    place-items: center;
+    color: #6b7280;
+
+    span {
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    em {
+      margin-top: 6px;
+      font-style: normal;
+      font-weight: 650;
+    }
+  }
+
+  .image-upload-tip {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
   .ant-input,
   .ant-input-number,
   .ant-input-affix-wrapper {
@@ -176,6 +238,12 @@
     .form-grid-2 {
       grid-template-columns: 1fr;
     }
+
+    .image-upload-item {
+      .ant-upload-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
   }
 
   @media (max-width: 560px) {
@@ -204,6 +272,13 @@
 
       .ant-btn {
         width: 100%;
+      }
+    }
+
+    .image-upload-item {
+      .ant-upload-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
       }
     }
   }
