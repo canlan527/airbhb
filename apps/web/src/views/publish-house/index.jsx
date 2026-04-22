@@ -11,12 +11,12 @@ const defaultImageUrls = [
   'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80'
 ]
-const maxUploadImages = 8
+const maxUploadImages = 24
 const maxImageSizeMB = 8
 const imageMaxEdge = 960
 const imageQuality = 0.68
-const maxCompressedImageSize = 480 * 1024
-const maxPublishPayloadSize = 12 * 1024 * 1024
+const maxCompressedImageSize = 320 * 1024
+const maxPublishPayloadSize = 18 * 1024 * 1024
 const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp']
 
 const defaultImageFiles = defaultImageUrls.map((url, index) => ({
