@@ -1,29 +1,29 @@
-@layer components {
-  .admin-page {
-    @apply mx-auto mb-12 mt-[120px] w-[1180px] max-w-[calc(100vw-48px)];
+.admin-page {
+  width: 1180px;
+  max-width: calc(100vw - 48px);
+  margin: 120px auto 48px;
 
-    .admin-head {
-      @apply mb-6;
-    }
+  .admin-head {
+    @apply mb-6;
+  }
 
-    h1 {
-      @apply mb-2 text-[30px] font-semibold leading-tight text-neutral-950;
-    }
+  h1 {
+    @apply mb-2 text-[30px] font-semibold leading-tight text-neutral-950;
+  }
 
-    p {
-      @apply text-neutral-500;
-    }
+  p {
+    @apply text-neutral-500;
+  }
 
-    .stats {
-      @apply mb-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4;
-    }
+  .stats {
+    @apply mb-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4;
+  }
 
-    .admin-card {
-      @apply rounded-lg;
-    }
+  .admin-card {
+    @apply rounded-lg;
+  }
 
-    .toolbar {
-      @apply mb-4 flex justify-end;
-    }
+  .toolbar {
+    @apply mb-4 flex justify-end;
   }
 }

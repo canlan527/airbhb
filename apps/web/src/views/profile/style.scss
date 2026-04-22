@@ -1,26 +1,27 @@
-@layer components {
-  .profile-page {
-    @apply mx-auto mb-12 mt-[120px] min-h-[70vh] w-[1120px] max-w-[calc(100vw-48px)];
+.profile-page {
+  width: 1120px;
+  max-width: calc(100vw - 48px);
+  min-height: 70vh;
+  margin: 120px auto 48px;
 
-    .profile-card,
-    .content-card {
-      @apply mb-5 rounded-lg;
-    }
+  .profile-card,
+  .content-card {
+    @apply mb-5 rounded-lg;
+  }
 
-    .profile-head {
-      @apply flex items-center justify-between gap-6;
-    }
+  .profile-head {
+    @apply flex items-center justify-between gap-6;
+  }
 
-    h1 {
-      @apply mb-2 text-[28px] font-semibold leading-tight text-neutral-950;
-    }
+  h1 {
+    @apply mb-2 text-[28px] font-semibold leading-tight text-neutral-950;
+  }
 
-    p {
-      @apply mb-3 text-neutral-500;
-    }
+  p {
+    @apply mb-3 text-neutral-500;
+  }
 
-    img {
-      @apply h-[180px] object-cover;
-    }
+  img {
+    @apply h-[180px] object-cover;
   }
 }
