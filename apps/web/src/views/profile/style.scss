@@ -115,6 +115,10 @@
   }
 
   .profile-house-list {
+    .ant-row {
+      row-gap: 28px;
+    }
+
     .ant-list-item {
       margin-bottom: 0;
     }
@@ -224,6 +228,12 @@
 
     .ant-tabs-nav-list {
       min-width: max-content;
+    }
+
+    .profile-house-list {
+      .ant-row {
+        row-gap: 18px;
+      }
     }
   }
 }

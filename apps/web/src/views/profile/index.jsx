@@ -126,7 +126,7 @@ function HouseRelationList({ data, emptyText }) {
   return (
     <List
       className="profile-house-list"
-      grid={{ gutter: 24, xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 3 }}
+      grid={{ gutter: [24, 28], xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 3 }}
       dataSource={data}
       renderItem={(item) => {
         const house = item.house
