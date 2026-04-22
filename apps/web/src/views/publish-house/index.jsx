@@ -13,9 +13,9 @@ const defaultImageUrls = [
 ]
 const maxUploadImages = 24
 const maxImageSizeMB = 8
-const imageMaxEdge = 960
-const imageQuality = 0.68
-const maxCompressedImageSize = 320 * 1024
+const imageMaxEdge = 1280
+const imageQuality = 0.82
+const maxCompressedImageSize = 512 * 1024
 const maxPublishPayloadSize = 18 * 1024 * 1024
 const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp']
 
@@ -43,8 +43,8 @@ async function fileToCompressedDataUrl(file) {
     const context = canvas.getContext('2d')
     const plans = [
       { edge: imageMaxEdge, quality: imageQuality },
-      { edge: 800, quality: 0.6 },
-      { edge: 640, quality: 0.52 }
+      { edge: 1080, quality: 0.76 },
+      { edge: 960, quality: 0.7 }
     ]
 
     let result = ''
@@ -73,7 +73,8 @@ const PublishHouse = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
   const [form] = Form.useForm()
   const [imageFiles, setImageFiles] = useState(defaultImageFiles)
-  const [previewImage, setPreviewImage] = useState('')
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+  const [previewIndex, setPreviewIndex] = useState(0)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
@@ -157,14 +158,23 @@ const PublishHouse = memo(() => {
   }
 
   function handlePreview(file) {
-    const currentFile = imageFiles.find(item => item.uid === file.uid)
-    const src = file.url || file.thumbUrl || currentFile?.url || currentFile?.thumbUrl
-    if (!src) {
+    const nextIndex = imageFiles.findIndex(item => item.uid === file.uid)
+    if (nextIndex < 0 || !imageFiles[nextIndex]?.url) {
       messageApi.warning('暂无可预览图片')
       return
     }
-    setPreviewImage(src)
+    setPreviewIndex(nextIndex)
+    setIsPreviewOpen(true)
   }
+
+  function handlePreviewStep(step) {
+    setPreviewIndex(currentIndex => {
+      if (!imageFiles.length) return 0
+      return (currentIndex + step + imageFiles.length) % imageFiles.length
+    })
+  }
+
+  const currentPreviewImage = imageFiles[previewIndex]?.url || imageFiles[previewIndex]?.thumbUrl || ''
 
   return (
     <div className="publish-house-page">
@@ -175,10 +185,19 @@ const PublishHouse = memo(() => {
         centered
         destroyOnHidden
         footer={null}
-        open={Boolean(previewImage)}
-        onCancel={() => setPreviewImage('')}
+        open={isPreviewOpen}
+        onCancel={() => setIsPreviewOpen(false)}
       >
-        {previewImage ? <Image alt="房源图片预览" preview={false} src={previewImage} /> : null}
+        <div className="preview-stage">
+          {imageFiles.length > 1 ? (
+            <Button className="preview-arrow preview-arrow-left" onClick={() => handlePreviewStep(-1)}>‹</Button>
+          ) : null}
+          {currentPreviewImage ? <Image alt="房源图片预览" preview={false} src={currentPreviewImage} /> : null}
+          {imageFiles.length > 1 ? (
+            <Button className="preview-arrow preview-arrow-right" onClick={() => handlePreviewStep(1)}>›</Button>
+          ) : null}
+        </div>
+        <div className="preview-count">{previewIndex + 1} / {imageFiles.length}</div>
       </Modal>
       <div className="publish-hero">
         <div>
