@@ -32,7 +32,7 @@ export const ItemWrapper = styled.div`
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 12px;
-      cursor: pointer;
+      cursor: ${(props) => props.isClickable ? "pointer" : "default"};
       img {
         position: absolute;
         top: 0;
@@ -158,7 +158,7 @@ export const ItemWrapper = styled.div`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      cursor: pointer;
+      cursor: ${(props) => props.isClickable ? "pointer" : "default"};
     }
 
     .item-price {

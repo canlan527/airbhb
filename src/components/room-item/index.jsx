@@ -11,6 +11,8 @@ const RoomItem = memo((props) => {
   const { item, itemClick, itemWidth = "25%" } = props;
   const [curIndex, setCurIndex] = useState(0);
   const [loading, setLoading] = useState(true)
+  const hasSwiper = item?.picture_urls?.length > 1;
+  const isClickable = Boolean(itemClick);
 
   const CarouselRef = useRef(null);
 
@@ -35,12 +37,11 @@ const RoomItem = memo((props) => {
     // 判断index边界
     if (newIndex < 0) newIndex = list.length - 1;
     if (newIndex > list.length - 1) newIndex = 0;
-    console.log(newIndex)
     setCurIndex(newIndex); // 设置index
   }
 
   function handleItemClick(item) {
-    itemClick && itemClick(item)
+    if (itemClick) itemClick(item)
   }
 
   // 单图元素
@@ -92,10 +93,11 @@ const RoomItem = memo((props) => {
       starColor={item?.star_rating_color ?? "#008489"}
       tagColor={item?.bottom_info?.content_color ?? ""}
       itemWidth={itemWidth}
-      onClick={() => handleItemClick(item)}
+      isClickable={isClickable}
+      onClick={isClickable ? () => handleItemClick(item) : undefined}
     >
       <div className="item-inner">
-        {item?.picture_urls ? swiperEl : SingleEl}
+        {hasSwiper ? swiperEl : SingleEl}
 
         <div className="item-desc">
           <span className="item-tag">
