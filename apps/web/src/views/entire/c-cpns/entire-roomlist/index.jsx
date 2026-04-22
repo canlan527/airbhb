@@ -33,7 +33,7 @@ const EntireRoomList = memo((props) => {
 
   return (
     <EntireRoomListWrapper>
-      <h2 className="entire-desc">{totalCount}多处住所</h2>
+      <h2 className="entire-desc">300多处住所</h2>
       <div className="entire-room-list">
         {isloading
           ? skeletonItems.map((_, index) => <RoomCardSkeleton key={index} itemWidth="20%" />)
