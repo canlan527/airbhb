@@ -15,7 +15,7 @@ import {
   updateAdminUserStatus
 } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
-import { AdminWrapper } from './style'
+import './style.scss'
 
 const houseStatuses = ['PENDING', 'PUBLISHED', 'REJECTED', 'OFFLINE']
 const orderStatuses = ['PENDING', 'PAID', 'CANCELLED', 'COMPLETED', 'REFUNDED']
@@ -155,7 +155,7 @@ const Admin = memo(() => {
   ]
 
   return (
-    <AdminWrapper>
+    <div className="admin-page">
       {contextHolder}
       <div className="admin-head">
         <h1>平台管理后台</h1>
@@ -196,7 +196,7 @@ const Admin = memo(() => {
           <Button type="primary" htmlType="submit">创建</Button>
         </Form>
       </Modal>
-    </AdminWrapper>
+    </div>
   )
 })
 

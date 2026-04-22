@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Button, Card, Form, Input, InputNumber, message } from 'antd'
 import { createMyHouse } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
-import { PublishHouseWrapper } from './style'
+import './style.scss'
 
 const PublishHouse = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -39,7 +39,7 @@ const PublishHouse = memo(() => {
   }
 
   return (
-    <PublishHouseWrapper>
+    <div className="publish-house-page">
       {contextHolder}
       <Card title="来爱彼迎发布房源" className="publish-card">
         <Form layout="vertical" onFinish={onFinish} initialValues={{
@@ -86,7 +86,7 @@ const PublishHouse = memo(() => {
           <Button type="primary" htmlType="submit">提交发布</Button>
         </Form>
       </Card>
-    </PublishHouseWrapper>
+    </div>
   )
 })
 

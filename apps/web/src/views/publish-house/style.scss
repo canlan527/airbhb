@@ -1,0 +1,13 @@
+@layer components {
+  .publish-house-page {
+    @apply mx-auto mb-12 mt-[120px] w-[900px] max-w-[calc(100vw-48px)];
+
+    .publish-card {
+      @apply rounded-lg;
+    }
+
+    .form-grid {
+      @apply grid grid-cols-1 gap-4 md:grid-cols-3;
+    }
+  }
+}

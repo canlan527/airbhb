@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Button, Card, Empty, List, Space, Tabs, Tag, message } from 'antd'
 import { getMyFavorites, getMyHistories, getMyHouses, getMyOrders } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
-import { ProfileWrapper } from './style'
+import './style.scss'
 
 const Profile = memo(() => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -71,7 +71,7 @@ const Profile = memo(() => {
   }
 
   return (
-    <ProfileWrapper>
+    <div className="profile-page">
       {contextHolder}
       <Card className="profile-card">
         <div className="profile-head">
@@ -90,7 +90,7 @@ const Profile = memo(() => {
       <Card className="content-card">
         <Tabs items={tabItems} />
       </Card>
-    </ProfileWrapper>
+    </div>
   )
 })
 
