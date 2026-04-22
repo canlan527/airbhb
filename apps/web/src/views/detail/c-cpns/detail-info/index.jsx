@@ -5,7 +5,7 @@ import storage from 'store' // 引入本地存储库
 import dayjs from 'dayjs' // 引入dayjs
 import { Rate, DatePicker, InputNumber, Form, Input, Spin, Button, message } from "antd"; // 按需引入antd组件
 import zhCN from 'antd/es/date-picker/locale/zh_CN'; // 引入antd-date-picker中文包
-import { createOrder, favoriteHouse, getMyFavorites, payOrder, recordHouseView } from "@/services";
+import { createOrder, favoriteHouse, getMyFavorites, payOrder, recordHouseView, unfavoriteHouse } from "@/services";
 
 // 引入表单格式化工具函数
 import {
@@ -209,19 +209,24 @@ const DetailInfo = memo((props) => {
 
   }
 
-  async function handleFavorite() {
+  async function handleFavoriteToggle() {
     if (!storage.get('airbhb-token')) {
       messageApi.info('请先登录')
       return
     }
-    if (isFavorite) return
     try {
       setFavoriteLoading(true)
-      await favoriteHouse(info._id)
-      setIsFavorite(true)
-      messageApi.success('已加入我的收藏')
+      if (isFavorite) {
+        await unfavoriteHouse(info._id)
+        setIsFavorite(false)
+        messageApi.success('已取消收藏')
+      } else {
+        await favoriteHouse(info._id)
+        setIsFavorite(true)
+        messageApi.success('已加入我的收藏')
+      }
     } catch (error) {
-      messageApi.error(error?.message || '收藏失败')
+      messageApi.error(error?.message || (isFavorite ? '取消收藏失败' : '收藏失败'))
     } finally {
       setFavoriteLoading(false)
     }
@@ -257,7 +262,7 @@ const DetailInfo = memo((props) => {
       {contextHolder}
       <div className="detail-info-left">
         <div className="detail-info-title">{info.name}</div>
-        <Button disabled={isFavorite} loading={favoriteLoading} onClick={handleFavorite} style={{ margin: '12px 0' }}>
+        <Button className="favorite-button" loading={favoriteLoading} onClick={handleFavoriteToggle}>
           {isFavorite ? '已添加至收藏' : '收藏房源'}
         </Button>
         <div className="detail-info-verify">

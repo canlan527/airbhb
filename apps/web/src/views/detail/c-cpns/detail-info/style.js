@@ -16,6 +16,17 @@ export const DetailInfoWrapper = styled.div`
       font-weight:600;
       line-height: 38px;
     }
+    .favorite-button {
+      margin: 12px 0;
+      border-radius: 8px;
+      font-weight: 600;
+
+      &:hover,
+      &:focus {
+        border-color: #FF385C;
+        color: #FF385C;
+      }
+    }
     .detail-info-verify {
       padding:10px 0;
       margin: 10px 0;
