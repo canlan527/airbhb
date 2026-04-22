@@ -163,11 +163,15 @@ async function importRemoteHouses() {
   for (const [index, item] of sectionItems.entries()) {
     const data = normalizeHouse(item, index);
     const existing = await prisma.house.findUnique({ where: { legacyId: data.legacyId } });
+    const shouldKeepDiscountCity = existing?.originSections.includes('discount') && item.section !== 'discount';
+    const mergedOriginSections = unique([...(existing?.originSections || []), ...data.originSections]);
     await prisma.house.upsert({
       where: { legacyId: data.legacyId },
       update: {
         ...data,
-        originSections: unique([...(existing?.originSections || []), ...data.originSections]),
+        city: shouldKeepDiscountCity ? existing.city : data.city,
+        address: shouldKeepDiscountCity ? existing.address : data.address,
+        originSections: mergedOriginSections,
         originGroup: existing?.originGroup || data.originGroup
       },
       create: data

@@ -103,7 +103,7 @@ export class HousesService {
     const list = await this.prisma.house.findMany({
       where,
       orderBy: options.orderBy === 'rating' ? { rating: 'desc' } : { createdAt: 'asc' },
-      take: options.take
+      take: options.groupByCity ? undefined : options.take
     });
     if (options.groupByCity) {
       const grouped = list.reduce<Record<string, ReturnType<typeof toLegacyHouse>[]>>((acc, house) => {
