@@ -144,8 +144,9 @@
 
     .ant-upload-list {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, 150px);
+      gap: 12px;
+      align-items: start;
     }
 
     .ant-upload-list::before,
@@ -155,9 +156,8 @@
 
     .ant-upload-list-picture-card .ant-upload-list-item-container,
     .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 10;
+      width: 150px;
+      height: 112px;
       margin: 0;
       border-radius: 8px;
     }
@@ -241,7 +241,13 @@
 
     .image-upload-item {
       .ant-upload-list {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fill, 138px);
+      }
+
+      .ant-upload-list-picture-card .ant-upload-list-item-container,
+      .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
+        width: 138px;
+        height: 104px;
       }
     }
   }
@@ -279,6 +285,13 @@
       .ant-upload-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
+      }
+
+      .ant-upload-list-picture-card .ant-upload-list-item-container,
+      .ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
       }
     }
   }
