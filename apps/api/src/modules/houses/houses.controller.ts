@@ -77,6 +77,7 @@ export class HousesController {
       section: 'hotrecommenddest',
       groupByCity: true,
       groupField: 'originGroup',
+      groupOrder: ['南海千灯湖公园', '季华园', '佛山创意产业园', '岭南天地', '史努比缤纷世界', '顺峰山公园', '陈村花卉世界', '亚洲艺术公园'],
       subtitle: '精选目的地与热门住宿'
     });
   }

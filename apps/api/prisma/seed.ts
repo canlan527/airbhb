@@ -124,7 +124,7 @@ function normalizeHouse(item: ImportItem, index: number) {
     reviewsCount: item.house.reviews_count || 0,
     verifyMessage: messages.length > 0 ? messages.join(' · ') : '整套房源',
     originSections: [item.section],
-    originGroup: item.group,
+    originGroup: item.section === 'hotrecommenddest' ? item.group : undefined,
     source: HouseSource.PLATFORM,
     status: HouseStatus.PUBLISHED
   };
@@ -172,7 +172,7 @@ async function importRemoteHouses() {
         city: shouldKeepDiscountCity ? existing.city : data.city,
         address: shouldKeepDiscountCity ? existing.address : data.address,
         originSections: mergedOriginSections,
-        originGroup: existing?.originGroup || data.originGroup
+        originGroup: item.section === 'hotrecommenddest' ? data.originGroup : existing?.originGroup
       },
       create: data
     });
