@@ -1,10 +1,10 @@
 import React, { memo } from "react";
-import { FooterWrapper } from "./style";
 import Data from "@/assets/data/footer.json";
+import "./style.scss";
 
 const Footer = memo(() => {
   return (
-    <FooterWrapper>
+    <div className="app-footer">
       <div className="content">
         {Data.map((item) => (
           <div className="list" key={item.name}>
@@ -16,9 +16,9 @@ const Footer = memo(() => {
         ))}
       </div>
       <div className="bottom">
-        © 2023 Airbnb, Inc. All rights reserved. 条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
+        © 2026 Airbnb, Inc. All rights reserved. 条款 · 隐私政策 · 网站地图 · 全国旅游投诉渠道 12301
       </div>
-    </FooterWrapper>
+    </div>
   );
 });
 

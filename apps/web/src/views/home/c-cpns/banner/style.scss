@@ -23,3 +23,22 @@
     transform: translateX(100%);
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .home-banner {
+    @apply h-[440px];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-banner {
+    @apply h-[360px];
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .home-banner {
+    @apply h-[300px];
+  }
+}

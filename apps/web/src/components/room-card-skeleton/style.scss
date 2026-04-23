@@ -1,0 +1,45 @@
+@reference "../../assets/css/tailwind.css";
+
+.room-card-skeleton {
+  width: var(--room-card-skeleton-width);
+  @apply my-2 box-border p-2;
+
+  .skeleton-block {
+    @apply relative overflow-hidden bg-[#edf0f2];
+  }
+
+  .skeleton-block::after {
+    content: "";
+    @apply absolute inset-0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    animation: room-card-skeleton-loading 1.2s ease-in-out infinite;
+  }
+
+  .cover {
+    @apply w-full rounded-[18px];
+    aspect-ratio: 3 / 2;
+  }
+
+  .meta {
+    @apply mt-3 h-[18px] w-[48%] rounded;
+  }
+
+  .title {
+    @apply mt-2.5 h-[22px] w-[92%] rounded;
+  }
+
+  .price {
+    @apply mt-2.5 h-5 w-[26%] rounded;
+  }
+
+  @keyframes room-card-skeleton-loading {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @media screen and (min-width: 350px) and (max-width: 750px) {
+    @apply w-full;
+  }
+}

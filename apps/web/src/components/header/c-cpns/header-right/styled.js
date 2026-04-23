@@ -7,7 +7,6 @@ export const RightWrapper = styled.div`
   justify-content: flex-end;
   font-size: 14px;
   color: ${(props) => props.theme.isAlpha ? '#fff' : props.theme.text.primaryColor};
-  margin-right: 24px;
   .register-modal {
     .logo-img {
       display: flex;
@@ -87,5 +86,49 @@ export const RightWrapper = styled.div`
         }
       }
 
+  }
+
+  @media screen and (max-width: 1024px) {
+    .menu-left {
+      margin-right: 10px;
+
+      .menu-left-item {
+        padding: 10px;
+      }
+    }
+
+    .menu-right {
+      padding: 5px 5px 5px 10px;
+
+      .menu-right-item.right {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu-left {
+      display: none;
+    }
+
+    .menu-right {
+      .panel {
+        top: 48px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .menu-right {
+      padding: 4px 4px 4px 10px;
+
+      .menu-right-item.right {
+        margin-left: 8px;
+      }
+
+      .panel {
+        width: 220px;
+      }
+    }
   }
 `;

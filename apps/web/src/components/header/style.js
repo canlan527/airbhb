@@ -12,7 +12,10 @@ export const HeaderWrapper = styled.div`
       position: relative;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       height: 80px;
+      padding: 0 24px;
+      box-sizing: border-box;
       border-bottom: 1px solid #eee;
       border-color: ${props => props.theme.isAlpha ? 'rgba(255,255,255, 0)' : '#eee'};
       z-index: 100;
@@ -39,6 +42,33 @@ export const HeaderWrapper = styled.div`
     right: 0;
     left: 0;
     z-index: 99;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .top {
+      .content {
+        height: 72px;
+        padding: 0 20px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .top {
+      .content {
+        height: 68px;
+        padding: 0 16px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .top {
+      .content {
+        height: 64px;
+        padding: 0 12px;
+      }
+    }
   }
 `;
 

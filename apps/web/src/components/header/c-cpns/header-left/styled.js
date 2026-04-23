@@ -8,8 +8,8 @@ export const LeftWrapper = styled.div`
   color: ${(props) => props.theme.isAlpha ? "#fff" : props.theme.color.primaryColor };
 
   .logo{
-    margin-left: 24px;
     cursor: pointer;
+    flex: 0 0 auto;
   }
   .text-logo {
     width:162px;
@@ -20,6 +20,20 @@ export const LeftWrapper = styled.div`
       height: 100%;
       /* object-fit: cover; */
       vertical-align: bottom;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .text-logo {
+      width: 140px;
+      height: 18px;
+      padding-left: 10px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .text-logo {
+      display: none;
     }
   }
 `;

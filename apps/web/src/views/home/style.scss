@@ -1,0 +1,20 @@
+@reference "../../assets/css/tailwind.css";
+
+.home-page {
+  .content {
+    width: min(1175px, calc(100vw - 48px));
+    @apply mx-auto;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .content {
+      width: min(1175px, calc(100vw - 32px));
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .content {
+      width: calc(100vw - 24px);
+    }
+  }
+}

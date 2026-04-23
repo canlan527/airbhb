@@ -31,4 +31,44 @@ export const ViewWrapper = styled.div`
       transform: translateY(-50%);
     }
   }
+
+  @media screen and (max-width: 1024px) {
+    .btn {
+      width: 44px;
+      height: 44px;
+
+      &.left-btn {
+        left: -18px;
+      }
+
+      &.right-btn {
+        right: -18px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 16px;
+
+    .btn {
+      width: 40px;
+      height: 40px;
+
+      &.left-btn {
+        left: -12px;
+      }
+
+      &.right-btn {
+        right: -12px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .btn {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+  }
 `;

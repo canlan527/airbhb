@@ -1,0 +1,70 @@
+@reference "../../assets/css/tailwind.css";
+
+.app-footer {
+  @apply border-t border-[#eeeeee];
+
+  .content {
+    width: 1080px;
+    @apply mx-auto box-border flex border-b border-[#eeeeee] px-[22px] py-[35px];
+
+    .list {
+      @apply mx-1 flex-1 text-[#767676];
+
+      .title {
+        @apply mb-3 text-lg font-semibold text-[#222222];
+      }
+
+      .item {
+        @apply mb-1 text-xs;
+      }
+    }
+  }
+
+  .bottom {
+    width: 1080px;
+    @apply mx-auto box-border flex items-center justify-center py-6 text-sm text-[#767676];
+  }
+
+  @media screen and (min-width: 350px) and (max-width: 1024px) {
+    .content,
+    .bottom {
+      @apply w-[80%];
+    }
+
+    .content {
+      display: grid;
+      @apply grid-cols-2 gap-x-6 gap-y-6 py-8;
+
+      .list {
+        @apply mx-0;
+
+        .title {
+          @apply mb-2 text-base;
+        }
+
+        .item {
+          @apply text-[13px] leading-6;
+        }
+      }
+    }
+
+    .bottom {
+      @apply text-center leading-7;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .content,
+    .bottom {
+      width: calc(100vw - 24px);
+    }
+
+    .content {
+      @apply gap-y-5 px-0 py-6;
+    }
+
+    .bottom {
+      @apply px-2 py-5 text-[13px] leading-6;
+    }
+  }
+}

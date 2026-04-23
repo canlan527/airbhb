@@ -3,7 +3,6 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "@/utils";
 
 import { fetchHomeDataAction } from "@/store/modules/home";
-import { HomeWrapper } from "./style";
 import Banner from "./c-cpns/banner";
 import HomeSectionV1 from "./c-cpns/home-section-v1";
 import HomeSectionV2 from "./c-cpns/home-section-v2";
@@ -12,6 +11,7 @@ import HomeLongfor from "./c-cpns/home-longfor";
 import HomeSkeleton from "./c-cpns/home-skeleton";
 import { changeHomeHeaderAction } from "@/store/modules/main";
 import { useScrollTop } from "@/hooks";
+import "./style.scss";
 
 const Home = memo(() => {
   // 从redux里拿数据
@@ -46,7 +46,7 @@ const Home = memo(() => {
   }, [dispatch]);
 
   return (
-    <HomeWrapper>
+    <div className="home-page">
       {/* 横幅 */}
       <Banner loading={isLoading} />
       <div className="content">
@@ -72,7 +72,7 @@ const Home = memo(() => {
           </>
         )}
       </div>
-    </HomeWrapper>
+    </div>
   );
 });
 

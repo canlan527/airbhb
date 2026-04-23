@@ -14,7 +14,14 @@ const HomeSectionV3 = memo((props) => {
       <ScrollView>
         <div className="v3room-item">
         {info.list.map((item) => (
-          <RoomItem key={item.id} item={item} />
+          <RoomItem
+            key={item.id}
+            item={item}
+            itemWidth="33.33%"
+            tabletWidth="320px"
+            mobileWidth="280px"
+            compactWidth="min(78vw, 240px)"
+          />
         ))}
       </div>
       </ScrollView>

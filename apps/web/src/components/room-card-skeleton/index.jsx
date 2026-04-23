@@ -1,16 +1,16 @@
 import React, { memo } from "react";
-import { CardSkeletonWrapper } from "./style";
+import "./style.scss";
 
 const RoomCardSkeleton = memo((props) => {
   const { itemWidth = "25%" } = props;
 
   return (
-    <CardSkeletonWrapper itemWidth={itemWidth}>
+    <div className="room-card-skeleton" style={{ "--room-card-skeleton-width": itemWidth }}>
       <div className="cover skeleton-block"></div>
       <div className="meta skeleton-block"></div>
       <div className="title skeleton-block"></div>
       <div className="price skeleton-block"></div>
-    </CardSkeletonWrapper>
+    </div>
   );
 });
 

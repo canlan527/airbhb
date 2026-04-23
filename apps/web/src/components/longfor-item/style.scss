@@ -33,3 +33,33 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .longfor-item {
+    @apply mr-3 h-[300px] w-[220px];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .longfor-item {
+    @apply h-[272px] w-[200px];
+
+    .longfor-item-info {
+      .item-city {
+        @apply text-base leading-7 tracking-[3px];
+      }
+
+      .item-price {
+        @apply text-sm;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .longfor-item {
+    width: min(76vw, 220px);
+    height: min(calc(76vw * 1.33), 292px);
+    @apply mr-3;
+  }
+}

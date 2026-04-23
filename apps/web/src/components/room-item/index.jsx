@@ -9,7 +9,14 @@ import classNames from "classnames";
 import "./style.scss";
 
 const RoomItem = memo((props) => {
-  const { item, itemClick, itemWidth = "25%" } = props;
+  const {
+    item,
+    itemClick,
+    itemWidth = "25%",
+    tabletWidth,
+    mobileWidth,
+    compactWidth,
+  } = props;
   const [curIndex, setCurIndex] = useState(0);
   const [loading, setLoading] = useState(true)
   const hasSwiper = item?.picture_urls?.length > 1;
@@ -93,6 +100,9 @@ const RoomItem = memo((props) => {
       className="room-item"
       style={{
         "--room-item-width": itemWidth,
+        "--room-item-tablet-width": tabletWidth || itemWidth,
+        "--room-item-mobile-width": mobileWidth || itemWidth,
+        "--room-item-compact-width": compactWidth || "100%",
         "--room-item-verify-color": item?.verify_info?.text_color || "#333",
         "--room-item-star-color": item?.star_rating_color ?? "#008489",
         "--room-item-tag-color": item?.bottom_info?.content_color ?? "",

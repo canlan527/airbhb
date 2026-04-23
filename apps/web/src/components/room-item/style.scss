@@ -4,8 +4,16 @@
   width: var(--room-item-width);
   @apply my-2 box-border p-2;
 
-  @media screen and (min-width: 350px) and (max-width: 750px) {
-    @apply w-full;
+  @media screen and (max-width: 1024px) {
+    width: var(--room-item-tablet-width);
+  }
+
+  @media screen and (max-width: 768px) {
+    width: var(--room-item-mobile-width);
+  }
+
+  @media screen and (max-width: 560px) {
+    width: var(--room-item-compact-width);
   }
 
   .item-inner {
@@ -17,7 +25,7 @@
       cursor: var(--room-item-clickable-cursor);
 
       img {
-        @apply absolute top-0 left-0 h-full w-full;
+        @apply absolute top-0 left-0 h-full w-full object-cover;
       }
     }
 

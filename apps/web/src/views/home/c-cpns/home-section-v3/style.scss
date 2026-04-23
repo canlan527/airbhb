@@ -5,3 +5,11 @@
     @apply flex transition-all duration-200 ease-in-out;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .home-section-v3 {
+    .v3room-item {
+      @apply mt-[-2px] pl-1 pr-3;
+    }
+  }
+}
