@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
 import RoomItem from '@/components/room-item'
-import {ListWrapper} from './style'
+import "./style.scss";
 
 const SectionRoom = memo((props) => {
   const { roomlist = [], itemWidth } = props;
 
   return (
-    <ListWrapper>
+    <div className="section-room">
       {roomlist?.slice(0, 8).map((item) => (
         <RoomItem key={item.id} item={item} itemWidth={itemWidth}></RoomItem>
       ))}
-    </ListWrapper>
+    </div>
   );
 });
 

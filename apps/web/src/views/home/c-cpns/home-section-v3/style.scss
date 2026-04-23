@@ -1,0 +1,7 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.home-section-v3 {
+  .v3room-item {
+    @apply flex transition-all duration-200 ease-in-out;
+  }
+}

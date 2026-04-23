@@ -1,0 +1,7 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.home-longfor {
+  .longfor-list {
+    @apply my-5 flex transition-all duration-200 ease-in-out;
+  }
+}

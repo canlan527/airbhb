@@ -1,0 +1,48 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.home-skeleton {
+  @apply px-0 pt-7 pb-4;
+
+  .skeleton-block {
+    @apply relative overflow-hidden bg-[#edf0f2];
+  }
+
+  .skeleton-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    animation: skeleton-loading 1.2s ease-in-out infinite;
+  }
+
+  .section-head {
+    @apply mb-[22px];
+  }
+
+  .title {
+    @apply h-[34px] w-[180px] rounded;
+  }
+
+  .subtitle {
+    @apply mt-3 h-[18px] w-[150px] rounded;
+  }
+
+  .tab-row {
+    @apply mb-[22px] flex gap-4 overflow-hidden;
+  }
+
+  .tab {
+    @apply h-9 basis-[150px] shrink-0 rounded;
+  }
+
+  .card-grid {
+    @apply mx-[-8px] flex flex-wrap;
+  }
+
+  @keyframes skeleton-loading {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}

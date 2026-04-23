@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import RoomCardSkeleton from "@/components/room-card-skeleton";
-import { SkeletonWrapper } from "./style";
+import "./style.scss";
 
 const HomeSkeleton = memo(() => {
   const cardItems = Array.from({ length: 6 });
   const destinationItems = Array.from({ length: 8 });
 
   return (
-    <SkeletonWrapper>
+    <div className="home-skeleton">
       <div className="section-head">
         <div className="title skeleton-block"></div>
         <div className="subtitle skeleton-block"></div>
@@ -22,7 +22,7 @@ const HomeSkeleton = memo(() => {
           <RoomCardSkeleton key={index} itemWidth="33.33%" />
         ))}
       </div>
-    </SkeletonWrapper>
+    </div>
   );
 });
 

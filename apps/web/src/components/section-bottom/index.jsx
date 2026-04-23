@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
 import {useNavigate} from 'react-router-dom'
-import { BottomWrapper } from "./style";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
+import "./style.scss";
+
 const SectionBottom = memo((props) => {
   const { text } = props;
 
@@ -17,12 +18,12 @@ const SectionBottom = memo((props) => {
   }
 
   return (
-    <BottomWrapper color={text? '#00848A' : '#333'} onClick={handleClick}>
+    <div className={`section-bottom ${text ? 'section-bottom--accent' : 'section-bottom--default'}`} onClick={handleClick}>
       <span className="text">{showMessage}</span>
       <span className="icon">
         <IconArrowFront />
       </span>
-    </BottomWrapper>
+    </div>
   );
 });
 

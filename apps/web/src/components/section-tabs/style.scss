@@ -1,0 +1,22 @@
+@reference "../../assets/css/tailwind.css";
+
+.section-tabs {
+  @apply mt-5 flex transition-all duration-200 ease-in-out;
+
+  .tabs-item {
+    @apply mr-4 shrink-0 basis-[150px] cursor-pointer border border-[#008489] bg-white px-3 py-2 text-center text-base whitespace-nowrap;
+  }
+
+  .tabs-item:last-of-type {
+    @apply mr-0;
+  }
+
+  .tabs-item:hover {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.18);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .tabs-item.active {
+    @apply bg-[#008489] text-white;
+  }
+}

@@ -4,13 +4,13 @@ import React, { memo } from "react";
 import SectionHeader from "@/components/section-header";
 import LongforItem from "@/components/longfor-item";
 import ScrollView from '@/base-ui/scroll-view';
-import { LongforWrapper } from "./style";
+import "./style.scss";
 
 const HomeLongfor = memo((props) => {
   // 获取 info 数据
   const {info} = props
   return (
-    <LongforWrapper>
+    <div className="home-longfor">
       <SectionHeader title={info.title} subTitle={info.subtitle} />
       <ScrollView>
         <div className="longfor-list">
@@ -19,7 +19,7 @@ const HomeLongfor = memo((props) => {
           ))}
         </div>
       </ScrollView>
-    </LongforWrapper>
+    </div>
   );
 });
 

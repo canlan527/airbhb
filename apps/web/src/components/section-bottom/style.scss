@@ -1,0 +1,29 @@
+@reference "../../assets/css/tailwind.css";
+
+.section-bottom {
+  @apply my-[18px] flex cursor-pointer items-center py-1.5 text-base font-semibold;
+
+  .icon {
+    @apply inline-flex shrink-0 items-center;
+  }
+
+  .text {
+    @apply mr-1.5 inline-flex items-center;
+  }
+
+  .text:hover {
+    @apply text-[#008489] underline;
+  }
+
+  .text:hover + .icon {
+    @apply text-[#008489];
+  }
+}
+
+.section-bottom--default {
+  @apply text-[#333333];
+}
+
+.section-bottom--accent {
+  @apply text-[#00848a];
+}

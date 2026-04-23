@@ -1,10 +1,10 @@
-import React, { memo } from 'react'
-import {BannerWrapper} from './style';
+import React, { memo } from "react";
+import "./style.scss";
 
-const Banner = memo(() => {
-  return (
-    <BannerWrapper></BannerWrapper>
-  )
-})
+const Banner = memo(({ loading = false }) => {
+  const bannerClassName = loading ? "home-banner is-loading" : "home-banner";
 
-export default Banner
+  return <div className={bannerClassName}></div>;
+});
+
+export default Banner;

@@ -1,0 +1,136 @@
+@reference "../../assets/css/tailwind.css";
+
+.room-item {
+  width: var(--room-item-width);
+  @apply my-2 box-border p-2;
+
+  @media screen and (min-width: 350px) and (max-width: 750px) {
+    @apply w-full;
+  }
+
+  .item-inner {
+    @apply w-full;
+
+    .item-cover {
+      @apply relative mb-3 overflow-hidden rounded-[18px];
+      padding: 66.66% 8px 0;
+      cursor: var(--room-item-clickable-cursor);
+
+      img {
+        @apply absolute top-0 left-0 h-full w-full;
+      }
+    }
+
+    .item-swiper {
+      @apply relative;
+
+      .ant-carousel .slick-slider .slick-list {
+        border-radius: 22px !important;
+      }
+
+      .indicator-list {
+        @apply absolute right-0 bottom-5 left-0 z-[19] mx-auto overflow-hidden;
+        width: 30%;
+
+        .indicator-item {
+          @apply flex w-[14.29%] items-center justify-center;
+
+          .dot {
+            @apply h-[6px] w-[6px] cursor-pointer rounded-full bg-white/50;
+
+            &.active {
+              @apply h-[10px] w-[10px] bg-white;
+            }
+
+            &.activeAside {
+              @apply h-[8px] w-[8px] bg-white/70;
+            }
+          }
+        }
+      }
+
+      .item-swiper-control {
+        @apply absolute top-0 right-0 bottom-3 left-0 z-20 rounded-[22px];
+        cursor: pointer;
+
+        &:hover {
+          background: linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0.2) 10px,
+            transparent 30%,
+            rgba(0, 0, 0, 0.2)
+          );
+        }
+
+        &:hover .btn {
+          @apply opacity-100;
+        }
+
+        .btn {
+          @apply absolute top-1/2 z-[150] -translate-y-1/2 text-white/60 opacity-0;
+          cursor: pointer;
+
+          &.left {
+            @apply left-4;
+          }
+
+          &.right {
+            @apply right-4;
+          }
+        }
+      }
+    }
+
+    .item-desc {
+      @apply mb-2 flex items-center justify-between;
+
+      .item-tag {
+        @apply flex max-w-[160px] items-center justify-center overflow-hidden rounded-[3px] bg-[#e9e9e9] px-[5px] py-[2px] text-xs whitespace-nowrap text-ellipsis;
+        color: var(--room-item-verify-color);
+      }
+
+      .item-star {
+        @apply flex items-center justify-between;
+
+        .item-icon-star {
+          @apply mr-1.5;
+        }
+      }
+    }
+
+    .item-title {
+      @apply overflow-hidden text-ellipsis whitespace-nowrap leading-6 font-semibold;
+      cursor: var(--room-item-clickable-cursor);
+      -webkit-line-clamp: 1;
+    }
+
+    .item-price {
+      @apply py-[7px];
+
+      span {
+        @apply font-bold;
+      }
+    }
+
+    .item-extra {
+      @apply text-xs text-[#666666];
+
+      .item-rate {
+        @apply mr-1.5 text-[10px];
+        color: var(--room-item-star-color);
+
+        li.ant-rate-star {
+          @apply mr-[-1px];
+        }
+      }
+
+      .item-reviews {
+        @apply mr-1.5;
+      }
+
+      .item-extar-tag {
+        color: var(--room-item-tag-color);
+      }
+    }
+  }
+}

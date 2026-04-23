@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-
-import { ItemWrapper } from "./style";
+import "./style.scss";
 
 const LongforItem = memo((props) => {
   const { item } = props;
   return (
-    <ItemWrapper>
+    <div className="longfor-item">
       <div className="longfor-shadow"></div>
       <div className="longfor-img">
         <img src={item.picture_url} alt="" />
@@ -16,7 +15,7 @@ const LongforItem = memo((props) => {
         <span className="item-city">{item.city}</span>
         <div className="item-price">{item.price}</div>
       </div>
-    </ItemWrapper>
+    </div>
   );
 });
 

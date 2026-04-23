@@ -4,12 +4,12 @@ import SectionHeader from "@/components/section-header";
 import SectionBottom from '@/components/section-bottom'
 import RoomItem from "@/components/room-item";
 import ScrollView from '@/base-ui/scroll-view';
-import { SectionV3Wrapper } from "./style";
+import "./style.scss";
 
 const HomeSectionV3 = memo((props) => {
   const { info } = props;
   return (
-    <SectionV3Wrapper>
+    <div className="home-section-v3">
       <SectionHeader title={info.title} subTitle={info.subtitle} />
       <ScrollView>
         <div className="v3room-item">
@@ -19,7 +19,7 @@ const HomeSectionV3 = memo((props) => {
       </div>
       </ScrollView>
       <SectionBottom text="Plus" />
-    </SectionV3Wrapper>
+    </div>
   );
 });
 

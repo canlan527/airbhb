@@ -1,20 +1,19 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-
-import { SectionV1Wrapper } from "./style";
 import SectionHeader from "@/components/section-header";
 import SectionRoom from "@/components/section-room";
 import SectionBottom from "@/components/section-bottom";
+import "./style.scss";
 
 const SectionV1 = memo((props) => {
   const { info } = props;
 
   return (
-    <SectionV1Wrapper>
+    <div className="home-section-v1">
       <SectionHeader title={info.title} subTitle={info.subtitle} />
       <SectionRoom roomlist={info.list} itemWidth='25%' />
       <SectionBottom />
-    </SectionV1Wrapper>
+    </div>
   );
 });
 

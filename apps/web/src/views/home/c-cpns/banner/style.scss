@@ -1,0 +1,25 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.home-banner {
+  @apply h-[529px];
+  background: url("@/assets/img/home/cover_01.jpeg") center / cover;
+}
+
+.home-banner.is-loading {
+  @apply relative overflow-hidden bg-[#d9dde3];
+  background-image: none;
+}
+
+.home-banner.is-loading::after {
+  content: "";
+  @apply absolute inset-0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  animation: banner-skeleton-loading 1.2s ease-in-out infinite;
+}
+
+@keyframes banner-skeleton-loading {
+  100% {
+    transform: translateX(100%);
+  }
+}

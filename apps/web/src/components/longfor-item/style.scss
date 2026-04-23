@@ -1,0 +1,35 @@
+@reference "../../assets/css/tailwind.css";
+
+.longfor-item {
+  @apply relative mr-4 h-[320px] w-[240px] shrink-0;
+
+  &:last-child {
+    @apply mr-0;
+  }
+
+  &:hover {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.18);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .longfor-shadow {
+    @apply absolute inset-0 cursor-pointer rounded-[16px];
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), 20%, transparent);
+  }
+
+  .longfor-img {
+    @apply h-full w-full;
+
+    img {
+      @apply h-full w-full rounded-[16px];
+    }
+  }
+
+  .longfor-item-info {
+    @apply absolute top-[70%] left-1/2 flex -translate-x-[35%] cursor-pointer flex-col items-center justify-center text-white;
+
+    .item-city {
+      @apply text-lg font-extrabold leading-8 tracking-[4px];
+    }
+  }
+}

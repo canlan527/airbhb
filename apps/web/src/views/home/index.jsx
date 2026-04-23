@@ -48,7 +48,7 @@ const Home = memo(() => {
   return (
     <HomeWrapper>
       {/* 横幅 */}
-      <Banner />
+      <Banner loading={isLoading} />
       <div className="content">
         {isLoading ? (
           <>

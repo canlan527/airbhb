@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import React, { memo, useState, useEffect, useRef } from "react";
 import { Rate, Carousel, Skeleton } from "antd";
-import { ItemWrapper } from "./style";
 import Indicator from "@/base-ui/indicator";
 import IconStar from "@/assets/svg/icon_star";
 import IconArrowBack from "@/assets/svg/icon-arrow-back";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
 import classNames from "classnames";
+import "./style.scss";
+
 const RoomItem = memo((props) => {
   const { item, itemClick, itemWidth = "25%" } = props;
   const [curIndex, setCurIndex] = useState(0);
@@ -88,12 +89,15 @@ const RoomItem = memo((props) => {
   );
 
   return (
-    <ItemWrapper
-      verifyColor={item?.verify_info?.text_color || "#333"}
-      starColor={item?.star_rating_color ?? "#008489"}
-      tagColor={item?.bottom_info?.content_color ?? ""}
-      itemWidth={itemWidth}
-      isClickable={isClickable}
+    <div
+      className="room-item"
+      style={{
+        "--room-item-width": itemWidth,
+        "--room-item-verify-color": item?.verify_info?.text_color || "#333",
+        "--room-item-star-color": item?.star_rating_color ?? "#008489",
+        "--room-item-tag-color": item?.bottom_info?.content_color ?? "",
+        "--room-item-clickable-cursor": isClickable ? "pointer" : "default"
+      }}
       onClick={isClickable ? () => handleItemClick(item) : undefined}
     >
       <div className="item-inner">
@@ -128,7 +132,7 @@ const RoomItem = memo((props) => {
         </div>
         <Skeleton loading={loading} />
       </div>
-    </ItemWrapper>
+    </div>
   );
 });
 
