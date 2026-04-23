@@ -259,7 +259,7 @@ const HousePublishForm = memo(({
   const currentPreviewImage = imageFiles[previewIndex]?.url || imageFiles[previewIndex]?.thumbUrl || ''
 
   return (
-    <div className={`publish-house-page${embedded ? ' is-embedded' : ''}`}>
+    <div className={`publish-house-page fullstack-page fullstack-page--form${embedded ? ' is-embedded' : ''}`}>
       {contextHolder}
       <Modal
         className="publish-image-preview-modal"
@@ -282,9 +282,9 @@ const HousePublishForm = memo(({
         <div className="preview-count">{previewIndex + 1} / {imageFiles.length}</div>
       </Modal>
 
-      <div className="publish-hero">
+      <div className="publish-hero fullstack-hero">
         <div>
-          <span className="publish-kicker">{heroKicker}</span>
+          <span className="publish-kicker fullstack-kicker">{heroKicker}</span>
           <h1>{heroTitle}</h1>
           <p>{heroDescription}</p>
         </div>
@@ -293,10 +293,10 @@ const HousePublishForm = memo(({
         </div>
       </div>
 
-      <Card className="publish-card">
+      <Card className="publish-card fullstack-card">
         <Form form={form} layout="vertical" onFinish={handleFinish} initialValues={initialValues}>
           <section className="form-section">
-            <div className="section-head">
+            <div className="section-head fullstack-section-head">
               <span>01</span>
               <div>
                 <h2>基础信息</h2>
@@ -317,7 +317,7 @@ const HousePublishForm = memo(({
           </section>
 
           <section className="form-section">
-            <div className="section-head">
+            <div className="section-head fullstack-section-head">
               <span>02</span>
               <div>
                 <h2>价格和规格</h2>
@@ -343,7 +343,7 @@ const HousePublishForm = memo(({
           </section>
 
           <section className="form-section">
-            <div className="section-head">
+            <div className="section-head fullstack-section-head">
               <span>03</span>
               <div>
                 <h2>图片资料</h2>
@@ -375,7 +375,7 @@ const HousePublishForm = memo(({
           </section>
 
           <section className="form-section">
-            <div className="section-head">
+            <div className="section-head fullstack-section-head">
               <span>04</span>
               <div>
                 <h2>描述和标签</h2>

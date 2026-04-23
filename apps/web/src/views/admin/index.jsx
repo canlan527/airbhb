@@ -170,23 +170,23 @@ const Admin = memo(() => {
   ]
 
   return (
-    <div className="admin-page">
+    <div className="admin-page fullstack-page fullstack-page--admin">
       {contextHolder}
-      <div className="admin-head">
+      <div className="admin-head fullstack-hero">
         <div>
-          <span className="admin-kicker">Airbhb Console</span>
+          <span className="admin-kicker fullstack-kicker">Airbhb Console</span>
           <h1>平台管理后台</h1>
           <p>平台自营房源、用户发布房源、订单和用户状态统一管理。</p>
         </div>
         <Button type="primary" size="large" onClick={() => setIsModalOpen(true)}>新增平台房源</Button>
       </div>
-      <div className="stats">
-        <Card className="stat-card stat-card-users"><Statistic title="用户数" value={dashboard.totalUsers || 0} /></Card>
-        <Card className="stat-card stat-card-houses"><Statistic title="房源数" value={dashboard.totalHouses || 0} /></Card>
-        <Card className="stat-card stat-card-pending"><Statistic title="待审核房源" value={dashboard.pendingHouses || 0} /></Card>
-        <Card className="stat-card stat-card-amount"><Statistic title="成交金额" value={dashboard.totalAmount || 0} prefix="￥" /></Card>
+      <div className="stats fullstack-stat-grid">
+        <Card className="stat-card stat-card-users fullstack-stat-card"><Statistic title="用户数" value={dashboard.totalUsers || 0} /></Card>
+        <Card className="stat-card stat-card-houses fullstack-stat-card"><Statistic title="房源数" value={dashboard.totalHouses || 0} /></Card>
+        <Card className="stat-card stat-card-pending fullstack-stat-card"><Statistic title="待审核房源" value={dashboard.pendingHouses || 0} /></Card>
+        <Card className="stat-card stat-card-amount fullstack-stat-card"><Statistic title="成交金额" value={dashboard.totalAmount || 0} prefix="￥" /></Card>
       </div>
-      <Card className="admin-card">
+      <Card className="admin-card fullstack-card fullstack-tabs">
         <Tabs items={tabs} />
       </Card>
 

@@ -1,16 +1,7 @@
 .profile-page {
-  width: 1320px;
-  max-width: calc(100vw - 64px);
-  min-height: 70vh;
-  margin: 96px auto 56px;
-  color: #1f2937;
-
   .profile-card,
   .content-card {
     margin-bottom: 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    box-shadow: 0 14px 38px rgba(15, 23, 42, 0.06);
   }
 
   .profile-card {
@@ -51,8 +42,8 @@
     height: 76px;
     place-items: center;
     border: 1px solid rgba(255, 56, 92, 0.18);
-    border-radius: 8px;
-    color: #ff385c;
+    border-radius: var(--airbhb-radius);
+    color: var(--airbhb-brand);
     font-size: 34px;
     font-weight: 800;
     background: #fff7f8;
@@ -64,21 +55,13 @@
   }
 
   .profile-kicker {
-    display: inline-flex;
     margin-bottom: 8px;
     padding: 4px 9px;
-    border: 1px solid rgba(0, 132, 137, 0.24);
-    border-radius: 8px;
-    color: #007a7f;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0;
-    background: rgba(0, 132, 137, 0.08);
   }
 
   h1 {
     margin-bottom: 8px;
-    color: #111827;
+    color: var(--airbhb-heading);
     font-size: 32px;
     font-weight: 760;
     line-height: 1.15;
@@ -87,7 +70,7 @@
   p {
     margin-bottom: 12px;
     overflow: hidden;
-    color: #6b7280;
+    color: var(--airbhb-muted);
     font-size: 15px;
     line-height: 1.5;
     text-overflow: ellipsis;
@@ -100,7 +83,7 @@
 
   .profile-action {
     min-width: 132px;
-    border-radius: 8px;
+    border-radius: var(--airbhb-radius);
     font-weight: 650;
   }
 
@@ -126,9 +109,9 @@
     .ant-card {
       height: 100%;
       overflow: hidden;
-      border: 1px solid #eef0f3;
-      border-radius: 8px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--airbhb-soft-border);
+      border-radius: var(--airbhb-radius);
+      box-shadow: var(--airbhb-shadow-sm);
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
@@ -141,7 +124,7 @@
     .ant-card-cover {
       aspect-ratio: 16 / 10;
       overflow: hidden;
-      background: #f3f4f6;
+      background: var(--airbhb-soft-bg);
     }
 
     .ant-card-body {
@@ -150,14 +133,14 @@
 
     .ant-card-meta-title {
       margin-bottom: 10px;
-      color: #111827;
+      color: var(--airbhb-heading);
       font-size: 17px;
       font-weight: 750;
       line-height: 1.35;
     }
 
     .ant-card-meta-description {
-      color: #6b7280;
+      color: var(--airbhb-muted);
       font-size: 14px;
       line-height: 1.5;
     }
@@ -170,9 +153,6 @@
   }
 
   @media (max-width: 900px) {
-    max-width: calc(100vw - 32px);
-    margin-top: 88px;
-
     .profile-card .ant-card-body,
     .content-card .ant-card-body {
       padding: 22px;
@@ -193,9 +173,6 @@
   }
 
   @media (max-width: 560px) {
-    max-width: calc(100vw - 24px);
-    margin-top: 76px;
-
     .profile-card .ant-card-body,
     .content-card .ant-card-body {
       padding: 18px;

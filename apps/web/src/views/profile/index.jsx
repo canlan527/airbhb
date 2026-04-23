@@ -71,14 +71,14 @@ const Profile = memo(() => {
   }
 
   return (
-    <div className="profile-page">
+    <div className="profile-page fullstack-page">
       {contextHolder}
-      <Card className="profile-card">
+      <Card className="profile-card fullstack-card">
         <div className="profile-head">
           <div className="profile-user">
             <div className="profile-avatar">{(user?.name || '用').slice(0, 1).toUpperCase()}</div>
             <div className="profile-meta">
-              <span className="profile-kicker">Personal Center</span>
+              <span className="profile-kicker fullstack-kicker">Personal Center</span>
               <h1>{user?.name || '用户'}的个人中心</h1>
               <p>{user?.email}</p>
               <Space className="profile-tags">
@@ -91,7 +91,7 @@ const Profile = memo(() => {
         </div>
       </Card>
 
-      <Card className="content-card">
+      <Card className="content-card fullstack-card fullstack-tabs">
         <Tabs items={tabItems} />
       </Card>
     </div>
