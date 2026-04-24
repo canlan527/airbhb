@@ -73,7 +73,10 @@ export class HousesService {
     this.assertOwner(house.hostId, userId);
     return this.prisma.house.update({
       where: { id: house.id },
-      data: dto
+      data: {
+        ...dto,
+        status: HouseStatus.PENDING
+      }
     });
   }
 

@@ -44,12 +44,12 @@ const PublishHouse = memo(() => {
     <HousePublishForm
       heroKicker={isEditMode ? 'Host Editing' : 'Host Onboarding'}
       heroTitle={isEditMode ? '修改你的房源信息' : '来爱彼迎发布房源'}
-      heroDescription={isEditMode ? '你可以更新房源资料、图片和描述，提交后会按平台规则同步最新内容。' : '提交后房源会进入待审核状态，管理员审核通过后即可出现在平台列表中。'}
+      heroDescription={isEditMode ? '你可以更新房源资料、图片和描述；保存后房源会重新进入待审核状态，管理员审核通过后再公开展示。' : '提交后房源会进入待审核状态，管理员审核通过后即可出现在平台列表中。'}
       flowSteps={isEditMode ? ['查看详情', '修改信息', '提交更新'] : ['填写信息', '平台审核', '公开展示']}
       initialValues={formInitialValues}
       cancelText="返回个人中心"
       submitText={isEditMode ? '保存修改' : '提交发布'}
-      successText={isEditMode ? '房源修改已保存' : '房源已提交，等待平台审核'}
+      successText={isEditMode ? '房源修改已保存，已重新进入审核队列' : '房源已提交，等待平台审核'}
       errorText={isEditMode ? '修改失败' : '发布失败'}
       onCancel={() => navigate('/profile')}
       onSubmit={handleSubmit}
