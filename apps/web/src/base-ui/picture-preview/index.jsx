@@ -7,8 +7,8 @@ import IconArrowFront from "@/assets/svg/icon-arrow-front";
 import IconArrowBack from "@/assets/svg/icon-arrow-back";
 import IconArrowTrangleUp from "@/assets/svg/icon_arrow_trangle_up";
 import IconArrowTrangleDown from "@/assets/svg/icon_arrow_trangle_down";
-import { PreviewWrapper } from "./style";
 import classNames from "classnames";
+import "./style.scss";
 
 const PicturePreview = memo((props) => {
   // 获取父组件属性
@@ -49,9 +49,12 @@ const PicturePreview = memo((props) => {
   }
 
   return (
-    <PreviewWrapper
-      direction={direction}
-      indicatorHeight={showIndicator ? 67 : 0}
+    <div
+      className="picture-preview"
+      style={{
+        "--preview-indicator-height": `${showIndicator ? 67 : 0}px`,
+        "--preview-enter-offset": direction === "next" ? "50%" : "-50%",
+      }}
     >
       <div className="preview-top">
         <div className="close-btn" onClick={showPreview}>
@@ -112,7 +115,7 @@ const PicturePreview = memo((props) => {
           </Indicator>
         </div>
       </div>
-    </PreviewWrapper>
+    </div>
   );
 });
 

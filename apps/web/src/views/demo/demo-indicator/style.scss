@@ -1,0 +1,17 @@
+@reference "../../../assets/css/tailwind.css";
+
+.demo-indicator {
+  @apply p-5;
+
+  .tools {
+    @apply m-5 p-3;
+  }
+
+  .indicator-list {
+    @apply w-[400px] overflow-hidden bg-[#d2b48c];
+
+    .indicator-item {
+      @apply mr-2 cursor-pointer border border-[#222222] px-2 py-1;
+    }
+  }
+}

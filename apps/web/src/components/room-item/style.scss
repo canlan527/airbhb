@@ -2,18 +2,22 @@
 
 .room-item {
   width: var(--room-item-width);
+  flex: 0 0 var(--room-item-width);
   @apply my-2 box-border p-2;
 
   @media screen and (max-width: 1024px) {
     width: var(--room-item-tablet-width);
+    flex-basis: var(--room-item-tablet-width);
   }
 
   @media screen and (max-width: 768px) {
     width: var(--room-item-mobile-width);
+    flex-basis: var(--room-item-mobile-width);
   }
 
   @media screen and (max-width: 560px) {
     width: var(--room-item-compact-width);
+    flex-basis: var(--room-item-compact-width);
   }
 
   .item-inner {
@@ -121,7 +125,7 @@
     }
 
     .item-extra {
-      @apply text-xs text-[#666666];
+      @apply text-xs text-ink-muted;
 
       .item-rate {
         @apply mr-1.5 text-[10px];

@@ -1,10 +1,10 @@
 import React, { memo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { CenterWrapper } from "./styled";
 import SearchTabs from "./c-cpns/search-tabs";
 import SearchTypes from "./c-cpns/search-types";
 import IconSearch from "@/assets/svg/icon_search";
 import data from "@/assets/data/search_titles.json";
+import "./style.scss";
 
 const HeaderCenter = memo((props) => {
   const { isSearch, handleIsSearch } = props;
@@ -21,7 +21,7 @@ const HeaderCenter = memo((props) => {
     handleIsSearch && handleIsSearch();
   }
   return (
-    <CenterWrapper>
+    <div className="header-center">
       <CSSTransition
         in={!isSearch}
         classNames="bar"
@@ -51,7 +51,7 @@ const HeaderCenter = memo((props) => {
           </div>
         </div>
       </CSSTransition>
-    </CenterWrapper>
+    </div>
   );
 });
 

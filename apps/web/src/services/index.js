@@ -5,3 +5,4 @@ export * from './modules/admin'
 
 export * from './modules/home'
 export * from './modules/entire'
+export * from './modules/houses'

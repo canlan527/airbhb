@@ -1,56 +1,38 @@
-import styled from "styled-components";
+@reference "../../../../assets/css/tailwind.css";
 
-export const CenterWrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: 48px;
+.header-center {
+  @apply relative flex h-12 justify-center;
+
   @media screen and (min-width: 350px) and (max-width: 1024px) {
-    display: none;
+    @apply hidden;
   }
 
   .search-bar {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 300px;
-    height: 48px;
-    box-sizing: border-box;
-    padding: 0 8px;
-    border: 1px solid #ddd;
-    border-radius: 24px;
-    cursor: pointer;
+    @apply absolute box-border flex h-12 w-[300px] cursor-pointer items-center justify-between rounded-[24px] border border-line-soft px-2 transition-shadow duration-200;
 
-    ${(props) => props.theme.mixin.boxShadow}
+    &:hover {
+      box-shadow: var(--shadow-elevated-hover);
+    }
 
     .text {
-      padding: 0 16px;
-      color: ${props => props.theme.isAlpha ? '#fff' : '#222'};
-      font-weight: bold;
+      @apply px-4 font-bold;
+      color: var(--header-center-bar-text, #222222);
     }
 
     .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: ${(props) => props.theme.color.primaryColor};
-      color: #fff;
-      border-radius: 50%;
+      @apply flex h-8 w-8 items-center justify-center rounded-full text-white;
+      background: var(--header-primary-color);
     }
   }
 
   .search-detail {
-    position: relative;
+    @apply relative;
     transform-origin: 50% 0;
     will-change: transform, opacity;
 
     .search-detail-info {
-      position: absolute;
+      @apply absolute left-1/2;
       top: 140%;
-      left: 50%;
       transform: translateX(-50%);
     }
   }
@@ -66,9 +48,7 @@ export const CenterWrapper = styled.div`
     opacity: 1;
   }
 
-  .bar-exit {
-    opacity: 0;
-  }
+  .bar-exit,
   .bar-exit-active {
     opacity: 0;
   }
@@ -94,4 +74,4 @@ export const CenterWrapper = styled.div`
     opacity: 1;
     transition: all 250ms ease;
   }
-`;
+}

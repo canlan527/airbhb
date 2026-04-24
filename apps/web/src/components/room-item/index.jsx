@@ -104,7 +104,7 @@ const RoomItem = memo((props) => {
         "--room-item-mobile-width": mobileWidth || itemWidth,
         "--room-item-compact-width": compactWidth || "100%",
         "--room-item-verify-color": item?.verify_info?.text_color || "#333",
-        "--room-item-star-color": item?.star_rating_color ?? "#008489",
+        "--room-item-star-color": item?.star_rating_color ?? "var(--color-accent)",
         "--room-item-tag-color": item?.bottom_info?.content_color ?? "",
         "--room-item-clickable-cursor": isClickable ? "pointer" : "default"
       }}

@@ -1,0 +1,290 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.detail-info {
+  @apply flex w-full items-start justify-between p-5;
+
+  .detail-info-left {
+    width: 60%;
+    padding: 0 50px;
+
+    .detail-info-title {
+      @apply text-[28px] font-semibold leading-[38px];
+    }
+
+    .favorite-button {
+      @apply my-3 rounded-lg font-semibold;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-brand);
+        color: var(--color-brand);
+      }
+    }
+
+    .detail-info-verify {
+      @apply my-[10px] py-[10px];
+
+      .detail-info-tag {
+        @apply mr-[10px] inline-block rounded-md bg-tag px-[10px] py-1.5 text-xs text-tag-text;
+      }
+    }
+
+    .detail-info-rating {
+      @apply border-y border-line py-[26px];
+
+      h2 {
+        @apply text-[28px];
+      }
+
+      .detail-info-rating-count {
+        @apply my-[14px];
+      }
+
+      .detail-info-rating-section {
+        @apply flex w-full flex-wrap items-center justify-between py-3;
+
+        .detail-info-rating-item {
+          @apply mb-3 flex w-1/2 shrink-0 items-center justify-between pr-5 text-base;
+
+          &:nth-of-type(2n) {
+            padding-right: 0;
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+
+    .detail-info-comment {
+      @apply my-5;
+
+      .detail-info-comment-item {
+        @apply my-[10px] border-b border-line py-[10px];
+
+        .comment-top {
+          @apply flex items-center justify-start pb-3;
+
+          .detail-info-comment-avatar {
+            @apply mr-5 h-[50px] w-[50px];
+
+            img {
+              @apply h-full w-full rounded-full object-cover;
+            }
+          }
+
+          .comment-info {
+            @apply flex-1;
+
+            .name {
+              @apply text-base font-semibold;
+            }
+
+            .time {
+              @apply text-sm text-line;
+            }
+          }
+        }
+
+        .comment-content {
+          line-height: 28px;
+        }
+      }
+    }
+  }
+
+  .detail-info-right {
+    @apply relative w-[375px] border border-line p-5;
+
+    .spin-wrapper {
+      @apply flex items-center justify-center;
+      transform: translateY(-400px);
+      z-index: 99;
+    }
+
+    .detail-info-price {
+      h3 {
+        @apply text-[28px] leading-9;
+      }
+
+      .detail-info-rate {
+        @apply cursor-pointer;
+
+        .rate {
+          @apply mr-3 text-sm;
+
+          .ant-rate-star {
+            @apply mr-0;
+          }
+        }
+      }
+    }
+
+    .detail-btn {
+      @apply mt-3 w-full cursor-pointer bg-danger py-3 text-center text-white;
+    }
+
+    .tip {
+      @apply inline-block w-full p-3 text-center text-xs text-ink-subtle;
+    }
+
+    .detail-info-right-item {
+      @apply my-4 text-ink-strong;
+
+      &.price {
+        @apply flex items-center justify-between font-bold;
+      }
+
+      .detail-info-right-item-text {
+        margin-bottom: 2px;
+      }
+
+      .ant-picker,
+      .ant-input-number {
+        @apply w-full;
+      }
+
+      .card-form {
+        @apply p-3;
+
+        .card-form-item {
+          @apply my-3;
+        }
+      }
+
+      form {
+        font-family: Helvetica, sans-serif;
+        margin: 30px auto 0;
+        max-width: 400px;
+      }
+    }
+  }
+
+  .rate {
+    @apply mr-3;
+    color: var(--color-accent);
+  }
+
+  @media screen and (max-width: 1024px) {
+    @apply px-4 pb-6 pt-5;
+
+    .detail-info-left {
+      width: calc(100% - 360px);
+      padding: 0 24px 0 8px;
+
+      .detail-info-title,
+      .detail-info-rating h2 {
+        font-size: 24px;
+        line-height: 1.35;
+      }
+
+      .detail-info-rating .detail-info-rating-section .detail-info-rating-item {
+        @apply text-[15px];
+      }
+    }
+
+    .detail-info-right {
+      width: 340px;
+      padding: 18px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply flex-col gap-5 px-3 pb-6 pt-[18px];
+
+    .detail-info-left,
+    .detail-info-right {
+      width: 100%;
+    }
+
+    .detail-info-left {
+      padding: 0;
+
+      .detail-info-title,
+      .detail-info-rating h2 {
+        @apply text-[22px];
+      }
+
+      .detail-info-rating {
+        @apply py-[22px];
+
+        .detail-info-rating-section {
+          gap: 0;
+
+          .detail-info-rating-item {
+            @apply w-full pr-0;
+
+            &:nth-of-type(2n) {
+              padding-left: 0;
+            }
+          }
+        }
+      }
+
+      .detail-info-comment .detail-info-comment-item .comment-top {
+        @apply items-start;
+
+        .detail-info-comment-avatar {
+          @apply mr-[14px];
+        }
+      }
+    }
+
+    .detail-info-right {
+      padding: 16px;
+
+      .detail-info-price {
+        h3 {
+          font-size: 24px;
+          line-height: 1.3;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    @apply px-2 pb-5 pt-4;
+
+    .detail-info-left {
+      .detail-info-title {
+        font-size: 20px;
+        line-height: 1.4;
+      }
+
+      .detail-info-verify {
+        .detail-info-tag {
+          @apply mb-2 mr-2;
+        }
+      }
+
+      .detail-info-rating {
+        .detail-info-rating-section .detail-info-rating-item {
+          @apply text-sm;
+        }
+      }
+
+      .detail-info-comment .detail-info-comment-item {
+        .comment-top {
+          @apply pb-[10px];
+        }
+
+        .comment-content {
+          @apply text-sm;
+          line-height: 1.8;
+        }
+      }
+    }
+
+    .detail-info-right {
+      padding: 14px;
+
+      .detail-info-price {
+        h3 {
+          @apply text-[22px];
+        }
+      }
+
+      .detail-info-right-item {
+        @apply my-[14px];
+      }
+    }
+  }
+}

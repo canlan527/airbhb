@@ -1,0 +1,50 @@
+@reference "../../assets/css/tailwind.css";
+
+.header-root {
+  .top {
+    @apply relative z-[19];
+    background: var(--header-top-bg);
+
+    .content {
+      @apply relative z-[100] box-border flex items-center justify-between border-b border-[#eeeeee] px-6;
+      height: 80px;
+      border-color: var(--header-border-color);
+    }
+
+    .search-area {
+      @apply transition-all duration-200 ease-in-out;
+      height: 100px;
+      max-height: var(--header-search-area-height);
+      overflow: hidden;
+    }
+  }
+
+  .modal {
+    @apply fixed inset-0 z-[9] cursor-pointer bg-black/30;
+  }
+
+  &.fixed {
+    @apply fixed inset-x-0 top-0 z-[99];
+  }
+
+  @media screen and (max-width: 1024px) {
+    .top .content {
+      height: 72px;
+      @apply px-5;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .top .content {
+      height: 68px;
+      @apply px-4;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .top .content {
+      height: 64px;
+      @apply px-3;
+    }
+  }
+}

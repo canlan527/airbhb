@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { Modal, Form, Input, Button, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { RightWrapper } from './styled'
+import './style.scss'
 
 import IconGlobal from '@/assets/svg/icon_global'
 import IconList from '@/assets/svg/icon_list'
@@ -104,7 +104,7 @@ const HeaderRight = memo(() => {
   }
 
   return (
-    <RightWrapper>
+    <div className="header-right">
       <div className="menu-left">
         {
           isLogin ? <>
@@ -186,7 +186,7 @@ const HeaderRight = memo(() => {
             <Input.Password />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit" style={{ marginRight: '8px', background: '#00848a' }}>
+            <Button type="primary" htmlType="submit" style={{ marginRight: '8px', background: 'var(--color-accent)' }}>
               提交
             </Button>
             <Button htmlType="button" onClick={() => setIsRegisterModalOpen(false)}>
@@ -206,7 +206,7 @@ const HeaderRight = memo(() => {
             <Input.Password />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit" style={{ marginRight: '8px', background: '#00848a' }}>
+            <Button type="primary" htmlType="submit" style={{ marginRight: '8px', background: 'var(--color-accent)' }}>
               提交
             </Button>
             <Button htmlType="button" onClick={() => setIsLoginModalOpen(false)}>
@@ -216,7 +216,7 @@ const HeaderRight = memo(() => {
         </Form>
       </Modal>
       {contextHolder}
-    </RightWrapper>
+    </div>
   )
 })
 

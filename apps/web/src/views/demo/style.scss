@@ -1,0 +1,9 @@
+@reference "../../assets/css/tailwind.css";
+
+.demo-page {
+  @apply p-[50px] text-xl;
+
+  a {
+    @apply mb-20 inline-block;
+  }
+}

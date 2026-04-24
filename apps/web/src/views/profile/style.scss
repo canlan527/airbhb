@@ -42,8 +42,8 @@
     height: 76px;
     place-items: center;
     border: 1px solid rgba(255, 56, 92, 0.18);
-    border-radius: var(--airbhb-radius);
-    color: var(--airbhb-brand);
+    border-radius: var(--radius-md);
+    color: var(--color-brand);
     font-size: 34px;
     font-weight: 800;
     background: #fff7f8;
@@ -61,7 +61,7 @@
 
   h1 {
     margin-bottom: 8px;
-    color: var(--airbhb-heading);
+    color: var(--color-heading);
     font-size: 32px;
     font-weight: 760;
     line-height: 1.15;
@@ -70,7 +70,7 @@
   p {
     margin-bottom: 12px;
     overflow: hidden;
-    color: var(--airbhb-muted);
+    color: var(--color-muted);
     font-size: 15px;
     line-height: 1.5;
     text-overflow: ellipsis;
@@ -83,7 +83,7 @@
 
   .profile-action {
     min-width: 132px;
-    border-radius: var(--airbhb-radius);
+    border-radius: var(--radius-md);
     font-weight: 650;
   }
 
@@ -109,9 +109,9 @@
     .ant-card {
       height: 100%;
       overflow: hidden;
-      border: 1px solid var(--airbhb-soft-border);
-      border-radius: var(--airbhb-radius);
-      box-shadow: var(--airbhb-shadow-sm);
+      border: 1px solid var(--color-border-soft);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-surface-sm);
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
@@ -124,7 +124,7 @@
     .ant-card-cover {
       aspect-ratio: 16 / 10;
       overflow: hidden;
-      background: var(--airbhb-soft-bg);
+      background: var(--color-surface-soft);
     }
 
     .ant-card-body {
@@ -133,14 +133,14 @@
 
     .ant-card-meta-title {
       margin-bottom: 10px;
-      color: var(--airbhb-heading);
+      color: var(--color-heading);
       font-size: 17px;
       font-weight: 750;
       line-height: 1.35;
     }
 
     .ant-card-meta-description {
-      color: var(--airbhb-muted);
+      color: var(--color-muted);
       font-size: 14px;
       line-height: 1.5;
     }

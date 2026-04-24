@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import RoomItem from "@/components/room-item";
 import RoomCardSkeleton from "@/components/room-card-skeleton";
 import { changeDetailInfoAction } from "@/store/modules/detail";
-import { EntireRoomListWrapper } from "./style";
+import "./style.scss";
 
 const EntireRoomList = memo((props) => {
   // 从redux拿取数据
@@ -32,21 +32,32 @@ const EntireRoomList = memo((props) => {
   );
 
   return (
-    <EntireRoomListWrapper>
+    <div className="entire-room-list-shell">
       <h2 className="entire-desc">300多处住所</h2>
       <div className="entire-room-list">
         {isloading
-          ? skeletonItems.map((_, index) => <RoomCardSkeleton key={index} itemWidth="20%" />)
+          ? skeletonItems.map((_, index) => (
+              <RoomCardSkeleton
+                key={index}
+                itemWidth="20%"
+                tabletWidth="33.33%"
+                mobileWidth="50%"
+                compactWidth="100%"
+              />
+            ))
           : roomlist.map((item) => (
               <RoomItem
                 key={item._id}
                 item={item}
                 itemWidth="20%"
+                tabletWidth="33.33%"
+                mobileWidth="50%"
+                compactWidth="100%"
                 itemClick={handleItemClick}
               />
             ))}
       </div>
-    </EntireRoomListWrapper>
+    </div>
   );
 });
 

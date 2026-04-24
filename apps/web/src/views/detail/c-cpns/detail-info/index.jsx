@@ -15,7 +15,7 @@ import {
 } from "@/utils";
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css' // 引入信用卡样式库
-import { DetailInfoWrapper } from "./style";
+import "./style.scss";
 
 const { RangePicker } = DatePicker;
 
@@ -258,7 +258,7 @@ const DetailInfo = memo((props) => {
   };
 
   return (
-    <DetailInfoWrapper>
+    <div className="detail-info">
       {contextHolder}
       <div className="detail-info-left">
         <div className="detail-info-title">{info.name}</div>
@@ -464,7 +464,7 @@ const DetailInfo = memo((props) => {
 
         {(!confirmPay && !completePay) && <span className="tip">您暂时不会被收费</span>}
       </div>
-    </DetailInfoWrapper>
+    </div>
   );
 });
 

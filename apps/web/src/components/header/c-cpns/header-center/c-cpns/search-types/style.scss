@@ -1,0 +1,44 @@
+@reference "../../../../../../assets/css/tailwind.css";
+
+.search-types {
+  @apply relative mt-3 flex rounded-[38px] border border-line-soft bg-white;
+
+  .type-content {
+    @apply relative;
+
+    .type-item {
+      @apply mr-[6px] flex w-[278px] cursor-pointer flex-col rounded-[38px] bg-white px-10 py-3;
+
+      &:hover {
+        @apply bg-surface-hover;
+      }
+
+      &.active {
+        z-index: 89;
+        background: #fff;
+        box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .item-title {
+        @apply mb-2 text-sm;
+      }
+
+      .item-desc {
+        @apply text-base text-ink-muted;
+
+        .city {
+          color: #222222;
+        }
+      }
+    }
+
+    .divider {
+      @apply absolute right-0 top-1/2 h-4 w-px -translate-y-1/2 bg-ink-muted;
+    }
+  }
+
+  .search-icon {
+    @apply absolute right-[10px] top-1/2 flex h-[50px] w-[50px] -translate-y-1/2 items-center justify-center rounded-full text-white;
+    background: var(--header-primary-color);
+  }
+}

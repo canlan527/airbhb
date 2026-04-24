@@ -6,7 +6,7 @@ import { changeHomeHeaderAction } from '@/store/modules/main'
 import EntireTabs from './c-cpns/entire-tabs'
 import EntireRoomlist from './c-cpns/entire-roomlist'
 import EntirePagination from './c-cpns/entire-pagination'
-import { EntireWrapper } from './style'
+import "./style.scss";
 import {useScrollTop} from '@/hooks'
 
 const Entire = memo(() => {
@@ -23,14 +23,14 @@ const Entire = memo(() => {
 
 
   return (
-    <EntireWrapper>
+    <div className="entire-page">
       {/* tabs */}
       <EntireTabs></EntireTabs>
       {/* 房间列表 */}
       <EntireRoomlist></EntireRoomlist>
       {/* 分页 */}
       <EntirePagination></EntirePagination>
-    </EntireWrapper>
+    </div>
   )
 })
 

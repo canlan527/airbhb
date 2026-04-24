@@ -12,18 +12,18 @@
   }
 
   .text:hover {
-    @apply text-[#008489] underline;
+    @apply text-accent underline;
   }
 
   .text:hover + .icon {
-    @apply text-[#008489];
+    @apply text-accent;
   }
 }
 
 .section-bottom--default {
-  @apply text-[#333333];
+  @apply text-ink-strong;
 }
 
 .section-bottom--accent {
-  @apply text-[#00848a];
+  @apply text-accent;
 }

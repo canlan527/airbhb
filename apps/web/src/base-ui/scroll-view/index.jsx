@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect, useRef } from "react";
-import { ViewWrapper } from "./style";
+import "./style.scss";
 import IconArrowFront from "@/assets/svg/icon-arrow-front";
 import IconArrowBack from "@/assets/svg/icon-arrow-back";
 
@@ -45,7 +45,7 @@ const ScrollView = memo((props) => {
   }
 
   return (
-    <ViewWrapper>
+    <div className="scroll-view">
       {showLBtn && <div className="btn left-btn" onClick={handleLeft}>
         <IconArrowBack />
       </div>}
@@ -57,7 +57,7 @@ const ScrollView = memo((props) => {
       <div className="scroll-content slot" ref={ScrollViewRef}>
         {props.children}
       </div>
-    </ViewWrapper>
+    </div>
   );
 });
 

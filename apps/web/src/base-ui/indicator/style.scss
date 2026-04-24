@@ -1,0 +1,9 @@
+@reference "../../assets/css/tailwind.css";
+
+.indicator {
+  @apply relative flex transition-all duration-300 ease-in-out;
+
+  > * {
+    flex-shrink: 0;
+  }
+}

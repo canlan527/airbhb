@@ -1,0 +1,48 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.entire-pagination {
+  @apply flex items-center justify-center py-[10px];
+
+  .pagination-info {
+    @apply flex flex-col items-center;
+  }
+
+  .entire-pagination-desc {
+    @apply my-10 flex items-center justify-center;
+  }
+
+  .ant-pagination-item.ant-pagination-item-active {
+    @apply bg-[#222222];
+  }
+
+  .ant-pagination-item-active a {
+    @apply text-white;
+
+    &:hover {
+      @apply text-white;
+    }
+  }
+
+  .ant-pagination-options {
+    @apply hidden;
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply pb-[14px] pt-[6px];
+
+    .entire-pagination-desc {
+      @apply mb-3 mt-6 text-center text-[13px] leading-[1.7];
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .ant-pagination {
+      @apply flex flex-wrap justify-center;
+      row-gap: 8px;
+    }
+
+    .entire-pagination-desc {
+      @apply mb-2 mt-[18px] text-xs;
+    }
+  }
+}

@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
 import React, { memo } from "react";
-
-import { HeaderWrapper } from "./style";
+import "./style.scss";
 
 const SectionHeader = memo((props) => {
   const { title, subTitle } = props;
   return (
-    <HeaderWrapper>
+    <div className="section-header">
       <h2 className="title">{title}</h2>
       <div className="subTitle">{subTitle && subTitle}</div>
-    </HeaderWrapper>
+    </div>
   );
 });
 

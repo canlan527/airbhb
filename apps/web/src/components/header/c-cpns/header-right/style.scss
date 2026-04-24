@@ -1,0 +1,115 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.header-right {
+  @apply flex flex-1 items-center justify-end text-sm;
+  color: var(--header-alpha-text);
+
+  .register-modal {
+    .logo-img {
+      @apply flex items-center justify-center;
+    }
+  }
+
+  .menu-left {
+    @apply mr-[14px] flex items-center justify-around;
+
+    .menu-left-item {
+      @apply cursor-pointer rounded-[22px] p-3;
+
+      &:hover {
+        @apply bg-surface-hover;
+        color: var(--header-hover-text);
+      }
+    }
+  }
+
+  .menu-right {
+    @apply relative flex cursor-pointer items-center justify-between rounded-[21px] border border-line px-[12px] py-[5px] pl-[12px] text-line transition-shadow duration-200;
+
+    &:hover {
+      box-shadow: var(--shadow-elevated-hover);
+    }
+
+    .menu-right-item {
+      color: var(--header-alpha-text);
+
+      &:hover {
+        color: var(--header-hover-text);
+      }
+
+      &.right {
+        @apply ml-3;
+      }
+    }
+
+    .panel {
+      @apply absolute right-0 top-[52px] w-[240px] rounded-[14px] bg-white text-ink-soft;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+
+      .panel-top,
+      .panel-bottom {
+        @apply py-3;
+
+        .panel-item {
+          @apply p-3;
+
+          &:hover {
+            @apply bg-surface-hover;
+          }
+
+          &.login {
+            @apply font-bold;
+          }
+        }
+      }
+
+      .panel-top {
+        @apply border-b border-line-soft;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .menu-left {
+      @apply mr-[10px];
+
+      .menu-left-item {
+        @apply p-[10px];
+      }
+    }
+
+    .menu-right {
+      padding: 5px 5px 5px 10px;
+
+      .menu-right-item.right {
+        @apply ml-[10px];
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu-left {
+      @apply hidden;
+    }
+
+    .menu-right {
+      .panel {
+        top: 48px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .menu-right {
+      padding: 4px 4px 4px 10px;
+
+      .menu-right-item.right {
+        @apply ml-2;
+      }
+
+      .panel {
+        @apply w-[220px];
+      }
+    }
+  }
+}

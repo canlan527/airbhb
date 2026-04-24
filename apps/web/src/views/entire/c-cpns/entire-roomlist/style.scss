@@ -1,0 +1,33 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.entire-room-list-shell {
+  @apply relative mt-[118px] py-[30px];
+
+  .entire-desc {
+    @apply font-bold;
+  }
+
+  .entire-room-list {
+    @apply flex flex-wrap;
+  }
+
+  @media screen and (max-width: 1024px) {
+    @apply mt-[86px] py-[26px];
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply mt-[78px] py-[22px];
+
+    .entire-desc {
+      @apply text-[22px];
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    @apply mt-[72px] py-[18px];
+
+    .entire-desc {
+      @apply text-xl leading-[1.3];
+    }
+  }
+}

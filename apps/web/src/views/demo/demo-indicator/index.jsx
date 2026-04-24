@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import Indicator from "@/base-ui/indicator";
-import { DemoIndicatorWrapper } from "./style";
+import "./style.scss";
 
 const DemoIndicator = memo(() => {
   const list = [
@@ -22,7 +22,7 @@ const DemoIndicator = memo(() => {
   }
 
   return (
-    <DemoIndicatorWrapper>
+    <div className="demo-indicator">
       <div className="tools">
         <button onClick={() => handleClick('prev')}>prev</button> | <button onClick={() => handleClick('next')}>next</button>
       </div>
@@ -35,7 +35,7 @@ const DemoIndicator = memo(() => {
           ))}
         </Indicator>
       </div>
-    </DemoIndicatorWrapper>
+    </div>
   );
 });
 

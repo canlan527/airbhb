@@ -1,0 +1,54 @@
+@reference "../../../../../../assets/css/tailwind.css";
+
+.search-tabs {
+  @apply mx-auto flex p-[10px] text-lg;
+
+  .search-tabs-item {
+    @apply relative mr-[30px] cursor-pointer py-1;
+    color: var(--header-search-tabs-color, var(--color-ink-soft));
+
+    &:after {
+      content: " ";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      height: 2px;
+      width: 0;
+      background: var(--color-ink-subtle);
+      transform: translate(-50%);
+    }
+
+    &.active {
+      &:after {
+        width: 100%;
+        background: var(--header-search-tabs-active-color, var(--color-ink-soft));
+      }
+    }
+
+    &:hover {
+      color: var(--header-search-tabs-hover-color, var(--color-ink-subtle));
+      transition: all 200ms ease;
+    }
+
+    &:hover:after {
+      height: 2px;
+      animation: ad_width .3s linear forwards;
+      background: var(--header-search-tabs-hover-color, var(--color-ink-subtle));
+    }
+
+    &:last-of-type {
+      @apply mr-0;
+    }
+  }
+}
+
+@keyframes ad_width {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}

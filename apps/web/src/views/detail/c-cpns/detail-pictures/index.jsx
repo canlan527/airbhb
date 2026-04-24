@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import PicturePreview from "@/base-ui/picture-preview";
-import { DetailPictureWrapper } from "./style";
+import "./style.scss";
 
 const DetailPicture = memo((props) => {
   const [showPreview, setShowPreview] = useState(false); //显示预览
@@ -19,7 +19,7 @@ const DetailPicture = memo((props) => {
   }
 
   return (
-    <DetailPictureWrapper>
+    <div className="detail-picture">
       <div className="picture-left">
         <div className="div-pic-item" onClick={handlePreview}>
           <img src={info.picture_url} alt="" />
@@ -49,7 +49,7 @@ const DetailPicture = memo((props) => {
           showIndex={showIndex}
         />
       )}
-    </DetailPictureWrapper>
+    </div>
   );
 });
 

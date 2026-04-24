@@ -4,6 +4,18 @@
   width: var(--room-card-skeleton-width);
   @apply my-2 box-border p-2;
 
+  @media screen and (max-width: 1024px) {
+    width: var(--room-card-skeleton-tablet-width);
+  }
+
+  @media screen and (max-width: 768px) {
+    width: var(--room-card-skeleton-mobile-width);
+  }
+
+  @media screen and (max-width: 560px) {
+    width: var(--room-card-skeleton-compact-width);
+  }
+
   .skeleton-block {
     @apply relative overflow-hidden bg-[#edf0f2];
   }
@@ -39,7 +51,4 @@
     }
   }
 
-  @media screen and (min-width: 350px) and (max-width: 750px) {
-    @apply w-full;
-  }
 }

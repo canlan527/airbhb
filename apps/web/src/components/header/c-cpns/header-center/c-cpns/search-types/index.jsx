@@ -2,8 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React, { memo, useState } from "react";
 import IconSearch from "@/assets/svg/icon_search";
-
-import { SearchTypesWrapper } from "./style";
+import "./style.scss";
 const SearchTypes = memo((props) => {
   const { info } = props;
   const [selectIndex, setSelectIndex] = useState();
@@ -13,7 +12,7 @@ const SearchTypes = memo((props) => {
   }
 
   return (
-    <SearchTypesWrapper>
+    <div className="search-types">
       {info.map((item, index) => (
         <div className="type-content" key={item.title}>
           <div
@@ -37,7 +36,7 @@ const SearchTypes = memo((props) => {
       <div className="search-icon">
         <IconSearch size={18} />
       </div>
-    </SearchTypesWrapper>
+    </div>
   );
 });
 SearchTypes.propTypes = {

@@ -1,12 +1,11 @@
 import classNames from "classnames";
 import React, { memo, useState, useRef } from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { ThemeProvider } from "styled-components";
 import HeaderLeft from "./c-cpns/header-left";
 import HeaderCenter from "./c-cpns/header-center";
 import HeaderRight from "./c-cpns/header-right";
 import {useScrollPosition} from "@/hooks";
-import { HeaderWrapper, SearchAreaWrapper } from "./style";
+import "./style.scss";
 
 const Header = memo(() => {
   const { homeHeader } = useSelector(
@@ -31,19 +30,37 @@ const Header = memo(() => {
   const isAlpha = alpha && scrollY === 0;
 
   return (
-    <ThemeProvider theme={{isAlpha}}>
-      <HeaderWrapper className={classNames({ fixed: isFixed })}>
-        <div className="top">
-          <div className="content">
-            <HeaderLeft />
-            <HeaderCenter isSearch={isSearch || isAlpha} handleIsSearch={handleIsSearch} />
-            <HeaderRight />
-          </div>
-          <SearchAreaWrapper isSearch={isSearch || isAlpha} />
+    <div
+      className={classNames("header-root", { fixed: isFixed })}
+      style={{
+        "--header-top-bg": isAlpha ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 1)",
+        "--header-border-color": isAlpha ? "rgba(255,255,255,0)" : "#eee",
+        "--header-primary-color": "var(--color-brand)",
+        "--header-left-color": isAlpha ? "#fff" : "var(--color-brand)",
+        "--header-text-primary": "var(--color-ink)",
+        "--header-text-light": "var(--color-ink-muted)",
+        "--header-alpha-text": isAlpha ? "#fff" : "var(--color-ink)",
+        "--header-alpha-title": isAlpha ? "#fff" : "#222",
+        "--header-hover-text": isAlpha ? "var(--color-ink)" : "var(--color-ink-soft)",
+        "--header-center-bar-text": isAlpha ? "#fff" : "#222",
+        "--header-search-tabs-color": isAlpha ? "#fff" : "var(--color-ink-soft)",
+        "--header-search-tabs-active-color": isAlpha ? "#fff" : "var(--color-ink-soft)",
+        "--header-search-tabs-hover-color": isAlpha ? "#222222" : "var(--color-ink-subtle)"
+      }}
+    >
+      <div className="top">
+        <div className="content">
+          <HeaderLeft />
+          <HeaderCenter isSearch={isSearch || isAlpha} handleIsSearch={handleIsSearch} />
+          <HeaderRight />
         </div>
-        {isSearch && <div className="modal" onClick={handleIsSearch}></div>}
-      </HeaderWrapper>
-    </ThemeProvider>
+        <div
+          className="search-area"
+          style={{ "--header-search-area-height": isSearch || isAlpha ? "100px" : "0" }}
+        />
+      </div>
+      {isSearch && <div className="modal" onClick={handleIsSearch}></div>}
+    </div>
   );
 });
 

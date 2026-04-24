@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import React, { memo, useState } from "react";
-
-import { SearchTabsWrapper } from "./style";
+import "./style.scss";
 
 const SearchTabs = memo((props) => {
   const { titles, tabClick } = props;
@@ -15,7 +14,7 @@ const SearchTabs = memo((props) => {
   }
 
   return (
-    <SearchTabsWrapper>
+    <div className="search-tabs">
       {titles.map((item, index) => (
         <div
           key={index}
@@ -27,7 +26,7 @@ const SearchTabs = memo((props) => {
           {item}
         </div>
       ))}
-    </SearchTabsWrapper>
+    </div>
   );
 });
 

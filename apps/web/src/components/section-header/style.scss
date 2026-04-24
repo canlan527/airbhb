@@ -1,0 +1,13 @@
+@reference "../../assets/css/tailwind.css";
+
+.section-header {
+  @apply pt-4;
+
+  .title {
+    @apply text-[26px] font-bold;
+  }
+
+  .subTitle {
+    @apply mt-3 text-ink-soft;
+  }
+}

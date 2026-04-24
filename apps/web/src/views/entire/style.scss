@@ -1,0 +1,17 @@
+@reference "../../assets/css/tailwind.css";
+
+.entire-page {
+  @apply w-full px-[26px] py-[10px];
+
+  @media screen and (max-width: 1024px) {
+    @apply px-5 py-[10px];
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply px-4 py-2;
+  }
+
+  @media screen and (max-width: 560px) {
+    @apply px-3 py-2;
+  }
+}

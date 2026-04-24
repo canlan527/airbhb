@@ -1,0 +1,93 @@
+@reference "../../assets/css/tailwind.css";
+
+.picture-preview {
+  @apply fixed inset-0 z-[99] flex flex-col bg-surface-dark transition-all duration-200 ease-in-out;
+
+  .preview-top {
+    @apply h-[100px];
+
+    .close-btn {
+      @apply absolute right-5 top-5 inline-block cursor-pointer;
+    }
+  }
+
+  .preview-main {
+    @apply relative min-h-[300px] flex-1;
+
+    .arrow-control {
+      @apply flex h-full items-center justify-between;
+
+      .arrow-btn {
+        @apply cursor-pointer text-white;
+      }
+    }
+
+    .preview-picture {
+      @apply absolute inset-0 mx-auto w-full max-w-[105vh] overflow-hidden;
+      cursor: pointer;
+      user-select: none;
+
+      img {
+        @apply h-full w-full;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .preview-indicator {
+    @apply relative my-5 mb-10 h-[200px] w-full;
+
+    .toolbar {
+      @apply absolute left-1/2 top-0 flex w-[1084px] -translate-x-1/2 justify-between text-white;
+
+      .toolbar-btn {
+        @apply cursor-pointer;
+      }
+    }
+
+    .preview-list {
+      @apply absolute left-1/2 top-5 mt-3 w-[1084px] -translate-x-1/2 overflow-hidden;
+
+      .preview-item {
+        @apply relative mr-3 w-[100px] transition-all duration-200 ease-in-out;
+        height: var(--preview-indicator-height);
+
+        img {
+          @apply h-full w-full cursor-pointer;
+        }
+
+        .preview-cover {
+          @apply absolute inset-0 h-full w-full cursor-pointer bg-black/50 opacity-100;
+
+          &.active {
+            @apply opacity-0;
+          }
+        }
+
+        &:last-of-type {
+          @apply mr-0;
+        }
+      }
+    }
+  }
+
+  .fade-enter {
+    opacity: 0.7;
+    transform: translateX(var(--preview-enter-offset));
+  }
+
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 150ms;
+  }
+
+  .fade-exit {
+    opacity: 1;
+  }
+
+  .fade-exit-active {
+    opacity: 0.7;
+    transition: all 150ms;
+  }
+}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { memo, useEffect, useRef } from 'react'
-import { IndicatorWrapper } from './style'
+import './style.scss'
 
 const Indicator = memo((props) => {
   const {children, curIndex} = props
@@ -24,9 +24,9 @@ const Indicator = memo((props) => {
 
 
   return (
-    <IndicatorWrapper ref={IndiactorRef}>
+    <div className="indicator" ref={IndiactorRef}>
       {children}
-    </IndicatorWrapper>
+    </div>
   )
 })
 

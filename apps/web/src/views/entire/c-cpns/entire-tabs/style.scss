@@ -1,0 +1,25 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.entire-tabs {
+  @apply fixed top-20 right-0 left-0 z-[9] w-full bg-white pl-[34px];
+
+  .filter-tab-list {
+    @apply flex;
+
+    .filter-tab-item {
+      @apply mr-3 my-1.5 cursor-pointer border border-[rgb(220,224,224)] px-2 py-1.5 text-sm text-[rgb(72,72,72)];
+
+      &:hover {
+        background: rgb(220 224 224 / 0.7);
+      }
+
+      &.active {
+        @apply border-[rgb(0,132,137)] bg-[rgb(0,132,137)] text-white;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    @apply hidden;
+  }
+}

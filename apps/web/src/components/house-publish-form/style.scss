@@ -26,7 +26,7 @@
 
   h1 {
     margin-bottom: 10px;
-    color: var(--airbhb-heading);
+    color: var(--color-heading);
     font-size: 34px;
     font-weight: 760;
     line-height: 1.15;
@@ -34,7 +34,7 @@
 
   p {
     max-width: 620px;
-    color: var(--airbhb-muted);
+    color: var(--color-muted);
     font-size: 15px;
     line-height: 1.8;
   }
@@ -46,8 +46,8 @@
 
     span {
       padding: 8px 11px;
-      border: 1px solid var(--airbhb-border);
-      border-radius: var(--airbhb-radius);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
       color: #374151;
       font-size: 13px;
       font-weight: 650;
@@ -63,7 +63,7 @@
 
   .form-section {
     padding: 24px 0;
-    border-bottom: 1px solid var(--airbhb-soft-border);
+    border-bottom: 1px solid var(--color-border-soft);
 
     &:first-child {
       padding-top: 0;
@@ -110,14 +110,14 @@
       width: 150px;
       height: 112px;
       margin: 0;
-      border-radius: var(--airbhb-radius);
+      border-radius: var(--radius-md);
     }
 
     .image-upload-card {
       position: relative;
       overflow: hidden;
       border: 1px solid #d9d9d9;
-      background: var(--airbhb-soft-bg);
+      background: var(--color-surface-soft);
       cursor: grab;
       transition:
         border-color 0.18s ease,
@@ -142,7 +142,7 @@
     }
 
     .image-upload-card.is-drag-over {
-      border-color: #ff385c;
+      border-color: var(--color-brand);
       box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.16);
 
       &::after {
@@ -150,8 +150,8 @@
         position: absolute;
         inset: 4px;
         z-index: 3;
-        border: 2px dashed #ff385c;
-        border-radius: var(--airbhb-radius);
+        border: 2px dashed var(--color-brand);
+        border-radius: var(--radius-md);
         pointer-events: none;
       }
     }
@@ -229,17 +229,17 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: 1px dashed #d9d9d9;
-    color: var(--airbhb-muted);
-    background: var(--airbhb-panel);
+    border: 1px dashed var(--color-line-soft);
+    color: var(--color-muted);
+    background: var(--color-panel);
     cursor: pointer;
     transition:
       border-color 0.18s ease,
       color 0.18s ease;
 
     &:hover {
-      border-color: #ff385c;
-      color: #ff385c;
+      border-color: var(--color-brand);
+      color: var(--color-brand);
     }
 
     span {
@@ -255,7 +255,7 @@
 
   .image-upload-tip {
     margin-top: 10px;
-    color: var(--airbhb-muted);
+    color: var(--color-muted);
     font-size: 13px;
     line-height: 1.6;
   }
@@ -263,7 +263,7 @@
   .ant-input,
   .ant-input-number,
   .ant-input-affix-wrapper {
-    border-radius: var(--airbhb-radius);
+    border-radius: var(--radius-md);
   }
 
   .form-actions {
@@ -274,7 +274,7 @@
 
     .ant-btn {
       min-width: 120px;
-      border-radius: var(--airbhb-radius);
+      border-radius: var(--radius-md);
       font-weight: 650;
     }
   }
@@ -356,8 +356,8 @@
     justify-content: center;
     min-height: 260px;
     overflow: hidden;
-    border-radius: var(--airbhb-radius);
-    background: var(--airbhb-soft-bg);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-soft);
   }
 
   .ant-image {
@@ -369,8 +369,8 @@
     width: 100%;
     max-height: 70vh;
     object-fit: contain;
-    border-radius: var(--airbhb-radius);
-    background: var(--airbhb-soft-bg);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-soft);
   }
 
   .preview-arrow {
@@ -380,8 +380,8 @@
     width: 40px;
     height: 40px;
     border: 0;
-    border-radius: var(--airbhb-radius);
-    color: var(--airbhb-heading);
+    border-radius: var(--radius-md);
+    color: var(--color-heading);
     font-size: 28px;
     line-height: 1;
     background: rgba(255, 255, 255, 0.86);
@@ -389,8 +389,8 @@
     transform: translateY(-50%);
 
     &:hover {
-      color: var(--airbhb-brand);
-      background: var(--airbhb-panel);
+      color: var(--color-brand);
+      background: var(--color-panel);
     }
   }
 
@@ -404,7 +404,7 @@
 
   .preview-count {
     margin-top: 10px;
-    color: var(--airbhb-muted);
+    color: var(--color-muted);
     font-size: 13px;
     font-weight: 650;
     text-align: center;

@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import classNames from "classnames";
 import filterData from "@/assets/data/filter_data.json";
-import { EntireTabsWrapper } from "./style";
+import "./style.scss";
 
 const EntireTabs = memo((props) => {
   const [selectedList, setSelectedList] = useState([]); // 记录被选中的tab-item
@@ -21,7 +21,7 @@ const EntireTabs = memo((props) => {
   }
 
   return (
-    <EntireTabsWrapper>
+    <div className="entire-tabs">
       <div className="filter-tab-list">
         {filterData.map((item) => (
           <span
@@ -35,7 +35,7 @@ const EntireTabs = memo((props) => {
           </span>
         ))}
       </div>
-    </EntireTabsWrapper>
+    </div>
   );
 });
 

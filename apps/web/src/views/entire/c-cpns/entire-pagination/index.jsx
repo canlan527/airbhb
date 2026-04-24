@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Pagination, ConfigProvider } from "antd";
 import { fetchEntireRoomlistAction } from "@/store/modules/entire/actionCreators";
-import { PaginationWrapper } from "./style";
+import "./style.scss";
 
 const EntirePagination = memo((props) => {
   // 从redux拿取数据
@@ -22,7 +22,7 @@ const EntirePagination = memo((props) => {
   }
 
   return (
-    <PaginationWrapper>
+    <div className="entire-pagination">
       <ConfigProvider
         theme={{ token: { colorPrimary: "#222", borderRadius: "50%" } }}
       >
@@ -40,7 +40,7 @@ const EntirePagination = memo((props) => {
           </div>
         )}
       </ConfigProvider>
-    </PaginationWrapper>
+    </div>
   );
 });
 

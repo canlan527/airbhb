@@ -1,0 +1,125 @@
+@reference "../../../../assets/css/tailwind.css";
+
+.detail-picture {
+  @apply relative flex w-full items-center justify-between pb-5;
+
+  &:hover {
+    .detail-pic-cover {
+      @apply opacity-100;
+    }
+
+    .div-pic-item:hover {
+      .detail-pic-cover {
+        @apply opacity-0;
+      }
+    }
+  }
+
+  .picture-left {
+    @apply flex-1;
+    height: 742px;
+  }
+
+  .picture-right {
+    @apply flex flex-1 flex-wrap;
+    height: 742px;
+  }
+
+  .div-pic-item {
+    @apply relative h-full w-full cursor-pointer overflow-hidden border border-[#222222];
+
+    img {
+      @apply h-full w-full object-cover;
+
+      &:hover {
+        transition: all 250ms ease;
+        transform: scale(1.1);
+      }
+    }
+
+    &.right {
+      @apply h-1/2 w-1/2;
+    }
+  }
+
+  .detail-pic-cover {
+    @apply absolute inset-0 bg-black/50 opacity-0;
+    transition: opacity 250ms ease;
+  }
+
+  .operation-btn {
+    @apply absolute cursor-pointer rounded bg-surface-overlay px-3 py-2 text-sm text-ink-strong;
+    right: 20px;
+    bottom: 40px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .picture-left,
+    .picture-right {
+      height: 560px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply flex-col items-stretch pb-4;
+    gap: 0;
+
+    .picture-left,
+    .picture-right {
+      width: 100%;
+      flex: none;
+    }
+
+    .picture-left {
+      height: 360px;
+    }
+
+    .picture-right {
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .div-pic-item {
+      border-width: 0;
+
+      &.right {
+        @apply h-auto w-full;
+        aspect-ratio: 16 / 10;
+      }
+    }
+
+    .operation-btn {
+      right: 16px;
+      bottom: 26px;
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    @apply pb-3;
+    gap: 0;
+
+    .picture-left {
+      height: 280px;
+    }
+
+    .picture-right {
+      gap: 0;
+    }
+
+    .div-pic-item {
+      &.right {
+        @apply h-auto w-full;
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    .operation-btn {
+      right: 12px;
+      bottom: 18px;
+    }
+  }
+}

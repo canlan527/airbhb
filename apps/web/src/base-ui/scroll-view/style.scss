@@ -1,0 +1,62 @@
+@reference "../../assets/css/tailwind.css";
+
+.scroll-view {
+  @apply relative mt-5;
+
+  .scroll-content {
+    @apply overflow-hidden;
+    transform: translateY(-10px);
+  }
+
+  .btn {
+    @apply absolute top-1/2 z-[9] flex h-[50px] w-[50px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-line bg-white text-base transition-shadow duration-200;
+
+    &:hover {
+      box-shadow: var(--shadow-elevated-hover);
+    }
+
+    &.left-btn {
+      left: -25px;
+    }
+
+    &.right-btn {
+      right: -25px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .btn {
+      @apply h-11 w-11;
+
+      &.left-btn {
+        left: -18px;
+      }
+
+      &.right-btn {
+        right: -18px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    @apply mt-4;
+
+    .btn {
+      @apply h-10 w-10;
+
+      &.left-btn {
+        left: -12px;
+      }
+
+      &.right-btn {
+        right: -12px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .btn {
+      @apply h-9 w-9 text-sm;
+    }
+  }
+}

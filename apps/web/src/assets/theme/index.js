@@ -1,16 +1,16 @@
 const theme = {
   color: {
-    primaryColor: "#ff385c",
-    secondaryColor: "#00848a",
+    primaryColor: "var(--color-brand)",
+    secondaryColor: "var(--color-accent)",
   },
   text: {
-    primaryColor: "#484848",
-    secondaryColor: "#333",
-    lightColor: "#666",
+    primaryColor: "var(--color-ink)",
+    secondaryColor: "var(--color-ink-strong)",
+    lightColor: "var(--color-ink-muted)",
   },
   mixin: {
     boxShadow: `&:hover {
-      box-shadow: 1px 2px 5px  rgba(0,0,0,0.18);
+      box-shadow: var(--shadow-elevated-hover);
       transition: box-shadow .2s ease;
       
     }`,
