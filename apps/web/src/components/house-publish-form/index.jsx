@@ -101,7 +101,7 @@ const HousePublishForm = memo(({
   const [messageApi, contextHolder] = message.useMessage()
   const [form] = Form.useForm()
   const [imageFiles, setImageFiles] = useState(() => {
-    const urls = String(initialValues.imageUrls || defaultImageUrls.join('\n')).split('\n').map(item => item.trim()).filter(Boolean)
+    const urls = String((initialValues || defaultInitialValues).imageUrls || defaultImageUrls.join('\n')).split('\n').map(item => item.trim()).filter(Boolean)
     return urls.length ? filesFromInitialImages(urls) : defaultImageFiles
   })
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
@@ -117,6 +117,14 @@ const HousePublishForm = memo(({
       imageUrls: urls.join('\n')
     })
   }, [form, imageFiles])
+
+  useEffect(() => {
+    const nextInitialValues = initialValues || defaultInitialValues
+    form.resetFields()
+    form.setFieldsValue(nextInitialValues)
+    const urls = String(nextInitialValues.imageUrls || defaultImageUrls.join('\n')).split('\n').map(item => item.trim()).filter(Boolean)
+    setImageFiles(urls.length ? filesFromInitialImages(urls) : defaultImageFiles)
+  }, [form, initialValues])
 
   async function handleFinish(values) {
     const imageUrls = values.imageUrls.split('\n').map(item => item.trim()).filter(Boolean)

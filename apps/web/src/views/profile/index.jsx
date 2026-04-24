@@ -3,6 +3,7 @@ import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Button, Card, Empty, List, Space, Tabs, Tag, message } from 'antd'
+import HouseDetailModal from '@/components/house-detail-modal'
 import { getMyFavorites, getMyHistories, getMyHouses, getMyOrders } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
 import './style.scss'
@@ -13,6 +14,7 @@ const Profile = memo(() => {
   const [favorites, setFavorites] = useState([])
   const [histories, setHistories] = useState([])
   const [houses, setHouses] = useState([])
+  const [selectedHouse, setSelectedHouse] = useState(null)
   const user = storage.get('airbhb-user')
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -66,7 +68,7 @@ const Profile = memo(() => {
     tabItems.push({
       key: 'houses',
       label: `我的房源${houses.length ? ` (${houses.length})` : ''}`,
-      children: <MyHouseList houses={houses} navigate={navigate} />
+      children: <MyHouseList houses={houses} navigate={navigate} onViewHouse={setSelectedHouse} />
     })
   }
 
@@ -94,6 +96,30 @@ const Profile = memo(() => {
       <Card className="content-card fullstack-card fullstack-tabs">
         <Tabs items={tabItems} />
       </Card>
+
+      <HouseDetailModal
+        title="我的房源详情"
+        open={Boolean(selectedHouse)}
+        house={selectedHouse}
+        showHostInfo={false}
+        footer={[
+          <Button key="close" onClick={() => setSelectedHouse(null)}>关闭</Button>,
+          selectedHouse ? (
+            <Button
+              key="edit"
+              type="primary"
+              onClick={() => {
+                const house = selectedHouse
+                setSelectedHouse(null)
+                navigate('/publish-house', { state: { mode: 'edit', house } })
+              }}
+            >
+              修改
+            </Button>
+          ) : null
+        ]}
+        onCancel={() => setSelectedHouse(null)}
+      />
     </div>
   )
 })
@@ -142,15 +168,20 @@ function HouseRelationList({ data, emptyText }) {
   )
 }
 
-function MyHouseList({ houses, navigate }) {
+function MyHouseList({ houses, navigate, onViewHouse }) {
   if (!houses.length) return <Empty description="暂无发布房源" />
   return (
     <List
       dataSource={houses}
       renderItem={(house) => (
-        <List.Item actions={[<Button key="edit" onClick={() => navigate('/publish-house')}>继续发布</Button>]}>
+        <List.Item
+          actions={[
+            <Button key="view" onClick={() => onViewHouse(house)}>查看</Button>,
+            <Button key="edit" type="primary" ghost onClick={() => navigate('/publish-house', { state: { mode: 'edit', house } })}>修改</Button>
+          ]}
+        >
           <List.Item.Meta title={house.title} description={`${house.city} · ${house.source} · ${house.status}`} />
-          <Tag color={house.status === 'PUBLISHED' ? 'green' : 'orange'}>{house.status}</Tag>
+          <Tag color={house.status === 'PUBLISHED' ? 'green' : house.status === 'PENDING' ? 'gold' : house.status === 'REJECTED' ? 'red' : 'default'}>{house.status}</Tag>
         </List.Item>
       )}
     />

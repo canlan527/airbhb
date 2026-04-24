@@ -1,15 +1,27 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useMemo } from 'react'
 import storage from 'store'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import HousePublishForm from '@/components/house-publish-form'
-import { createMyHouse } from '@/services'
+import { createMyHouse, updateMyHouse } from '@/services'
 import { changeHomeHeaderAction } from '@/store/modules/main'
 
 const PublishHouse = memo(() => {
   const navigate = useNavigate()
+  const location = useLocation()
   const dispatch = useDispatch()
   const user = storage.get('airbhb-user')
+  const editingHouse = location.state?.mode === 'edit' ? location.state?.house : null
+  const isEditMode = Boolean(editingHouse?.id)
+
+  const formInitialValues = useMemo(() => {
+    if (!editingHouse) return undefined
+    return {
+      ...editingHouse,
+      tags: Array.isArray(editingHouse.tags) ? editingHouse.tags.join(',') : editingHouse.tags,
+      imageUrls: Array.isArray(editingHouse.imageUrls) ? editingHouse.imageUrls.join('\n') : editingHouse.imageUrls
+    }
+  }, [editingHouse])
 
   useEffect(() => {
     dispatch(changeHomeHeaderAction({ isFixed: true, alpha: false }))
@@ -20,20 +32,25 @@ const PublishHouse = memo(() => {
       navigate('/home')
       throw new Error('请先登录')
     }
+    if (isEditMode) {
+      await updateMyHouse(editingHouse.id, payload)
+      return
+    }
     await createMyHouse(payload)
     storage.set('airbhb-user', { ...user, role: 'HOST' })
   }
 
   return (
     <HousePublishForm
-      heroKicker="Host Onboarding"
-      heroTitle="来爱彼迎发布房源"
-      heroDescription="提交后房源会进入待审核状态，管理员审核通过后即可出现在平台列表中。"
-      flowSteps={['填写信息', '平台审核', '公开展示']}
+      heroKicker={isEditMode ? 'Host Editing' : 'Host Onboarding'}
+      heroTitle={isEditMode ? '修改你的房源信息' : '来爱彼迎发布房源'}
+      heroDescription={isEditMode ? '你可以更新房源资料、图片和描述，提交后会按平台规则同步最新内容。' : '提交后房源会进入待审核状态，管理员审核通过后即可出现在平台列表中。'}
+      flowSteps={isEditMode ? ['查看详情', '修改信息', '提交更新'] : ['填写信息', '平台审核', '公开展示']}
+      initialValues={formInitialValues}
       cancelText="返回个人中心"
-      submitText="提交发布"
-      successText="房源已提交，等待平台审核"
-      errorText="发布失败"
+      submitText={isEditMode ? '保存修改' : '提交发布'}
+      successText={isEditMode ? '房源修改已保存' : '房源已提交，等待平台审核'}
+      errorText={isEditMode ? '修改失败' : '发布失败'}
       onCancel={() => navigate('/profile')}
       onSubmit={handleSubmit}
       onSuccess={() => setTimeout(() => navigate('/profile'), 600)}

@@ -1,0 +1,54 @@
+@reference "../../assets/css/tailwind.css";
+
+.house-detail-modal {
+  .ant-modal-body {
+    @apply max-h-[72vh] overflow-y-auto;
+  }
+
+  .house-detail {
+    @apply grid gap-[18px];
+  }
+
+  .house-detail-cover {
+    @apply overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-surface-soft)];
+
+    .ant-image {
+      @apply block w-full;
+    }
+
+    img {
+      @apply w-full object-cover;
+      max-height: 360px;
+    }
+  }
+
+  .house-detail-images {
+    h3 {
+      @apply mb-3 text-base font-[750] text-[var(--color-heading)];
+    }
+  }
+
+  .house-detail-image-grid {
+    @apply grid gap-3;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+    .ant-image {
+      @apply overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-surface-soft)];
+      aspect-ratio: 4 / 3;
+    }
+
+    img {
+      @apply h-full w-full object-cover;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ant-modal-body {
+      max-height: 76vh;
+    }
+
+    .house-detail-image-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

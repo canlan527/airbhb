@@ -2,7 +2,8 @@ import React, { memo, useEffect, useState } from 'react'
 import storage from 'store'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Card, Descriptions, Image, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
+import { Button, Card, Modal, Popconfirm, Select, Space, Statistic, Table, Tabs, Tag, message } from 'antd'
+import HouseDetailModal from '@/components/house-detail-modal'
 import HousePublishForm from '@/components/house-publish-form'
 import {
   createAdminHouse,
@@ -78,10 +79,10 @@ const Admin = memo(() => {
   async function handlePublishHouse(id) {
     try {
       await updateAdminHouseStatus(id, 'PUBLISHED')
-      messageApi.success('房源已重新上架')
+      messageApi.success('房源已上架')
       loadData()
     } catch (error) {
-      messageApi.error(error?.message || '重新上架失败')
+      messageApi.error(error?.message || '上架失败')
     }
   }
 
@@ -108,13 +109,13 @@ const Admin = memo(() => {
               { title: '操作', width: 180, render: (_, record) => (
                 <Space>
                   <Button onClick={() => setSelectedHouse(record)}>查看</Button>
-                  {record.status === 'OFFLINE' ? (
-                    <Popconfirm title="确认重新上架房源？" onConfirm={() => handlePublishHouse(record.id)}>
-                      <Button type="primary">重新上架</Button>
-                    </Popconfirm>
-                  ) : (
+                  {record.status === 'PUBLISHED' ? (
                     <Popconfirm title="确认下架房源？" description="下架后前台不可见，历史订单和成交金额会保留。" onConfirm={() => handleOfflineHouse(record.id)}>
                       <Button danger>下架</Button>
+                    </Popconfirm>
+                  ) : (
+                    <Popconfirm title="确认上架房源？" onConfirm={() => handlePublishHouse(record.id)}>
+                      <Button type="primary">上架</Button>
                     </Popconfirm>
                   )}
                 </Space>
@@ -224,11 +225,10 @@ const Admin = memo(() => {
         />
       </Modal>
 
-      <Modal
-        className="house-detail-modal"
+      <HouseDetailModal
         title="房源审核详情"
-        width={920}
         open={Boolean(selectedHouse)}
+        house={selectedHouse}
         footer={[
           <Button key="close" onClick={() => setSelectedHouse(null)}>关闭</Button>,
           selectedHouse?.status !== 'REJECTED' ? (
@@ -245,41 +245,7 @@ const Admin = memo(() => {
           ) : null
         ]}
         onCancel={() => setSelectedHouse(null)}
-      >
-        {selectedHouse ? (
-          <div className="house-detail">
-            <div className="house-detail-cover">
-              <Image src={selectedHouse.coverUrl} alt={selectedHouse.title} />
-            </div>
-            <Descriptions bordered column={2} size="middle">
-              <Descriptions.Item label="房源标题" span={2}>{selectedHouse.title}</Descriptions.Item>
-              <Descriptions.Item label="城市">{selectedHouse.city}</Descriptions.Item>
-              <Descriptions.Item label="价格">￥{selectedHouse.price} / 晚</Descriptions.Item>
-              <Descriptions.Item label="来源"><Tag>{selectedHouse.source}</Tag></Descriptions.Item>
-              <Descriptions.Item label="状态"><Tag color={selectedHouse.status === 'PUBLISHED' ? 'green' : selectedHouse.status === 'PENDING' ? 'gold' : 'default'}>{selectedHouse.status}</Tag></Descriptions.Item>
-              <Descriptions.Item label="发布者">{selectedHouse.host?.name || '平台自营'}</Descriptions.Item>
-              <Descriptions.Item label="邮箱">{selectedHouse.host?.email || '-'}</Descriptions.Item>
-              <Descriptions.Item label="卧室">{selectedHouse.bedrooms}</Descriptions.Item>
-              <Descriptions.Item label="卫生间">{selectedHouse.bathrooms}</Descriptions.Item>
-              <Descriptions.Item label="详细地址" span={2}>{selectedHouse.address || '-'}</Descriptions.Item>
-              <Descriptions.Item label="标签" span={2}>
-                <Space wrap>{selectedHouse.tags?.map(tag => <Tag key={tag}>{tag}</Tag>)}</Space>
-              </Descriptions.Item>
-              <Descriptions.Item label="房源描述" span={2}>{selectedHouse.description || '-'}</Descriptions.Item>
-            </Descriptions>
-            <div className="house-detail-images">
-              <h3>房源图片</h3>
-              <Image.PreviewGroup>
-                <div className="house-detail-image-grid">
-                  {selectedHouse.imageUrls?.map((url, index) => (
-                    <Image key={`${url}-${index}`} src={url} alt={`${selectedHouse.title}-${index + 1}`} />
-                  ))}
-                </div>
-              </Image.PreviewGroup>
-            </div>
-          </div>
-        ) : null}
-      </Modal>
+      />
     </div>
   )
 })
